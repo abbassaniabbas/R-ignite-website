@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team | R-Ignite Group</title>
+  <meta name="description" content="Meet the founders of R-Ignite Group — the driving force behind Nigeria's premier Data & AI consultancy.">
+  <meta property="og:title" content="Team | R-Ignite Group">
+  <meta property="og:description" content="Meet the founders of R-Ignite Group — the driving force behind Nigeria's premier Data & AI consultancy.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0D6B4F">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#0A0A0A;--ink-mid:#3A3A3A;--ink-muted:#6B6B6B;--ink-faint:#ADADAD;--rule:#E2E2E2;--surface:#F7F5F2;--white:#FFFFFF;--accent:#0D6B4F;--accent-light:#E8F5F0;--accent-mid:#1A8A65;--ease:cubic-bezier(0.16,1,0.3,1)}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{font-family:Outfit,sans-serif;background:#fff;color:#0A0A0A;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    p{line-height:1.75;color:var(--ink-mid)}
+    nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 5%;height:68px;display:flex;justify-content:space-between;align-items:center;background:var(--ink);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);transition:box-shadow .3s}
+    nav.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.35)}
+    .logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#ffffff;text-decoration:none}
+    .logo-dot{color:var(--accent)}
+    .nav-links{display:flex;gap:2.5rem;list-style:none}
+    .nav-links a{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.55);text-decoration:none;transition:all .2s;padding:.3rem .7rem;border-radius:100px}
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}.nav-links a.active{color:#fff;background:var(--accent);}
+    .nav-cta{font-size:.82rem;font-weight:600;padding:.55rem 1.4rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:100px;transition:all .2s;border:1px solid rgba(255,255,255,.15)}
+    .nav-cta:hover{background:var(--accent-mid);transform:translateY(-1px)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .hamburger span{width:22px;height:1.5px;background:#fff;display:block}
+    .mobile-nav{display:none;position:fixed;inset:0;background:#fff;z-index:999;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8%}
+    .mobile-nav.open{display:flex}
+    .mobile-nav a{font-size:clamp(2rem,8vw,3.5rem);font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.04em;line-height:1.2;transition:color .2s}
+    .mobile-nav a:hover{color:var(--accent)}
+    .mobile-nav .close-btn{position:absolute;top:1.5rem;right:5%;font-size:1.5rem;cursor:pointer;background:none;border:none;color:var(--ink-muted)}
+    .mobile-nav-bottom{position:absolute;bottom:3rem;left:8%}
+    .mobile-nav-bottom a{font-size:.85rem;font-weight:600;color:#fff;background:var(--accent);padding:.8rem 1.8rem;border-radius:100px;text-decoration:none}
+    .page-hero{padding:11rem 5% 6rem;border-bottom:1px solid var(--rule);background:var(--bg)}
+    .hero-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+    .hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
+    .page-title{font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:.92;letter-spacing:-.05em}
+    .page-title .accent{color:var(--accent)}
+    .section-label{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+    .section-title{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:800;letter-spacing:-.04em}
+
+    .founders{padding:7rem 5%;max-width:1400px;margin:0 auto}
+    .founders-header{margin-bottom:4rem;padding-bottom:2rem;border-bottom:1px solid var(--rule)}
+    .founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+    .founder-card{padding:3.5rem;border:1px solid var(--rule);border-radius:20px;transition:all .35s var(--ease)}
+    .founder-card:hover{border-color:var(--accent);box-shadow:0 24px 64px rgba(13,107,79,.1);transform:translateY(-6px)}
+    .founder-avatar{width:72px;height:72px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:800;color:var(--accent);letter-spacing:-.02em;margin-bottom:2rem;border:2px solid var(--accent)}
+    .founder-role{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
+    .founder-name{font-size:1.6rem;font-weight:800;letter-spacing:-.04em;margin-bottom:1.2rem}
+    .founder-bio{font-size:.95rem;color:var(--ink-muted);line-height:1.75}
+
+    .culture{padding:7rem 5%;background:var(--surface)}
+    .culture-inner{max-width:1400px;margin:0 auto}
+    .culture-header{margin-bottom:4rem}
+    .principles-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem}
+    .principle{padding:2rem;background:#fff;border-radius:16px;border:1px solid var(--rule);transition:all .3s var(--ease)}
+    .principle:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,107,79,.08)}
+    .principle-num{font-size:.72rem;font-weight:700;letter-spacing:.1em;color:var(--accent);margin-bottom:1rem}
+    .principle h4{font-size:1rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.6rem}
+    .principle p{font-size:.88rem;color:var(--ink-muted);line-height:1.65}
+
+    .join-section{padding:10rem 5%;text-align:center;background:var(--ink)}
+    .join-label{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-mid);margin-bottom:2rem}
+    .join-headline{font-size:clamp(2.5rem,7vw,6rem);font-weight:900;letter-spacing:-.05em;line-height:.92;color:#fff;margin-bottom:3rem}
+    .join-headline .accent{color:var(--accent-mid)}
+    .btn-primary{display:inline-flex;align-items:center;gap:.5rem;font-size:.88rem;font-weight:600;padding:.9rem 2rem;background:#fff;color:var(--ink);text-decoration:none;border-radius:100px;transition:all .25s var(--ease)}
+    .btn-primary:hover{background:var(--accent);color:#fff;transform:translateY(-2px)}
+
+    footer{padding:4rem 5%;border-top:1px solid rgba(255,255,255,.1);background:var(--ink)}
+    .footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem}
+    .footer-logo{font-size:1.1rem;font-weight:800;color:#fff}
+    .footer-logo-dot{color:var(--accent-mid)}
+    .footer-tagline{font-size:.8rem;color:rgba(255,255,255,.35)}
+    .footer-copy{font-size:.78rem;color:rgba(255,255,255,.25)}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-delay-1{transition-delay:.08s}.reveal-delay-2{transition-delay:.16s}.reveal-delay-3{transition-delay:.24s}
+
+    @media(max-width:1024px){.principles-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}.founders-grid{grid-template-columns:1fr}.principles-grid{grid-template-columns:1fr}}
+
+    /* Accessibility & touch improvements */
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+    @media(hover:none){
+      .service-row:hover,.svc-item:hover,.stage-card:hover,.value-card:hover,
+      .pillar-card:hover,.outcome-cell:hover,.principle:hover,.founder-card:hover,
+      .pos-card:hover,.market-card:hover,.counter-cell:hover{transform:none}
+    }
+    a,button,[role=button]{min-height:44px;min-width:44px;display:inline-flex;align-items:center}
+    .nav-links a,.footer-tagline,.footer-copy,.section-label,.hero-eyebrow,
+    .marquee-item,.svc-num,.service-num,.stage-phase,.pillar-num{
+      min-height:unset;min-width:unset;display:revert
+    }
+
+    /* Rich background textures */
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='.6' fill='rgba(0,0,0,.045)'/%3E%3C/svg%3E");background-size:4px 4px;pointer-events:none;z-index:0;opacity:1}
+    body > *{position:relative;z-index:1}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(10,10,10,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(10,10,10,.055) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0}
+    .page-hero > *{position:relative;z-index:1}
+    .page-hero::after{content:'';position:absolute;right:0;top:0;width:50%;height:100%;background:radial-gradient(ellipse 70% 80% at 90% 40%,rgba(13,107,79,.09) 0%,transparent 65%);pointer-events:none;z-index:0}
+  </style>
+</head>
+<body>
+  <div class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="closeNav">✕</button>
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="goals.html">Goals</a><a href="strategy.html">Strategy</a><a href="milestones.html">Milestones</a>
+    <a href="team.html">Team</a>
+    <div class="mobile-nav-bottom"><a href="my-backend/contact.html">Get in Touch</a></div>
+  </div>
+  <nav id="mainNav">
+    <a class="logo" href="index.html">R<span class="logo-dot">·</span>IGNITE</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li><li><a href="goals.html">Goals</a></li>
+      <li><a href="strategy.html">Strategy</a></li><li><a href="milestones.html">Milestones</a></li>
+      <li><a href="team.html" class="active">Team</a></li>
+    </ul>
+    <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <section class="page-hero">
+    <div class="hero-eyebrow">The People Behind It</div>
+    <h1 class="page-title">Meet Our<br/><span class="accent">Founders.</span></h1>
+  </section>
+
+  <section class="founders">
+    <div class="founders-header reveal">
+      <div class="section-label">Leadership</div>
+      <h2 class="section-title">The Driving Force</h2>
+    </div>
+    <div class="founders-grid">
+      <div class="founder-card reveal">
+        <div class="founder-avatar">SU</div>
+        <div class="founder-role">Co-Founder / Chief Technology Officer</div>
+        <h3 class="founder-name">Samuel Urieto</h3>
+        <p class="founder-bio">Leading technological innovation and driving our technical vision forward. Samuel brings extensive experience in software development and emerging technologies to ensure R-Ignite stays at the forefront of enterprise tech excellence.</p>
+      </div>
+      <div class="founder-card reveal reveal-delay-1">
+        <div class="founder-avatar">AA</div>
+        <div class="founder-role">Co-Founder / Chief Executive Officer</div>
+        <h3 class="founder-name">Abbas Sani Abbas</h3>
+        <p class="founder-bio">Guiding strategic direction and fostering partnerships for growth. Abbas is passionate about empowering organisations through technology, bringing visionary leadership and sharp commercial acumen to R-Ignite's mission.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="culture">
+    <div class="culture-inner">
+      <div class="culture-header reveal">
+        <div class="section-label">Our Culture</div>
+        <h2 class="section-title">Leadership Principles</h2>
+      </div>
+      <div class="principles-grid">
+        <div class="principle reveal">
+          <div class="principle-num">01</div>
+          <h4>Visionary Thinking</h4>
+          <p>We think ahead, anticipating industry trends and positioning ourselves as leaders in enterprise tech innovation.</p>
+        </div>
+        <div class="principle reveal reveal-delay-1">
+          <div class="principle-num">02</div>
+          <h4>Collaborative Spirit</h4>
+          <p>We believe in the power of partnerships — with clients, team, and the wider Nigerian tech ecosystem.</p>
+        </div>
+        <div class="principle reveal reveal-delay-2">
+          <div class="principle-num">03</div>
+          <h4>Continuous Learning</h4>
+          <p>We're committed to staying ahead of emerging technologies and best practices — always sharpening the edge.</p>
+        </div>
+        <div class="principle reveal reveal-delay-3">
+          <div class="principle-num">04</div>
+          <h4>Excellence Driven</h4>
+          <p>We maintain uncompromising standards in everything — from how we write code to how we write proposals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="join-section">
+    <div class="join-label reveal">Join the Team</div>
+    <h2 class="join-headline reveal">We're Building<br/>Something<br/><span class="accent">Significant.</span></h2>
+    <div class="reveal"><a href="my-backend/contact.html" class="btn-primary">Get in Touch →</a></div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">R<span class="footer-logo-dot">·</span>IGNITE GROUP</div>
+      <div class="footer-tagline">Empower · Innovate · Excel</div>
+      <div class="footer-copy">© 2025 R-Ignite Group. Abuja, Nigeria.</div>
+    </div>
+  </footer>
+  <script>
+    const nav=document.getElementById('mainNav');
+    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+    document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
+    document.getElementById('closeNav').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
+    const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+  </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goals | R-Ignite Group</title>
+  <meta name="description" content="Our 6-year strategic roadmap: from Cash Engine to Recurring Revenue to Productisation. Three stages, one vision.">
+  <meta property="og:title" content="Goals | R-Ignite Group">
+  <meta property="og:description" content="Our 6-year strategic roadmap: from Cash Engine to Recurring Revenue to Productisation. Three stages, one vision.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0D6B4F">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#0A0A0A;--ink-mid:#3A3A3A;--ink-muted:#6B6B6B;--ink-faint:#ADADAD;--rule:#E2E2E2;--surface:#F7F5F2;--white:#FFFFFF;--accent:#0D6B4F;--accent-light:#E8F5F0;--accent-mid:#1A8A65;--ease:cubic-bezier(0.16,1,0.3,1)}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{font-family:Outfit,sans-serif;background:#fff;color:#0A0A0A;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    p{line-height:1.75;color:var(--ink-mid)}
+    nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 5%;height:68px;display:flex;justify-content:space-between;align-items:center;background:var(--ink);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);transition:box-shadow .3s}
+    nav.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.35)}
+    .logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#ffffff;text-decoration:none}
+    .logo-dot{color:var(--accent)}
+    .nav-links{display:flex;gap:2.5rem;list-style:none}
+    .nav-links a{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.55);text-decoration:none;transition:all .2s;padding:.3rem .7rem;border-radius:100px}
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}.nav-links a.active{color:#fff;background:var(--accent);}
+    .nav-cta{font-size:.82rem;font-weight:600;padding:.55rem 1.4rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:100px;transition:all .2s;border:1px solid rgba(255,255,255,.15)}
+    .nav-cta:hover{background:var(--accent-mid);transform:translateY(-1px)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .hamburger span{width:22px;height:1.5px;background:#fff;display:block}
+    .mobile-nav{display:none;position:fixed;inset:0;background:#fff;z-index:999;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8%}
+    .mobile-nav.open{display:flex}
+    .mobile-nav a{font-size:clamp(2rem,8vw,3.5rem);font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.04em;line-height:1.2;transition:color .2s}
+    .mobile-nav a:hover{color:var(--accent)}
+    .mobile-nav .close-btn{position:absolute;top:1.5rem;right:5%;font-size:1.5rem;cursor:pointer;background:none;border:none;color:var(--ink-muted)}
+    .mobile-nav-bottom{position:absolute;bottom:3rem;left:8%}
+    .mobile-nav-bottom a{font-size:.85rem;font-weight:600;color:#fff;background:var(--accent);padding:.8rem 1.8rem;border-radius:100px;text-decoration:none}
+    .page-hero{padding:11rem 5% 6rem;border-bottom:1px solid var(--rule);background:var(--bg)}
+    .hero-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+    .hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
+    .page-title{font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:.92;letter-spacing:-.05em}
+    .page-title .accent{color:var(--accent)}
+    .section-label{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+    .section-title{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:800;letter-spacing:-.04em}
+
+    .stages-section{padding:7rem 5%;max-width:1400px;margin:0 auto}
+    .stages-intro{margin-bottom:5rem;padding-bottom:3rem;border-bottom:1px solid var(--rule)}
+    .stage-full{display:grid;grid-template-columns:280px 1fr;gap:6rem;padding:5rem 0;border-bottom:1px solid var(--rule)}
+    .stage-left{position:sticky;top:6rem;align-self:start}
+    .stage-phase{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+    .stage-num-big{font-size:8rem;font-weight:900;letter-spacing:-.06em;line-height:.85;color:rgba(0,0,0,.06);margin-bottom:1.5rem}
+    .stage-target{font-size:.85rem;font-weight:600;color:var(--accent);padding:.5rem 1rem;background:var(--accent-light);border-radius:100px;display:inline-block}
+    .stage-right h3{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-.04em;margin-bottom:1.2rem}
+    .stage-right p{font-size:1.05rem;color:var(--ink-muted);line-height:1.8;margin-bottom:2rem}
+    .stage-bullets{list-style:none;display:flex;flex-direction:column;gap:.8rem}
+    .stage-bullets li{font-size:.92rem;color:var(--ink-muted);padding-left:1.5rem;position:relative;line-height:1.6}
+    .stage-bullets li::before{content:'→';position:absolute;left:0;color:var(--accent);font-weight:600}
+
+    .outcomes{padding:7rem 5%;background:var(--surface)}
+    .outcomes-inner{max-width:1400px;margin:0 auto}
+    .outcomes-header{margin-bottom:4rem}
+    .outcomes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+    .outcome-cell{padding:2.5rem;background:#fff;border-radius:16px;border:1px solid var(--rule);transition:all .3s var(--ease)}
+    .outcome-cell:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,107,79,.08)}
+    .outcome-num{font-size:.72rem;font-weight:700;letter-spacing:.1em;color:var(--accent);margin-bottom:1.5rem}
+    .outcome-cell h4{font-size:1rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.6rem}
+    .outcome-cell p{font-size:.88rem;color:var(--ink-muted);line-height:1.65}
+
+    footer{padding:4rem 5%;border-top:1px solid var(--rule);background:var(--ink)}
+    .footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem}
+    .footer-logo{font-size:1.1rem;font-weight:800;color:#fff}
+    .footer-logo-dot{color:var(--accent-mid)}
+    .footer-tagline{font-size:.8rem;color:rgba(255,255,255,.35)}
+    .footer-copy{font-size:.78rem;color:rgba(255,255,255,.25)}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-delay-1{transition-delay:.08s}.reveal-delay-2{transition-delay:.16s}.reveal-delay-3{transition-delay:.24s}
+
+    @media(max-width:1024px){.stage-full{grid-template-columns:1fr;gap:2rem}.stage-left{position:static}.outcomes-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}.outcomes-grid{grid-template-columns:1fr}}
+
+    /* Accessibility & touch improvements */
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+    @media(hover:none){
+      .service-row:hover,.svc-item:hover,.stage-card:hover,.value-card:hover,
+      .pillar-card:hover,.outcome-cell:hover,.principle:hover,.founder-card:hover,
+      .pos-card:hover,.market-card:hover,.counter-cell:hover{transform:none}
+    }
+    a,button,[role=button]{min-height:44px;min-width:44px;display:inline-flex;align-items:center}
+    .nav-links a,.footer-tagline,.footer-copy,.section-label,.hero-eyebrow,
+    .marquee-item,.svc-num,.service-num,.stage-phase,.pillar-num{
+      min-height:unset;min-width:unset;display:revert
+    }
+
+    /* Rich background textures */
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='.6' fill='rgba(0,0,0,.045)'/%3E%3C/svg%3E");background-size:4px 4px;pointer-events:none;z-index:0;opacity:1}
+    body > *{position:relative;z-index:1}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(10,10,10,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(10,10,10,.055) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0}
+    .page-hero > *{position:relative;z-index:1}
+    .page-hero::after{content:'';position:absolute;right:0;top:0;width:50%;height:100%;background:radial-gradient(ellipse 70% 80% at 90% 40%,rgba(13,107,79,.09) 0%,transparent 65%);pointer-events:none;z-index:0}
+  </style>
+</head>
+<body>
+  <div class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="closeNav">✕</button>
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="goals.html">Goals</a><a href="strategy.html">Strategy</a><a href="milestones.html">Milestones</a>
+    <a href="team.html">Team</a>
+    <div class="mobile-nav-bottom"><a href="my-backend/contact.html">Get in Touch</a></div>
+  </div>
+  <nav id="mainNav">
+    <a class="logo" href="index.html">R<span class="logo-dot">·</span>IGNITE</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li><li><a href="goals.html" class="active">Goals</a></li>
+      <li><a href="strategy.html">Strategy</a></li><li><a href="milestones.html">Milestones</a></li>
+      <li><a href="team.html">Team</a></li>
+    </ul>
+    <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <section class="page-hero">
+    <div class="hero-eyebrow">Strategic Blueprint</div>
+    <h1 class="page-title">Three Stages.<br/>Six <span class="accent">Years.</span><br/>One Vision.</h1>
+  </section>
+
+  <section class="stages-section">
+    <div class="stages-intro reveal">
+      <div class="section-label">Our Goals</div>
+      <h2 class="section-title">The Roadmap to<br/>Market Leadership</h2>
+    </div>
+
+    <div class="stage-full reveal">
+      <div class="stage-left">
+        <div class="stage-phase">Years 0–2 · Stage 1</div>
+        <div class="stage-num-big">01</div>
+        <div class="stage-target">₦100M–₦250M target</div>
+      </div>
+      <div class="stage-right">
+        <h3>Cash Engine</h3>
+        <p>Build a lean, premium B2B service company delivering high-ticket enterprise solutions with fast cash flow. The foundation that funds everything else.</p>
+        <ul class="stage-bullets">
+          <li>Target: ₦100M–₦250M revenue in 24 months</li>
+          <li>Focus: Banks, government, telecoms, oil &amp; gas, large SMEs</li>
+          <li>Core team: 4–5 specialists + strategic outsourcing</li>
+          <li>Services: BI dashboards, AI automation, ERP/CRM, data infrastructure</li>
+          <li>Premium positioning with high-value project delivery</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stage-full reveal">
+      <div class="stage-left">
+        <div class="stage-phase">Years 2–4 · Stage 2</div>
+        <div class="stage-num-big">02</div>
+        <div class="stage-target">60%+ recurring revenue</div>
+      </div>
+      <div class="stage-right">
+        <h3>Recurring Revenue</h3>
+        <p>Convert project clients into long-term contracts, creating predictable income and cash flow stability. The engine that creates investor appeal.</p>
+        <ul class="stage-bullets">
+          <li>Transform one-time projects into annual retainers</li>
+          <li>Managed analytics services and AI monitoring contracts</li>
+          <li>Build 60%+ recurring revenue base</li>
+          <li>Reduce dependency on new client acquisition</li>
+          <li>Establish premium brand and long-term client relationships</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stage-full reveal">
+      <div class="stage-left">
+        <div class="stage-phase">Years 4–6 · Stage 3</div>
+        <div class="stage-num-big">03</div>
+        <div class="stage-target">10x valuation multiple</div>
+      </div>
+      <div class="stage-right">
+        <h3>Productisation</h3>
+        <p>Identify patterns across engagements and build SaaS products that scale beyond consulting hours. The transformation from service firm to technology company.</p>
+        <ul class="stage-bullets">
+          <li>Launch SaaS products based on repeated client problems</li>
+          <li>Transition to hybrid service + product company</li>
+          <li>Achieve 10x valuation multiple from productisation</li>
+          <li>Create investor-ready business with exit potential</li>
+          <li>Build passive income streams alongside consulting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="outcomes">
+    <div class="outcomes-inner">
+      <div class="outcomes-header reveal">
+        <div class="section-label">Expected Outcomes</div>
+        <h2 class="section-title">What Success Looks Like</h2>
+      </div>
+      <div class="outcomes-grid">
+        <div class="outcome-cell reveal">
+          <div class="outcome-num">01</div>
+          <h4>Consulting Profit</h4>
+          <p>High-margin B2B services generating fast cash flow and operational profitability from year one.</p>
+        </div>
+        <div class="outcome-cell reveal reveal-delay-1">
+          <div class="outcome-num">02</div>
+          <h4>Recurring Retainers</h4>
+          <p>Predictable monthly income from annual contracts, creating stability and investor appeal.</p>
+        </div>
+        <div class="outcome-cell reveal reveal-delay-2">
+          <div class="outcome-num">03</div>
+          <h4>Equity Valuation</h4>
+          <p>10x+ valuation multiple from SaaS productisation, building long-term wealth and exit options.</p>
+        </div>
+        <div class="outcome-cell reveal reveal-delay-3">
+          <div class="outcome-num">04</div>
+          <h4>Investor Ready</h4>
+          <p>Structured, scalable business model attractive to acquirers and Series A investors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">R<span class="footer-logo-dot">·</span>IGNITE GROUP</div>
+      <div class="footer-tagline">Empower · Innovate · Excel</div>
+      <div class="footer-copy">© 2025 R-Ignite Group. Abuja, Nigeria.</div>
+    </div>
+  </footer>
+  <script>
+    const nav=document.getElementById('mainNav');
+    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+    document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
+    document.getElementById('closeNav').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
+    const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+  </script>
+</body>
+</html>

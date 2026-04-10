@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | R-Ignite Group</title>
+  <meta name="description" content="Enterprise-grade BI, AI automation, ERP/CRM, data infrastructure and managed services for Nigerian banks, government, telecoms and oil & gas.">
+  <meta property="og:title" content="Services | R-Ignite Group">
+  <meta property="og:description" content="Enterprise-grade BI, AI automation, ERP/CRM, data infrastructure and managed services for Nigerian banks, government, telecoms and oil & gas.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0D6B4F">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#0A0A0A;--ink-soft:#1C1C1C;--ink-mid:#3A3A3A;--ink-muted:#6B6B6B;--ink-faint:#ADADAD;--rule:#E2E2E2;--surface:#F7F5F2;--white:#FFFFFF;--accent:#0D6B4F;--accent-light:#E8F5F0;--accent-mid:#1A8A65;--ease:cubic-bezier(0.16,1,0.3,1)}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    h1,h2,h3,h4{font-weight:700;line-height:1.05;letter-spacing:-.03em}
+    p{line-height:1.75;color:var(--ink-mid)}
+    nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 5%;height:68px;display:flex;justify-content:space-between;align-items:center;background:var(--ink);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);transition:box-shadow .3s}
+    nav.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.35)}
+    .logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#ffffff;text-decoration:none}
+    .logo-dot{color:var(--accent)}
+    .nav-links{display:flex;gap:2.5rem;list-style:none}
+    .nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.55);text-decoration:none;transition:all .2s;padding:.3rem .7rem;border-radius:100px}
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}.nav-links a.active{color:#fff;background:var(--accent);}
+    .nav-cta{font-size:.82rem;font-weight:600;padding:.55rem 1.4rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:100px;transition:all .2s;border:1px solid rgba(255,255,255,.15)}
+    .nav-cta:hover{background:var(--accent-mid);transform:translateY(-1px)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .hamburger span{width:22px;height:1.5px;background:var(--ink);display:block}
+    .mobile-nav{display:none;position:fixed;inset:0;background:var(--white);z-index:999;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8%}
+    .mobile-nav.open{display:flex}
+    .mobile-nav a{font-size:clamp(2rem,8vw,3.5rem);font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.04em;line-height:1.2;transition:color .2s}
+    .mobile-nav a:hover{color:var(--accent)}
+    .mobile-nav .close-btn{position:absolute;top:1.5rem;right:5%;font-size:1.5rem;cursor:pointer;background:none;border:none;color:var(--ink-muted)}
+    .mobile-nav-bottom{position:absolute;bottom:3rem;left:8%}
+    .mobile-nav-bottom a{font-size:.85rem;font-weight:600;color:var(--white);background:var(--accent);padding:.8rem 1.8rem;border-radius:100px;text-decoration:none}
+
+    .page-hero{padding:11rem 5% 6rem;border-bottom:1px solid var(--rule);background:var(--bg)}
+    .hero-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+    .hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
+    .page-title{font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:.92;letter-spacing:-.05em}
+    .page-title .accent{color:var(--accent)}
+
+    .marquee-section{padding:1.2rem 0;border-bottom:1px solid var(--rule);background:var(--surface);overflow:hidden}
+    .marquee-track{display:flex;animation:marquee 30s linear infinite;white-space:nowrap}
+    .marquee-item{display:flex;align-items:center;gap:1.5rem;padding:0 1.5rem;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted)}
+    .marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    .services-main{padding:7rem 5%;max-width:1400px;margin:0 auto}
+    .svc-item{display:grid;grid-template-columns:60px 1fr auto;gap:3rem;padding:3.5rem 0;border-bottom:1px solid var(--rule);align-items:start;transition:all .3s var(--ease)}
+    .svc-item:hover{padding-left:1.5rem;background:var(--accent-light);margin:0 -1.5rem;padding-right:1.5rem;border-radius:16px;border-bottom-color:transparent}
+    .svc-num{font-size:.78rem;font-weight:700;letter-spacing:.06em;color:var(--ink-faint);padding-top:.3rem}
+    .svc-item:hover .svc-num{color:var(--accent)}
+    .svc-body h3{font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.8rem;color:var(--ink)}
+    .svc-body p{font-size:1rem;color:var(--ink-muted);line-height:1.75;margin-bottom:1.5rem;max-width:600px}
+    .svc-features{display:flex;flex-wrap:wrap;gap:.5rem}
+    .svc-feature{font-size:.72rem;font-weight:600;letter-spacing:.04em;padding:.35rem .8rem;background:var(--surface);color:var(--ink-mid);border-radius:100px;border:1px solid var(--rule);transition:all .2s}
+    .svc-item:hover .svc-feature{background:var(--white)}
+    .svc-arrow{font-size:1.3rem;color:var(--ink-faint);transition:all .3s;padding-top:.3rem}
+    .svc-item:hover .svc-arrow{color:var(--accent);transform:translate(3px,-3px)}
+
+    .bottom-cta{padding:10rem 5%;text-align:center;background:var(--surface);position:relative;overflow:hidden}
+    .bottom-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 50%,rgba(13,107,79,.07) 0%,transparent 70%)}
+    .cta-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
+    .cta-headline{font-size:clamp(2.5rem,7vw,6rem);font-weight:900;letter-spacing:-.05em;line-height:.92;margin-bottom:3rem;position:relative}
+    .cta-headline .accent{color:var(--accent)}
+    .btn-primary{display:inline-flex;align-items:center;gap:.5rem;font-size:.88rem;font-weight:600;padding:.9rem 2rem;background:var(--ink);color:var(--white);text-decoration:none;border-radius:100px;transition:all .25s var(--ease);position:relative}
+    .btn-primary:hover{background:var(--accent);transform:translateY(-2px)}
+
+    footer{padding:4rem 5%;border-top:1px solid var(--rule);background:var(--ink)}
+    .footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem}
+    .footer-logo{font-size:1.1rem;font-weight:800;color:var(--white)}
+    .footer-logo-dot{color:var(--accent-mid)}
+    .footer-tagline{font-size:.8rem;color:rgba(255,255,255,.35);letter-spacing:.05em}
+    .footer-copy{font-size:.78rem;color:rgba(255,255,255,.25)}
+
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-delay-1{transition-delay:.08s}.reveal-delay-2{transition-delay:.16s}.reveal-delay-3{transition-delay:.24s}
+
+    @media(max-width:768px){
+      .nav-links,.nav-cta{display:none}.hamburger{display:flex}
+      .svc-item{grid-template-columns:40px 1fr;gap:1rem}
+      .svc-arrow{display:none}
+    }
+
+    /* Accessibility & touch improvements */
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+    @media(hover:none){
+      .service-row:hover,.svc-item:hover,.stage-card:hover,.value-card:hover,
+      .pillar-card:hover,.outcome-cell:hover,.principle:hover,.founder-card:hover,
+      .pos-card:hover,.market-card:hover,.counter-cell:hover{transform:none}
+    }
+    a,button,[role=button]{min-height:44px;min-width:44px;display:inline-flex;align-items:center}
+    .nav-links a,.footer-tagline,.footer-copy,.section-label,.hero-eyebrow,
+    .marquee-item,.svc-num,.service-num,.stage-phase,.pillar-num{
+      min-height:unset;min-width:unset;display:revert
+    }
+
+    /* Rich background textures */
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='.6' fill='rgba(0,0,0,.045)'/%3E%3C/svg%3E");background-size:4px 4px;pointer-events:none;z-index:0;opacity:1}
+    body > *{position:relative;z-index:1}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(10,10,10,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(10,10,10,.055) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0}
+    .page-hero > *{position:relative;z-index:1}
+    .page-hero::after{content:'';position:absolute;right:0;top:0;width:50%;height:100%;background:radial-gradient(ellipse 70% 80% at 90% 40%,rgba(13,107,79,.09) 0%,transparent 65%);pointer-events:none;z-index:0}
+  </style>
+</head>
+<body>
+  <div class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="closeNav">✕</button>
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="goals.html">Goals</a><a href="strategy.html">Strategy</a><a href="milestones.html">Milestones</a>
+    <a href="team.html">Team</a>
+    <div class="mobile-nav-bottom"><a href="my-backend/contact.html">Get in Touch</a></div>
+  </div>
+  <nav id="mainNav">
+    <a class="logo" href="index.html">R<span class="logo-dot">·</span>IGNITE</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html" class="active">Services</a></li><li><a href="goals.html">Goals</a></li>
+      <li><a href="strategy.html">Strategy</a></li><li><a href="milestones.html">Milestones</a></li>
+      <li><a href="team.html">Team</a></li>
+    </ul>
+    <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <section class="page-hero">
+    <div class="hero-eyebrow">Enterprise Solutions</div>
+    <h1 class="page-title">What We<br/>Deliver for<br/><span class="accent">You.</span></h1>
+  </section>
+
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <div class="marquee-item"><div class="marquee-dot"></div>Banks</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Government</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Telecoms</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Oil &amp; Gas</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Large SMEs</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Enterprise</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Banks</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Government</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Telecoms</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Oil &amp; Gas</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Large SMEs</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Enterprise</div>
+    </div>
+  </div>
+
+  <section class="services-main">
+    <div class="svc-item reveal">
+      <div class="svc-num">01</div>
+      <div class="svc-body">
+        <h3>Business Intelligence &amp; Analytics</h3>
+        <p>Enterprise-grade BI dashboards and analytics infrastructure that turn your raw data into decision-making fuel. Built for scale, designed for clarity.</p>
+        <div class="svc-features">
+          <span class="svc-feature">Power BI</span><span class="svc-feature">Tableau</span>
+          <span class="svc-feature">Data Warehouses</span><span class="svc-feature">Executive KPIs</span>
+          <span class="svc-feature">Real-time Reporting</span><span class="svc-feature">Data Governance</span>
+        </div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </div>
+
+    <div class="svc-item reveal">
+      <div class="svc-num">02</div>
+      <div class="svc-body">
+        <h3>AI-Powered Process Automation</h3>
+        <p>Intelligent automation that eliminates manual workflows and transforms your operations. From document processing to predictive forecasting.</p>
+        <div class="svc-features">
+          <span class="svc-feature">RPA</span><span class="svc-feature">Workflow AI</span>
+          <span class="svc-feature">OCR &amp; Doc Processing</span><span class="svc-feature">Predictive Analytics</span>
+          <span class="svc-feature">NLP Applications</span>
+        </div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </div>
+
+    <div class="svc-item reveal">
+      <div class="svc-num">03</div>
+      <div class="svc-body">
+        <h3>ERP &amp; CRM Implementation</h3>
+        <p>Strategic implementation and customisation of enterprise resource planning and CRM systems — from selection through go-live and beyond.</p>
+        <div class="svc-features">
+          <span class="svc-feature">ERP Deployment</span><span class="svc-feature">Salesforce</span>
+          <span class="svc-feature">Dynamics 365</span><span class="svc-feature">Custom Modules</span>
+          <span class="svc-feature">Legacy Integration</span><span class="svc-feature">Change Management</span>
+        </div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </div>
+
+    <div class="svc-item reveal">
+      <div class="svc-num">04</div>
+      <div class="svc-body">
+        <h3>Data Infrastructure &amp; Engineering</h3>
+        <p>Build the data foundation your enterprise needs — scalable cloud platforms, robust ETL pipelines, and data lakes designed for the long term.</p>
+        <div class="svc-features">
+          <span class="svc-feature">AWS</span><span class="svc-feature">Azure</span><span class="svc-feature">GCP</span>
+          <span class="svc-feature">ETL Pipelines</span><span class="svc-feature">Data Lakes</span>
+          <span class="svc-feature">API Development</span><span class="svc-feature">DB Optimisation</span>
+        </div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </div>
+
+    <div class="svc-item reveal">
+      <div class="svc-num">05</div>
+      <div class="svc-body">
+        <h3>Custom Enterprise Software</h3>
+        <p>Bespoke enterprise applications engineered for your organisation's unique operational challenges — not off-the-shelf, built precisely for you.</p>
+        <div class="svc-features">
+          <span class="svc-feature">Industry-Specific Apps</span><span class="svc-feature">Admin Portals</span>
+          <span class="svc-feature">Compliance Systems</span><span class="svc-feature">Mobile Enterprise</span>
+          <span class="svc-feature">Workflow Management</span>
+        </div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </div>
+
+    <div class="svc-item reveal">
+      <div class="svc-num">06</div>
+      <div class="svc-body">
+        <h3>Managed Services &amp; Retainers</h3>
+        <p>Ongoing partnership, monitoring, and optimisation. Your systems never stop delivering value because we never stop working on them.</p>
+        <div class="svc-features">
+          <span class="svc-feature">Annual Contracts</span><span class="svc-feature">Managed Analytics</span>
+          <span class="svc-feature">AI Monitoring</span><span class="svc-feature">Priority Support</span>
+          <span class="svc-feature">Continuous Improvement</span>
+        </div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </div>
+  </section>
+
+  <section class="bottom-cta">
+    <div class="cta-eyebrow reveal">Ready to Start?</div>
+    <h2 class="cta-headline reveal">Let's Solve<br/>Your Biggest<br/><span class="accent">Data Problem.</span></h2>
+    <div class="reveal"><a href="my-backend/contact.html" class="btn-primary">Get in Touch →</a></div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">R<span class="footer-logo-dot">·</span>IGNITE GROUP</div>
+      <div class="footer-tagline">Empower · Innovate · Excel</div>
+      <div class="footer-copy">© 2025 R-Ignite Group. Abuja, Nigeria.</div>
+    </div>
+  </footer>
+  <script>
+    const nav=document.getElementById('mainNav');
+    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+    document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
+    document.getElementById('closeNav').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
+    const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+  </script>
+</body>
+</html>

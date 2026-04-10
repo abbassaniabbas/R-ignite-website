@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strategy | R-Ignite Group</title>
+  <meta name="description" content="How R-Ignite wins: premium positioning, lean operations, project-to-retainer conversion and sector-specific expertise.">
+  <meta property="og:title" content="Strategy | R-Ignite Group">
+  <meta property="og:description" content="How R-Ignite wins: premium positioning, lean operations, project-to-retainer conversion and sector-specific expertise.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0D6B4F">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#0A0A0A;--ink-mid:#3A3A3A;--ink-muted:#6B6B6B;--ink-faint:#ADADAD;--rule:#E2E2E2;--surface:#F7F5F2;--white:#FFFFFF;--accent:#0D6B4F;--accent-light:#E8F5F0;--accent-mid:#1A8A65;--ease:cubic-bezier(0.16,1,0.3,1)}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{font-family:Outfit,sans-serif;background:#fff;color:#0A0A0A;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    p{line-height:1.75;color:var(--ink-mid)}
+    nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 5%;height:68px;display:flex;justify-content:space-between;align-items:center;background:var(--ink);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);transition:box-shadow .3s}
+    nav.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.35)}
+    .logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#ffffff;text-decoration:none}
+    .logo-dot{color:var(--accent)}
+    .nav-links{display:flex;gap:2.5rem;list-style:none}
+    .nav-links a{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.55);text-decoration:none;transition:all .2s;padding:.3rem .7rem;border-radius:100px}
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}.nav-links a.active{color:#fff;background:var(--accent);}
+    .nav-cta{font-size:.82rem;font-weight:600;padding:.55rem 1.4rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:100px;transition:all .2s;border:1px solid rgba(255,255,255,.15)}
+    .nav-cta:hover{background:var(--accent-mid);transform:translateY(-1px)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .hamburger span{width:22px;height:1.5px;background:#fff;display:block}
+    .mobile-nav{display:none;position:fixed;inset:0;background:#fff;z-index:999;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8%}
+    .mobile-nav.open{display:flex}
+    .mobile-nav a{font-size:clamp(2rem,8vw,3.5rem);font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.04em;line-height:1.2;transition:color .2s}
+    .mobile-nav a:hover{color:var(--accent)}
+    .mobile-nav .close-btn{position:absolute;top:1.5rem;right:5%;font-size:1.5rem;cursor:pointer;background:none;border:none;color:var(--ink-muted)}
+    .mobile-nav-bottom{position:absolute;bottom:3rem;left:8%}
+    .mobile-nav-bottom a{font-size:.85rem;font-weight:600;color:#fff;background:var(--accent);padding:.8rem 1.8rem;border-radius:100px;text-decoration:none}
+    .page-hero{padding:11rem 5% 6rem;border-bottom:1px solid var(--rule);background:var(--bg)}
+    .hero-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+    .hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
+    .page-title{font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:.92;letter-spacing:-.05em}
+    .page-title .accent{color:var(--accent)}
+    .section-label{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+    .section-title{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:800;letter-spacing:-.04em}
+
+    .strategy-main{padding:7rem 5%;max-width:1400px;margin:0 auto}
+    .strategy-header{margin-bottom:4rem;padding-bottom:2rem;border-bottom:1px solid var(--rule)}
+    .strategy-row{display:grid;grid-template-columns:60px 1fr auto;gap:3rem;padding:3rem 0;border-bottom:1px solid var(--rule);align-items:start;transition:all .3s var(--ease)}
+    .strategy-row:hover{padding-left:1.5rem;background:var(--accent-light);margin:0 -1.5rem;padding-right:1.5rem;border-radius:16px;border-bottom-color:transparent}
+    .s-num{font-size:.78rem;font-weight:700;letter-spacing:.06em;color:var(--ink-faint);padding-top:.3rem}
+    .strategy-row:hover .s-num{color:var(--accent)}
+    .s-body h3{font-size:1.25rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.8rem}
+    .s-body p{font-size:.97rem;color:var(--ink-muted);line-height:1.75;max-width:580px}
+    .s-badge{display:flex;flex-direction:column;gap:.4rem;align-items:flex-end}
+    .badge{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .7rem;background:var(--surface);color:var(--ink-muted);border-radius:100px;white-space:nowrap}
+    .strategy-row:hover .badge{background:var(--bg)}
+
+    .positioning{padding:7rem 5%;background:var(--surface)}
+    .positioning-inner{max-width:1400px;margin:0 auto}
+    .pos-header{margin-bottom:4rem}
+    .pos-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    .pos-card{padding:3.5rem;border-radius:20px;border:1px solid var(--rule);background:#fff;transition:all .3s var(--ease)}
+    .pos-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 20px 50px rgba(13,107,79,.08)}
+    .pos-num{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem}
+    .pos-card h3{font-size:1.4rem;font-weight:800;letter-spacing:-.03em;margin-bottom:1rem}
+    .pos-card p{font-size:.95rem;color:var(--ink-muted);line-height:1.75}
+
+    .revenue{padding:7rem 5%;max-width:1400px;margin:0 auto}
+    .revenue-header{margin-bottom:4rem;padding-bottom:2rem;border-bottom:1px solid var(--rule)}
+    .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule);border:1px solid var(--rule)}
+    .rev-cell{padding:3.5rem;background:#fff;transition:background .3s}
+    .rev-cell:hover{background:var(--accent-light)}
+    .rev-num{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+    .rev-pct{font-size:clamp(3rem,5vw,5rem);font-weight:900;letter-spacing:-.06em;line-height:1;color:var(--ink);margin-bottom:.8rem}
+    .rev-cell h4{font-size:1.1rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.8rem}
+    .rev-cell p{font-size:.88rem;color:var(--ink-muted);line-height:1.7}
+
+    footer{padding:4rem 5%;border-top:1px solid var(--rule);background:var(--ink)}
+    .footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem}
+    .footer-logo{font-size:1.1rem;font-weight:800;color:#fff}
+    .footer-logo-dot{color:var(--accent-mid)}
+    .footer-tagline{font-size:.8rem;color:rgba(255,255,255,.35)}
+    .footer-copy{font-size:.78rem;color:rgba(255,255,255,.25)}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-delay-1{transition-delay:.08s}.reveal-delay-2{transition-delay:.16s}.reveal-delay-3{transition-delay:.24s}
+
+    @media(max-width:1024px){.pos-grid{grid-template-columns:1fr}.rev-grid{grid-template-columns:1fr}}
+    @media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}.strategy-row{grid-template-columns:40px 1fr;gap:1rem}.s-badge{display:none}}
+
+    /* Accessibility & touch improvements */
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+    @media(hover:none){
+      .service-row:hover,.svc-item:hover,.stage-card:hover,.value-card:hover,
+      .pillar-card:hover,.outcome-cell:hover,.principle:hover,.founder-card:hover,
+      .pos-card:hover,.market-card:hover,.counter-cell:hover{transform:none}
+    }
+    a,button,[role=button]{min-height:44px;min-width:44px;display:inline-flex;align-items:center}
+    .nav-links a,.footer-tagline,.footer-copy,.section-label,.hero-eyebrow,
+    .marquee-item,.svc-num,.service-num,.stage-phase,.pillar-num{
+      min-height:unset;min-width:unset;display:revert
+    }
+
+    /* Rich background textures */
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='.6' fill='rgba(0,0,0,.045)'/%3E%3C/svg%3E");background-size:4px 4px;pointer-events:none;z-index:0;opacity:1}
+    body > *{position:relative;z-index:1}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(10,10,10,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(10,10,10,.055) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0}
+    .page-hero > *{position:relative;z-index:1}
+    .page-hero::after{content:'';position:absolute;right:0;top:0;width:50%;height:100%;background:radial-gradient(ellipse 70% 80% at 90% 40%,rgba(13,107,79,.09) 0%,transparent 65%);pointer-events:none;z-index:0}
+  </style>
+</head>
+<body>
+  <div class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="closeNav">✕</button>
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="goals.html">Goals</a><a href="strategy.html">Strategy</a><a href="milestones.html">Milestones</a>
+    <a href="team.html">Team</a>
+    <div class="mobile-nav-bottom"><a href="my-backend/contact.html">Get in Touch</a></div>
+  </div>
+  <nav id="mainNav">
+    <a class="logo" href="index.html">R<span class="logo-dot">·</span>IGNITE</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li><li><a href="goals.html">Goals</a></li>
+      <li><a href="strategy.html" class="active">Strategy</a></li><li><a href="milestones.html">Milestones</a></li>
+      <li><a href="team.html">Team</a></li>
+    </ul>
+    <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <section class="page-hero">
+    <div class="hero-eyebrow">How We Win</div>
+    <h1 class="page-title">Strategy<br/>Before<br/><span class="accent">Tactics.</span></h1>
+  </section>
+
+  <section class="strategy-main">
+    <div class="strategy-header reveal">
+      <div class="section-label">Core Strategy</div>
+      <h2 class="section-title">Our Winning Formula</h2>
+    </div>
+
+    <div class="strategy-row reveal">
+      <div class="s-num">01</div>
+      <div class="s-body">
+        <h3>Premium B2B Positioning</h3>
+        <p>We don't compete on price. We target Nigeria's most complex, highest-value data challenges — the kind that require real expertise and command premium fees. Banks and government agencies pay for certainty, not cheapness.</p>
+      </div>
+      <div class="s-badge"><span class="badge">Pricing</span><span class="badge">Positioning</span></div>
+    </div>
+
+    <div class="strategy-row reveal">
+      <div class="s-num">02</div>
+      <div class="s-body">
+        <h3>Lean Team, Outsized Output</h3>
+        <p>A core team of 4–5 specialists, augmented by a trusted network of contractors. This model keeps overhead low while enabling us to take on enterprise-scale projects that smaller firms can't and larger firms won't prioritise.</p>
+      </div>
+      <div class="s-badge"><span class="badge">Operations</span><span class="badge">Talent</span></div>
+    </div>
+
+    <div class="strategy-row reveal">
+      <div class="s-num">03</div>
+      <div class="s-body">
+        <h3>Project-to-Retainer Conversion</h3>
+        <p>Every project engagement is designed with retainer conversion in mind. We deliver outstanding results, build deep client trust, then transition clients to long-term contracts that generate predictable recurring income.</p>
+      </div>
+      <div class="s-badge"><span class="badge">Revenue</span><span class="badge">Retention</span></div>
+    </div>
+
+    <div class="strategy-row reveal">
+      <div class="s-num">04</div>
+      <div class="s-body">
+        <h3>Pattern Recognition → Productisation</h3>
+        <p>As we solve similar problems across industries, we identify opportunities to productise. A dashboard built for five banks becomes a SaaS product. A compliance system built for three telecoms becomes a platform. This is how we achieve 10x valuation.</p>
+      </div>
+      <div class="s-badge"><span class="badge">Product</span><span class="badge">Growth</span></div>
+    </div>
+
+    <div class="strategy-row reveal">
+      <div class="s-num">05</div>
+      <div class="s-body">
+        <h3>Sector-Specific Expertise</h3>
+        <p>We go deep in four verticals: banking/finance, government/public sector, telecoms, and oil &amp; gas. Deep sector knowledge lets us speak the language of our clients, win trust faster, and deliver faster than generalists ever could.</p>
+      </div>
+      <div class="s-badge"><span class="badge">Sectors</span><span class="badge">Expertise</span></div>
+    </div>
+  </section>
+
+  <section class="positioning">
+    <div class="positioning-inner">
+      <div class="pos-header reveal">
+        <div class="section-label">Market Position</div>
+        <h2 class="section-title">Where We Play</h2>
+      </div>
+      <div class="pos-grid">
+        <div class="pos-card reveal">
+          <div class="pos-num">What We Are</div>
+          <h3>Premium Enterprise Consultancy</h3>
+          <p>We are Nigeria's go-to partner for mission-critical data and AI challenges. High-touch, high-value, high-trust. We work with the organisations that can't afford to get it wrong.</p>
+        </div>
+        <div class="pos-card reveal reveal-delay-1">
+          <div class="pos-num">What We Are Not</div>
+          <h3>A Commodity Tech Vendor</h3>
+          <p>We don't do cheap, fast, or generic. We don't compete with freelancers or mass-market software vendors. We compete with the top tier of enterprise consultancies — and win on local expertise and senior attention.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="revenue">
+    <div class="revenue-header reveal">
+      <div class="section-label">Revenue Architecture</div>
+      <h2 class="section-title">Three Streams, One Engine</h2>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-cell reveal">
+        <div class="rev-num">Stream 01</div>
+        <div class="rev-pct">40%</div>
+        <h4>Project Fees</h4>
+        <p>High-ticket enterprise project delivery. Fast cash flow, high margins, and the entry point for every client relationship.</p>
+      </div>
+      <div class="rev-cell reveal reveal-delay-1">
+        <div class="rev-num">Stream 02</div>
+        <div class="rev-pct">50%</div>
+        <h4>Retainer Contracts</h4>
+        <p>Recurring monthly income from annual managed services contracts. The backbone of our predictable, investor-grade revenue model.</p>
+      </div>
+      <div class="rev-cell reveal reveal-delay-2">
+        <div class="rev-num">Stream 03</div>
+        <div class="rev-pct">10%</div>
+        <h4>SaaS Products</h4>
+        <p>Productised solutions born from client patterns. Begins small, grows exponentially. The engine of long-term valuation.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">R<span class="footer-logo-dot">·</span>IGNITE GROUP</div>
+      <div class="footer-tagline">Empower · Innovate · Excel</div>
+      <div class="footer-copy">© 2025 R-Ignite Group. Abuja, Nigeria.</div>
+    </div>
+  </footer>
+  <script>
+    const nav=document.getElementById('mainNav');
+    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+    document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
+    document.getElementById('closeNav').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
+    const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+  </script>
+</body>
+</html>

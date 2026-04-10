@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up / Sign In | R-Ignite Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root{--ink:#0A0A0A;--ink-mid:#3A3A3A;--ink-muted:#6B6B6B;--ink-faint:#ADADAD;--rule:#E2E2E2;--surface:#F7F5F2;--white:#FFFFFF;--accent:#0D6B4F;--accent-light:#E8F5F0;--accent-mid:#1A8A65;--ease:cubic-bezier(0.16,1,0.3,1)}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{font-family:Outfit,sans-serif;background:var(--surface);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh}
+    p{line-height:1.75;color:var(--ink-mid)}
+
+    /* MINI LOADER */
+    #boot{position:fixed;inset:0;background:var(--white);display:flex;align-items:center;justify-content:center;z-index:9000;transition:opacity .5s,visibility .5s}
+    #boot.off{opacity:0;visibility:hidden;pointer-events:none}
+    .boot-logo{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+    .boot-dot{color:var(--accent)}
+
+    /* NAV */
+    nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 5%;height:68px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--rule)}
+    .logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#ffffff;text-decoration:none}
+    .logo-dot{color:var(--accent)}
+    .nav-links{display:flex;gap:2.5rem;list-style:none}
+    .nav-links a{font-size:.82rem;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color .2s}
+    .nav-links a:hover{color:var(--ink)}
+    .nav-cta{font-size:.82rem;font-weight:600;padding:.55rem 1.4rem;background:var(--ink);color:#fff;text-decoration:none;border-radius:100px;transition:all .2s}
+    .nav-cta:hover{background:var(--accent)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .hamburger span{width:22px;height:1.5px;background:var(--ink);display:block}
+    .mobile-nav{display:none;position:fixed;inset:0;background:#fff;z-index:999;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8%}
+    .mobile-nav.open{display:flex}
+    .mobile-nav a{font-size:clamp(2rem,8vw,3.5rem);font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.04em;line-height:1.2;transition:color .2s}
+    .mobile-nav a:hover{color:var(--accent)}
+    .mobile-nav .close-btn{position:absolute;top:1.5rem;right:5%;font-size:1.5rem;cursor:pointer;background:none;border:none;color:var(--ink-muted)}
+    .mobile-nav-bottom{position:absolute;bottom:3rem;left:8%}
+    .mobile-nav-bottom a{font-size:.85rem;font-weight:600;color:#fff;background:var(--accent);padding:.8rem 1.8rem;border-radius:100px;text-decoration:none}
+
+    /* TOAST */
+    #toast{position:fixed;bottom:2rem;right:2rem;padding:1rem 1.4rem;background:var(--ink);color:#fff;font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:.7rem;transform:translateY(120px);opacity:0;transition:all .4s var(--ease);z-index:9500;max-width:360px;border-radius:12px;pointer-events:none}
+    #toast.on{transform:translateY(0);opacity:1}
+    #toast.ok{background:var(--accent)}
+    #toast.err{background:#C0392B}
+    .t-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);flex-shrink:0}
+
+    /* VIEWS */
+    .view{display:none;padding-top:68px}
+    .view.active{display:flex}
+
+    /* ── AUTH VIEW ───────────────────── */
+    #authView{min-height:100vh;flex-direction:row}
+    .auth-left{width:42%;background:var(--ink);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+    .auth-left::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 80%,rgba(13,107,79,.3) 0%,transparent 70%)}
+    .a-logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#fff;text-decoration:none;position:relative}
+    .a-logo-dot{color:var(--accent-mid)}
+    .a-tag{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;color:#fff;margin-bottom:1.5rem;position:relative}
+    .a-tag .em{color:var(--accent-mid)}
+    .a-sub{font-size:.97rem;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:3rem;position:relative}
+    .a-stats{display:flex;flex-direction:column;gap:1.5rem;position:relative}
+    .a-stat{display:flex;align-items:center;gap:1.2rem}
+    .a-stat-v{font-size:1.5rem;font-weight:800;letter-spacing:-.04em;color:#fff;min-width:3rem}
+    .a-stat-l{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.4}
+    .a-foot{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);position:relative}
+
+    .auth-right{flex:1;padding:3rem 4rem;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto}
+    .auth-card{width:100%;max-width:480px;padding-top:1rem}
+
+    /* TABS */
+    .a-tabs{display:flex;margin-bottom:2.5rem;border-bottom:1px solid var(--rule)}
+    .a-tab{font-size:.88rem;font-weight:600;padding:.8rem 0;margin-right:2rem;background:none;border:none;cursor:pointer;color:var(--ink-faint);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+    .a-tab.on{color:var(--ink);border-bottom-color:var(--ink)}
+
+    /* FORM PANELS */
+    .fpanel{display:none}
+    .fpanel.on{display:block}
+    .fhead{font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;letter-spacing:-.04em;margin-bottom:.5rem}
+    .fsub{font-size:.92rem;color:var(--ink-muted);margin-bottom:2rem;line-height:1.6}
+    .ferr{padding:.8rem 1rem;background:#FEF2F2;border:1px solid #FECACA;color:#B91C1C;font-size:.85rem;border-radius:8px;margin-bottom:1rem;display:none}
+    .ferr.on{display:block}
+
+    /* SOCIAL BTNS */
+    .s-btns{display:flex;gap:.8rem;margin-bottom:1.5rem}
+    .s-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.75rem;background:#fff;border:1px solid var(--rule);border-radius:10px;font-size:.82rem;font-weight:600;color:var(--ink);cursor:pointer;transition:all .2s}
+    .s-btn:hover{border-color:var(--ink);background:var(--surface)}
+    .s-btn svg{width:18px;height:18px}
+
+    /* DIVIDER */
+    .divider{text-align:center;position:relative;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:1.5rem}
+    .divider::before,.divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:var(--rule)}
+    .divider::before{left:0}.divider::after{right:0}
+
+    /* FORM FIELDS */
+    .frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .field{margin-bottom:1.2rem;position:relative}
+    .field label{display:block;font-size:.78rem;font-weight:600;color:var(--ink-mid);margin-bottom:.4rem;letter-spacing:.01em}
+    .field input{width:100%;padding:.75rem 1rem;background:#fff;border:1px solid var(--rule);border-radius:10px;color:var(--ink);font-family:Outfit,sans-serif;font-size:.92rem;outline:none;transition:border .2s,box-shadow .2s}
+    .field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(13,107,79,.1)}
+    .field input::placeholder{color:var(--ink-faint)}
+    .forgot{position:absolute;right:0;top:0;font-size:.75rem;font-weight:600;color:var(--accent);text-decoration:none;cursor:pointer}
+
+    /* PASSWORD STRENGTH */
+    .pw-bars{display:flex;gap:3px;margin-top:.5rem}
+    .pw-bar{height:3px;flex:1;background:var(--rule);border-radius:100px;transition:background .3s}
+    .pw-bar.s1{background:#EF4444}
+    .pw-bar.s2{background:#F97316}
+    .pw-bar.s3{background:#EAB308}
+    .pw-bar.s4{background:var(--accent)}
+    .pw-lbl{font-size:.72rem;color:var(--ink-faint);margin-top:.3rem}
+
+    /* COURSE OPTIONS */
+    .clabel{font-size:.78rem;font-weight:600;color:var(--ink-mid);display:block;margin-bottom:.6rem;letter-spacing:.01em}
+    .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.2rem}
+    .copt{padding:.75rem 1rem;border:1px solid var(--rule);border-radius:10px;cursor:pointer;transition:all .2s}
+    .copt:hover{border-color:var(--accent)}
+    .copt.on{border-color:var(--accent);background:var(--accent-light)}
+    .copt-n{font-size:.82rem;font-weight:600;display:block;color:var(--ink)}
+    .copt-t{font-size:.72rem;color:var(--ink-faint);display:block;margin-top:.1rem}
+
+    /* CHECKBOX */
+    .chk{display:flex;align-items:flex-start;gap:.8rem;cursor:pointer;margin-bottom:1rem;font-size:.85rem;color:var(--ink-mid)}
+    .chk input[type=checkbox]{position:absolute;opacity:0;pointer-events:none}
+    .chkbox{width:18px;height:18px;border:1.5px solid var(--rule);border-radius:5px;flex-shrink:0;margin-top:1px;transition:all .2s;position:relative}
+    .chk input:checked+.chkbox{background:var(--accent);border-color:var(--accent)}
+    .chk input:checked+.chkbox::after{content:'';position:absolute;left:4px;top:1px;width:5px;height:9px;border:2px solid #fff;border-left:none;border-top:none;transform:rotate(45deg)}
+    .chk a{color:var(--accent);text-decoration:none}
+
+    /* SUBMIT BTN */
+    .btn-sub{width:100%;padding:1rem;background:var(--ink);color:#fff;border:none;border-radius:100px;font-family:Outfit,sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .25s var(--ease);margin-top:1rem}
+    .btn-sub:hover{background:var(--accent);transform:translateY(-2px)}
+    .btn-sub:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .fnote{text-align:center;font-size:.82rem;color:var(--ink-muted);margin-top:1.2rem}
+    .fnote a{color:var(--accent);cursor:pointer;font-weight:600}
+
+    /* ── DASHBOARD VIEW ──────────────── */
+    #dashView{min-height:100vh;flex-direction:column}
+    .d-nav{position:sticky;top:68px;z-index:100;padding:.8rem 3%;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+    .d-logo{font-size:1rem;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+    .d-logo span{color:var(--accent)}
+    .d-nav-r{display:flex;align-items:center;gap:1rem}
+    .d-notif{position:relative;font-size:1.1rem;cursor:pointer}
+    .n-badge{position:absolute;top:-4px;right:-6px;background:var(--accent);color:#fff;font-size:.6rem;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .d-av{width:34px;height:34px;border-radius:50%;background:var(--accent-light);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--accent);cursor:pointer}
+    .btn-out{font-size:.78rem;font-weight:600;padding:.4rem 1rem;background:none;border:1px solid var(--rule);border-radius:100px;cursor:pointer;color:var(--ink-muted);transition:all .2s}
+    .btn-out:hover{border-color:var(--ink);color:var(--ink)}
+
+    .d-body{display:grid;grid-template-columns:230px 1fr;flex:1;min-height:calc(100vh - 136px)}
+    .d-side{padding:2rem 1.5rem;border-right:1px solid var(--rule);background:#fff}
+    .s-grp{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:.5rem .7rem;margin-top:1rem}
+    .s-item{display:flex;align-items:center;gap:.7rem;padding:.65rem .8rem;font-size:.85rem;font-weight:500;color:var(--ink-muted);cursor:pointer;border-radius:8px;transition:all .2s;margin-bottom:2px}
+    .s-item:hover{background:var(--surface);color:var(--ink)}
+    .s-item.on{background:var(--accent-light);color:var(--accent);font-weight:600}
+    .s-ico{font-size:.95rem;width:20px;text-align:center}
+    .s-badge{margin-left:auto;font-size:.65rem;font-weight:700;background:var(--accent);color:#fff;padding:.15rem .45rem;border-radius:100px}
+
+    .d-main{padding:3rem;overflow-y:auto}
+    .d-panel{display:none}
+    .d-panel.on{display:block}
+    .p-greet{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+    .p-title{font-size:clamp(1.5rem,2.5vw,2.5rem);font-weight:800;letter-spacing:-.04em;margin-bottom:2.5rem}
+
+    /* STAT ROW */
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem}
+    .s-box{padding:1.5rem;background:#fff;border:1px solid var(--rule);border-radius:12px;transition:all .3s}
+    .s-box:hover{border-color:var(--accent);box-shadow:0 8px 24px rgba(13,107,79,.07)}
+    .s-num{font-size:1.6rem;font-weight:800;letter-spacing:-.04em;margin-bottom:.3rem}
+    .s-lbl{font-size:.78rem;color:var(--ink-faint)}
+
+    .d-sec{margin-bottom:2.5rem}
+    .d-sec-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+    .d-sec-t{font-size:1rem;font-weight:700;letter-spacing:-.01em}
+    .d-sec-a{font-size:.78rem;font-weight:600;color:var(--accent);background:none;border:none;cursor:pointer}
+
+    .act-list,.c-list{display:flex;flex-direction:column;gap:2px}
+    .act-row{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:#fff;border:1px solid var(--rule);border-radius:10px;font-size:.85rem}
+    .act-ico{font-size:1rem;width:32px;height:32px;background:var(--accent-light);border-radius:8px;display:flex;align-items:center;justify-content:center}
+    .act-txt{flex:1;font-weight:500;color:var(--ink)}
+    .act-time{font-size:.72rem;color:var(--ink-faint)}
+    .c-row{display:flex;align-items:center;gap:1.2rem;padding:1rem 1.2rem;background:#fff;border:1px solid var(--rule);border-radius:10px}
+    .c-ico{font-size:1.2rem;width:42px;height:42px;background:var(--accent-light);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .c-inf{flex:1}
+    .c-nm{font-size:.9rem;font-weight:600;color:var(--ink)}
+    .c-bar-wrap{height:4px;background:var(--rule);border-radius:100px;margin-top:.4rem;overflow:hidden}
+    .c-bar{height:100%;background:var(--accent);border-radius:100px;transition:width .5s var(--ease)}
+    .c-pct{font-size:.75rem;color:var(--accent);font-weight:700;margin-left:.5rem;white-space:nowrap}
+
+    /* CATALOGUE */
+    .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+    .cat-card{padding:1.8rem;background:#fff;border:1px solid var(--rule);border-radius:14px;cursor:pointer;transition:all .3s}
+    .cat-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 32px rgba(13,107,79,.08)}
+    .cat-ic{font-size:1.8rem;margin-bottom:1rem}
+    .cat-nm{font-size:.95rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.4rem}
+    .cat-desc{font-size:.82rem;color:var(--ink-muted);line-height:1.6}
+    .cat-tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.25rem .7rem;background:var(--accent-light);color:var(--accent);border-radius:100px;display:inline-block;margin-top:.8rem}
+
+    /* NEWSLETTER */
+    .nl-card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:2.5rem;max-width:600px}
+    .nl-card h3{font-size:1.1rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.8rem}
+    .nl-card p{font-size:.92rem;color:var(--ink-muted);line-height:1.7;margin-bottom:1.5rem}
+    .nl-tops{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+    .nl-top{font-size:.78rem;font-weight:600;padding:.4rem .9rem;border:1px solid var(--rule);color:var(--ink-muted);border-radius:100px;cursor:pointer;transition:all .2s}
+    .nl-top.on{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
+    .btn-nl{padding:.8rem 1.8rem;background:var(--ink);color:#fff;border:none;border-radius:100px;font-family:Outfit,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s}
+    .btn-nl:hover{background:var(--accent)}
+
+    /* PROFILE */
+    .pf-grid{display:grid;grid-template-columns:auto 1fr;gap:4rem;align-items:start}
+    .pf-big-av{width:90px;height:90px;border-radius:50%;background:var(--accent-light);border:3px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;color:var(--accent);margin:0 auto 1rem}
+    .pf-nm{font-size:1rem;font-weight:700;text-align:center;margin-bottom:.3rem}
+    .pf-role{font-size:.78rem;color:var(--ink-faint);text-align:center}
+
+    /* SKELETON */
+    .sk{background:linear-gradient(90deg,var(--surface) 25%,var(--rule) 50%,var(--surface) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:10px}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .auth-left{width:38%}.auth-left{padding:3rem 2.5rem}
+      .cat-grid{grid-template-columns:1fr 1fr}
+      .stat-row{grid-template-columns:1fr 1fr}
+      .d-body{grid-template-columns:200px 1fr}
+    }
+    @media(max-width:768px){
+      .nav-links,.nav-cta{display:none}.hamburger{display:flex}
+      #authView{flex-direction:column}
+      .auth-left{width:100%;padding:2.5rem 6%;min-height:auto}
+      .a-stats{flex-direction:row;gap:2rem}
+      .auth-right{padding:2.5rem 6%}
+      .frow{grid-template-columns:1fr}
+      .d-body{grid-template-columns:1fr}
+      .d-side{display:none}
+      .d-main{padding:2rem 5%}
+      .cat-grid{grid-template-columns:1fr}
+      .stat-row{grid-template-columns:1fr 1fr}
+      .pf-grid{grid-template-columns:1fr;gap:2rem}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loader -->
+  <div id="boot"><div class="boot-logo">R<span class="boot-dot">·</span>IGNITE</div></div>
+
+  <!-- Toast -->
+  <div id="toast"><div class="t-dot"></div><span id="t-msg"></span></div>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="closeNav">✕</button>
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="goals.html">Goals</a><a href="strategy.html">Strategy</a><a href="milestones.html">Milestones</a>
+    <a href="team.html">Team</a>
+    <div class="mobile-nav-bottom"><a href="my-backend/contact.html">Get in Touch</a></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a class="logo" href="index.html">R<span class="logo-dot">·</span>IGNITE</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li><li><a href="goals.html">Goals</a></li>
+      <li><a href="strategy.html">Strategy</a></li><li><a href="milestones.html">Milestones</a></li>
+      <li><a href="team.html">Team</a></li>
+    </ul>
+    <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+     AUTH VIEW
+═══════════════════════════════════ -->
+<div id="authView" class="view">
+  <div class="auth-left">
+   <!-- <a class="a-logo" href="index.html">R<span class="logo-dot">·</span>IGNITE</a> -->
+    <div>
+      <h2 class="a-tag">Unlock Nigeria's<br/><span class="em">Premier</span><br/>Data Platform.</h2>
+      <p class="a-sub">Access enterprise-grade courses, weekly intelligence briefings, and your personalised learning dashboard.</p>
+      <div class="a-stats">
+        <div class="a-stat"><div class="a-stat-v">12+</div><div class="a-stat-l">Enterprise courses available</div></div>
+        <div class="a-stat"><div class="a-stat-v">2K+</div><div class="a-stat-l">Professionals enrolled</div></div>
+        <div class="a-stat"><div class="a-stat-v">📩</div><div class="a-stat-l">Weekly AI & data briefings</div></div>
+      </div>
+    </div>
+    <div class="a-foot">EMPOWER · INNOVATE · EXCEL</div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="a-tabs">
+        <button class="a-tab on" data-t="signup">Create Account</button>
+        <button class="a-tab" data-t="login">Sign In</button>
+      </div>
+
+      <!-- SIGN UP -->
+      <div class="fpanel on" id="su">
+        <h2 class="fhead">Join R-Ignite</h2>
+        <p class="fsub">Create your free account to access courses and weekly briefings.</p>
+        <div class="ferr" id="su-err"></div>
+
+        <div class="s-btns">
+          <button class="s-btn" onclick="oAuth('google')">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Continue with Google
+          </button>
+          <button class="s-btn" onclick="oAuth('facebook')">
+            <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Continue with Facebook
+          </button>
+        </div>
+        <div class="divider">OR WITH EMAIL</div>
+
+        <form onsubmit="doSignup(event)">
+          <div class="frow">
+            <div class="field"><label>First Name</label><input id="su-fn" type="text" placeholder="First name" required></div>
+            <div class="field"><label>Last Name</label><input id="su-ln" type="text" placeholder="Last name" required></div>
+          </div>
+          <div class="field"><label>Email</label><input id="su-em" type="email" placeholder="you@company.com" required></div>
+          <div class="field"><label>Organisation</label><input id="su-og" type="text" placeholder="Company or institution"></div>
+          <div class="field">
+            <label>Password</label>
+            <input id="su-pw" type="password" placeholder="Min. 8 characters" required oninput="pwStr(this.value)">
+            <div class="pw-bars"><div class="pw-bar" id="pb1"></div><div class="pw-bar" id="pb2"></div><div class="pw-bar" id="pb3"></div><div class="pw-bar" id="pb4"></div></div>
+            <div class="pw-lbl" id="pbl">Enter a password</div>
+          </div>
+
+          <span class="clabel">Courses I'm interested in</span>
+          <div class="cgrid">
+            <div class="copt" onclick="togC(this)" data-v="bi-mastery"><span class="copt-n">Business Intelligence</span><span class="copt-t">Power BI · Tableau</span></div>
+            <div class="copt" onclick="togC(this)" data-v="ai-automation"><span class="copt-n">AI & Automation</span><span class="copt-t">RPA · ML · NLP</span></div>
+            <div class="copt" onclick="togC(this)" data-v="data-engineering"><span class="copt-n">Data Engineering</span><span class="copt-t">ETL · Cloud · SQL</span></div>
+            <div class="copt" onclick="togC(this)" data-v="erp-crm"><span class="copt-n">ERP & CRM</span><span class="copt-t">Salesforce · SAP</span></div>
+            <div class="copt" onclick="togC(this)" data-v="digital-strategy"><span class="copt-n">Digital Strategy</span><span class="copt-t">Transformation</span></div>
+            <div class="copt" onclick="togC(this)" data-v="advanced-analytics"><span class="copt-n">Advanced Analytics</span><span class="copt-t">Stats · Python</span></div>
+          </div>
+
+          <label class="chk"><input type="checkbox" id="su-nl" checked><div class="chkbox"></div><span class="chk-t"><strong>Weekly Intelligence Briefing</strong> — AI trends and data insights every Monday.</span></label>
+          <label class="chk"><input type="checkbox" id="su-tc" required><div class="chkbox"></div><span class="chk-t">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</span></label>
+
+          <button type="submit" class="btn-sub" id="su-btn">Create My Account →</button>
+        </form>
+        <p class="fnote">Already have an account? <a onclick="swTab('login')">Sign in here</a></p>
+      </div>
+
+      <!-- LOGIN -->
+      <div class="fpanel" id="li">
+        <h2 class="fhead">Welcome Back</h2>
+        <p class="fsub">Sign in to access your courses and dashboard.</p>
+        <div class="ferr" id="li-err"></div>
+
+        <div class="s-btns">
+          <button class="s-btn" onclick="oAuth('google')">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Sign in with Google
+          </button>
+          <button class="s-btn" onclick="oAuth('facebook')">
+            <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Sign in with Facebook
+          </button>
+        </div>
+        <div class="divider">OR WITH EMAIL</div>
+
+        <form onsubmit="doLogin(event)">
+          <div class="field"><label>Email</label><input id="li-em" type="email" placeholder="you@company.com" required></div>
+          <div class="field">
+            <a class="forgot" href="#" onclick="forgotPw(event)">Forgot password?</a>
+            <label>Password</label>
+            <input id="li-pw" type="password" placeholder="Your password" required>
+          </div>
+          <label class="chk"><input type="checkbox" id="li-rem" checked><div class="chkbox"></div><span class="chk-t">Keep me signed in on this device</span></label>
+          <button type="submit" class="btn-sub" id="li-btn">Sign In →</button>
+        </form>
+        <p class="fnote">Don't have an account? <a onclick="swTab('signup')">Create one free</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     DASHBOARD VIEW
+═══════════════════════════════════ -->
+<div id="dashView" class="view" style="flex-direction:column">
+  <div class="d-nav">
+    <div class="d-logo">R<span class="logo-dot">·</span>IGNITE</div>
+    <div class="d-nav-r">
+      <div class="d-notif">🔔<div class="n-badge" id="n-cnt">0</div></div>
+      <div class="d-av" id="d-av">?</div>
+      <button class="btn-out" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="d-body">
+    <div class="d-side">
+      <div class="s-grp">Overview</div>
+      <div class="s-item on" onclick="goPanel('ov',this)"><span class="s-ico">📊</span>Dashboard</div>
+      <div class="s-item" onclick="goPanel('act',this)"><span class="s-ico">⚡</span>My Activity<span class="s-badge" id="act-cnt">0</span></div>
+      <div class="s-grp">Learning</div>
+      <div class="s-item" onclick="goPanel('mc',this)"><span class="s-ico">📚</span>My Courses</div>
+      <div class="s-item" onclick="goPanel('cat',this)"><span class="s-ico">🔍</span>Explore Courses</div>
+      <div class="s-grp">Account</div>
+      <div class="s-item" onclick="goPanel('nl',this)"><span class="s-ico">📩</span>Weekly Updates</div>
+      <div class="s-item" onclick="goPanel('pf',this)"><span class="s-ico">👤</span>Profile</div>
+    </div>
+
+    <div class="d-main">
+
+      <!-- OVERVIEW -->
+      <div class="d-panel on" id="p-ov">
+        <div class="p-head">
+          <div class="p-greet" id="d-greet">WELCOME</div>
+          <h2 class="p-title" id="d-wel">Loading…</h2>
+        </div>
+        <div class="stat-row">
+          <div class="s-box"><div class="s-num" id="st-c">—</div><div class="s-lbl">Courses enrolled</div></div>
+          <div class="s-box"><div class="s-num" id="st-p">—</div><div class="s-lbl">Avg. completion</div></div>
+          <div class="s-box"><div class="s-num" id="st-a">—</div><div class="s-lbl">Activities logged</div></div>
+          <div class="s-box"><div class="s-num" id="st-n">—</div><div class="s-lbl">Newsletter</div></div>
+        </div>
+        <div class="d-sec">
+          <div class="d-sec-h"><div class="d-sec-t">Recent Activity</div><button class="d-sec-a" onclick="goPanel('act',qs('.s-item:nth-child(3)'))">View all →</button></div>
+          <div class="act-list" id="ov-act"><div class="sk" style="height:55px;margin-bottom:2px"></div><div class="sk" style="height:55px;margin-bottom:2px"></div><div class="sk" style="height:55px"></div></div>
+        </div>
+        <div class="d-sec">
+          <div class="d-sec-h"><div class="d-sec-t">Continue Learning</div><button class="d-sec-a" onclick="goPanel('mc',qs('.s-item:nth-child(5)'))">All courses →</button></div>
+          <div class="c-list" id="ov-crs"><div class="sk" style="height:68px;margin-bottom:4px"></div><div class="sk" style="height:68px"></div></div>
+        </div>
+      </div>
+
+      <!-- ACTIVITY -->
+      <div class="d-panel" id="p-act">
+        <div class="p-head"><div class="p-greet">HISTORY</div><h2 class="p-title">My Activity</h2></div>
+        <div class="act-list" id="full-act"><div class="sk" style="height:55px;margin-bottom:2px"></div><div class="sk" style="height:55px;margin-bottom:2px"></div><div class="sk" style="height:55px"></div></div>
+      </div>
+
+      <!-- MY COURSES -->
+      <div class="d-panel" id="p-mc">
+        <div class="p-head"><div class="p-greet">LEARNING</div><h2 class="p-title">My Courses</h2></div>
+        <div class="c-list" id="my-crs"><div class="sk" style="height:68px;margin-bottom:4px"></div><div class="sk" style="height:68px"></div></div>
+      </div>
+
+      <!-- CATALOGUE -->
+      <div class="d-panel" id="p-cat">
+        <div class="p-head"><div class="p-greet">EXPLORE</div><h2 class="p-title">All Courses</h2></div>
+        <div class="cat-grid" id="cat-grid"><div class="sk" style="height:200px"></div><div class="sk" style="height:200px"></div><div class="sk" style="height:200px"></div><div class="sk" style="height:200px"></div><div class="sk" style="height:200px"></div><div class="sk" style="height:200px"></div></div>
+      </div>
+
+      <!-- NEWSLETTER -->
+      <div class="d-panel" id="p-nl">
+        <div class="p-head"><div class="p-greet">STAY INFORMED</div><h2 class="p-title">Weekly Updates</h2></div>
+        <div class="nl-card">
+          <h3>📩 Your Weekly Intelligence Briefing</h3>
+          <p>Every Monday morning, receive a curated briefing on data, AI, and digital transformation — tailored for Nigerian enterprise professionals. Choose your topics below.</p>
+          <div class="nl-tops" id="nl-tops">
+            <div class="nl-top on" onclick="togT(this)">AI & Machine Learning</div>
+            <div class="nl-top on" onclick="togT(this)">Business Intelligence</div>
+            <div class="nl-top on" onclick="togT(this)">Nigerian Tech News</div>
+            <div class="nl-top" onclick="togT(this)">Cloud Infrastructure</div>
+            <div class="nl-top" onclick="togT(this)">ERP & CRM Trends</div>
+            <div class="nl-top" onclick="togT(this)">Data Engineering</div>
+            <div class="nl-top on" onclick="togT(this)">Case Studies</div>
+            <div class="nl-top" onclick="togT(this)">Career & Hiring</div>
+          </div>
+          <label class="chk" style="position:relative;z-index:1;margin-bottom:1.4rem">
+            <input type="checkbox" id="nl-on" checked>
+            <div class="chkbox"></div>
+            <span class="chk-t"><strong>Subscribed to weekly briefings</strong> — uncheck to unsubscribe</span>
+          </label>
+          <button class="btn-nl" id="nl-btn" onclick="saveNl()">Save Preferences →</button>
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="d-panel" id="p-pf">
+        <div class="p-head"><div class="p-greet">ACCOUNT</div><h2 class="p-title">My Profile</h2></div>
+        <div class="pf-grid">
+          <div class="pf-av-wrap">
+            <div class="pf-big-av" id="pf-av">?</div>
+            <div class="pf-nm" id="pf-nm">Loading…</div>
+            <div class="pf-role">Member</div>
+          </div>
+          <div class="pf-form">
+            <div class="frow">
+              <div class="field"><label>First Name</label><input id="pf-fn" type="text" placeholder="First name"></div>
+              <div class="field"><label>Last Name</label><input id="pf-ln" type="text" placeholder="Last name"></div>
+            </div>
+            <div class="field"><label>Email</label><input id="pf-em" type="email" disabled style="opacity:.5;cursor:not-allowed"></div>
+            <div class="field"><label>Organisation</label><input id="pf-og" type="text" placeholder="Your company"></div>
+            <button class="btn-sub" style="margin-top:.8rem" onclick="savePf()">Save Changes →</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /d-main -->
+  </div><!-- /d-body -->
+</div><!-- /dashView -->
+
+
+</body>
+
+<script>
+  document.getElementById("hamburger").addEventListener("click",()=>document.getElementById("mobileNav").classList.add("open"));
+  document.getElementById("closeNav").addEventListener("click",()=>document.getElementById("mobileNav").classList.remove("open"));
+</script>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+// ⚠️  CONFIGURATION — Replace with your real Supabase credentials
+//     Supabase Dashboard → Project Settings → API
+// ════════════════════════════════════════════════════════════════
+const SB_URL  = 'https://yqdeouclncruyupvkxlw.supabase.co';  // e.g. https://xyzxyz.supabase.co
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlxZGVvdWNsbmNydXl1cHZreGx3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4MjE5OTksImV4cCI6MjA4NzM5Nzk5OX0.QAf7Mkwp_VSMQTECjvo249Ndd1CY1Y9r5CPTvOuUp-8';     // safe to expose in frontend
+
+// ── Init Supabase with persistent session (auto login saved) ──────
+const { createClient } = supabase;
+const sb = createClient(SB_URL, SB_ANON, {
+  auth: {
+    persistSession: true,        // saves JWT to localStorage → stays logged in
+    storageKey:     'rignite-v1',
+    storage:        window.localStorage,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,    // handles OAuth redirect back to this page
+  }
+});
+
+// ── Helpers ────────────────────────────────────────────────────────
+const qs  = s => document.querySelector(s);
+const qsa = s => [...document.querySelectorAll(s)];
+
+function toast(msg, type=''){
+  const el=qs('#toast'); el.className='on '+type;
+  qs('#t-msg').textContent=msg;
+  clearTimeout(el._t);
+  el._t=setTimeout(()=>el.classList.remove('on'),4200);
+}
+
+
+
+// ── Tab switcher ───────────────────────────────────────────────────
+function swTab(t){
+  qsa('.a-tab').forEach(el=>el.classList.toggle('on',el.dataset.t===t));
+  qsa('.fpanel').forEach(el=>el.classList.toggle('on',el.id===(t==='signup'?'su':'li')));
+  qsa('.ferr').forEach(el=>el.classList.remove('on'));
+}
+qsa('.a-tab').forEach(el=>el.addEventListener('click',()=>swTab(el.dataset.t)));
+
+function showErr(id,msg){const el=qs('#'+id);el.textContent=msg;el.classList.add('on')}
+
+// ── Password strength ──────────────────────────────────────────────
+function pwStr(pw){
+  const bars=qsa('.pw-bar'); bars.forEach(b=>b.className='pw-bar');
+  const lbl=qs('#pbl');
+  if(!pw){lbl.textContent='Enter a password';return}
+  let sc=0;
+  if(pw.length>=8)sc++;if(/[A-Z]/.test(pw))sc++;if(/[0-9]/.test(pw))sc++;if(/[^A-Za-z0-9]/.test(pw))sc++;
+  const cls=sc<=1?'w':sc<=2?'m':'s';
+  const txt=sc<=1?'Weak':sc<=2?'Medium':sc===3?'Good':'Strong ✓';
+  for(let i=0;i<sc;i++)bars[i].classList.add(cls);
+  lbl.textContent=txt;
+}
+function togC(el){el.classList.toggle('sel')}
+function selCourses(){return qsa('.copt.sel').map(el=>el.dataset.v)}
+
+// ── OAuth (Google / Facebook) ──────────────────────────────────────
+async function oAuth(provider){
+  const {error}=await sb.auth.signInWithOAuth({
+    provider,
+    options:{
+      redirectTo: window.location.href,
+      scopes: provider==='facebook'?'email,public_profile':undefined
+    }
+  });
+  if(error)toast('OAuth error: '+error.message,'err');
+}
+
+// ── Email Sign Up ──────────────────────────────────────────────────
+async function doSignup(e){
+  e.preventDefault();
+  const fn=qs('#su-fn').value.trim(), ln=qs('#su-ln').value.trim();
+  const em=qs('#su-em').value.trim(), og=qs('#su-og').value.trim();
+  const pw=qs('#su-pw').value, nl=qs('#su-nl').checked;
+  if(pw.length<8){showErr('su-err','Password must be at least 8 characters.');return}
+  const btn=qs('#su-btn'); btn.disabled=true; btn.textContent='Creating…'; btn.classList.add('ld');
+
+  const {data,error}=await sb.auth.signUp({
+    email:em, password:pw,
+    options:{
+      data:{first_name:fn,last_name:ln,full_name:fn+' '+ln,organisation:og},
+      emailRedirectTo: window.location.href
+    }
+  });
+
+  if(error){showErr('su-err',error.message);btn.disabled=false;btn.textContent='Create My Account →';btn.classList.remove('ld');return}
+
+  if(data.user){
+    // Upsert full profile row
+    await sb.from('profiles').upsert({
+      id:data.user.id, email:em,
+      first_name:fn, last_name:ln, full_name:fn+' '+ln,
+      organisation:og, newsletter:nl
+    });
+
+    // Enroll in selected courses
+    const chosen=selCourses();
+    if(chosen.length){
+      const {data:crs}=await sb.from('courses').select('id,slug').in('slug',chosen);
+      if(crs?.length){
+        await sb.from('enrollments').insert(crs.map(c=>({user_id:data.user.id,course_id:c.id,progress:0})));
+      }
+    }
+
+    // Log signup activity
+    await sb.from('activity_log').insert({
+      user_id:data.user.id, type:'signup',
+      title:'Account created and profile set up',
+      meta:{newsletter:nl, courses_selected:chosen.length}
+    });
+  }
+
+  btn.disabled=false; btn.textContent='Create My Account →'; btn.classList.remove('ld');
+  toast('Check your email to confirm your account! 📧','ok');
+  swTab('login');
+}
+
+// ── Email Login ────────────────────────────────────────────────────
+async function doLogin(e){
+  e.preventDefault();
+  const em=qs('#li-em').value.trim(), pw=qs('#li-pw').value;
+  const btn=qs('#li-btn'); btn.disabled=true; btn.textContent='Signing in…'; btn.classList.add('ld');
+
+  const {data,error}=await sb.auth.signInWithPassword({email:em,password:pw});
+
+  btn.disabled=false; btn.textContent='Sign In →'; btn.classList.remove('ld');
+  if(error){showErr('li-err',error.message);return}
+
+  await logAct(data.user.id,'login','Signed in to dashboard');
+  await loadDash(data.user);
+}
+
+// ── Forgot password ────────────────────────────────────────────────
+async function forgotPw(e){
+  e.preventDefault();
+  const em=qs('#li-em').value.trim();
+  if(!em){showErr('li-err','Enter your email above first.');return}
+  const {error}=await sb.auth.resetPasswordForEmail(em,{redirectTo:window.location.href});
+  if(error)toast('Error: '+error.message,'err');
+  else toast('Password reset email sent! Check your inbox. 📧','ok');
+}
+
+// ── Logout ─────────────────────────────────────────────────────────
+async function doLogout(){
+  await sb.auth.signOut();
+  qs('#dashView').classList.remove('active');
+  qs('#authView').classList.add('active');
+  swTab('login');
+  toast('Signed out successfully.');
+}
+
+// ── Log activity helper ────────────────────────────────────────────
+async function logAct(uid,type,title,meta={}){
+  await sb.from('activity_log').insert({user_id:uid,type,title,meta});
+}
+
+// ── Load Dashboard ─────────────────────────────────────────────────
+async function loadDash(user){
+  qs('#authView').classList.remove('active');
+  qs('#dashView').classList.add('active');
+
+  const h=new Date().getHours();
+  qs('#d-greet').textContent=h<12?'GOOD MORNING':h<17?'GOOD AFTERNOON':'GOOD EVENING';
+
+  // Fetch profile
+  const {data:pf}=await sb.from('profiles').select('*').eq('id',user.id).single();
+  const fn=pf?.first_name||user.user_metadata?.full_name?.split(' ')[0]||user.email.split('@')[0];
+  const full=pf?.full_name||fn;
+  const ini=(full.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2))||'?';
+
+  qs('#d-wel').textContent=`Welcome back, ${fn} 👋`;
+  qs('#d-av').textContent=ini;
+  qs('#pf-av').textContent=ini;
+  qs('#pf-nm').textContent=full;
+  qs('#pf-fn').value=pf?.first_name||'';
+  qs('#pf-ln').value=pf?.last_name||'';
+  qs('#pf-em').value=user.email||'';
+  qs('#pf-og').value=pf?.organisation||'';
+  qs('#nl-on').checked=pf?.newsletter!==false;
+
+  // Fetch data in parallel
+  const [
+    {data:enr},
+    {data:acts},
+    {data:allCrs}
+  ]=await Promise.all([
+    sb.from('enrollments').select('*, courses(*)').eq('user_id',user.id),
+    sb.from('activity_log').select('*').eq('user_id',user.id).order('created_at',{ascending:false}).limit(30),
+    sb.from('courses').select('*').eq('is_published',true)
+  ]);
+
+  // Stats
+  const avg=enr?.length?Math.round(enr.reduce((s,e)=>s+e.progress,0)/enr.length):0;
+  qs('#st-c').textContent=enr?.length||0;
+  qs('#st-p').textContent=avg+'%';
+  qs('#st-a').textContent=acts?.length||0;
+  qs('#st-n').textContent=pf?.newsletter!==false?'✅':'⬜';
+  qs('#n-cnt').textContent=Math.min(acts?.length||0,9);
+  qs('#act-cnt').textContent=acts?.length||0;
+
+  // Render
+  renderAct('ov-act',  acts?.slice(0,4));
+  renderAct('full-act',acts);
+  renderCrs('ov-crs',  enr?.slice(0,3));
+  renderCrs('my-crs',  enr);
+  renderCat(allCrs, enr);
+
+  setTimeout(()=>qsa('.prog-bar').forEach(b=>{const w=b.dataset.w;b.style.width=0;setTimeout(()=>b.style.width=w,80)}),300);
+}
+
+// ── Render helpers ─────────────────────────────────────────────────
+const ACT_ICO ={signup:'🎉',login:'🔑',enrollment:'📚',progress:'📊',newsletter:'📩',profile_update:'👤',course_complete:'🏆'};
+const ACT_CLS ={signup:'sd',login:'sd',enrollment:'sn',progress:'sp',newsletter:'sn',profile_update:'sd',course_complete:'sd'};
+const ACT_LBL ={signup:'Done',login:'Done',enrollment:'New',progress:'Progress',newsletter:'New',profile_update:'Updated',course_complete:'Complete'};
+
+function ago(d){
+  const diff=Date.now()-new Date(d).getTime(), m=~~(diff/6e4), h=~~(m/60), dy=~~(h/24);
+  return dy?dy===1?'Yesterday':`${dy}d ago`:h?`${h}h ago`:m?`${m}m ago`:'Just now';
+}
+
+function renderAct(id,data){
+  const el=qs('#'+id);
+  if(!data?.length){el.innerHTML='<p style="color:var(--grey);font-size:.88rem;padding:.8rem 0">No activity yet.</p>';return}
+  el.innerHTML=data.map(a=>`
+    <div class="act-item">
+      <div class="act-ico">${ACT_ICO[a.type]||'📌'}</div>
+      <div class="act-body"><div class="act-ttl">${a.title}</div><div class="act-meta">${ago(a.created_at)}</div></div>
+      <div class="act-stat ${ACT_CLS[a.type]||'sd'}">${ACT_LBL[a.type]||'Done'}</div>
+    </div>`).join('');
+}
+
+function renderCrs(id,enr){
+  const el=qs('#'+id);
+  if(!enr?.length){el.innerHTML='<p style="color:var(--grey);font-size:.88rem;padding:.8rem 0">No courses yet. <a href="#" onclick="goPanel(\'cat\',null)" style="color:var(--accent)">Explore →</a></p>';return}
+  el.innerHTML=enr.map(e=>{const c=e.courses;return`
+    <div class="c-card">
+      <div class="c-ico">${c.icon||'📚'}</div>
+      <div class="c-info"><h4>${c.title}</h4><p>${c.category} · ${c.module_count} modules · ${c.duration_weeks} weeks</p></div>
+      <div class="c-prog">
+        <div class="prog-wrap"><div class="prog-bar" data-w="${e.progress}%" style="width:${e.progress}%"></div></div>
+        <div class="prog-lbl">${e.progress}% complete</div>
+      </div>
+    </div>`}).join('');
+}
+
+function renderCat(all,enr){
+  const el=qs('#cat-grid');
+  if(!all?.length){el.innerHTML='<p style="color:var(--grey);padding:2rem">No courses available.</p>';return}
+  const enrIds=new Set(enr?.map(e=>e.course_id)||[]);
+  el.innerHTML=all.map(c=>{
+    const isEnr=enrIds.has(c.id);
+    return`<div class="cat-card">
+      <span class="cat-em">${c.icon||'📚'}</span>
+      <div class="cat-tag">${c.category}</div>
+      <div class="cat-tit">${c.title}</div>
+      <div class="cat-dsc">${c.description}</div>
+      <div class="cat-foot">
+        <span class="cat-dur">${c.module_count} modules · ${c.duration_weeks}w</span>
+        ${isEnr
+          ?`<button class="btn-enr enrd" disabled>Enrolled</button>`
+          :`<button class="btn-enr" onclick="doEnroll('${c.id}','${c.title}',this)">Enrol Now</button>`}
+      </div></div>`;}).join('');
+}
+
+// ── Enroll ─────────────────────────────────────────────────────────
+async function doEnroll(cid,ctitle,btn){
+  btn.disabled=true; btn.textContent='Enrolling…';
+  const {data:{user}}=await sb.auth.getUser();
+  if(!user){toast('Please sign in.','err');return}
+  const {error}=await sb.from('enrollments').insert({user_id:user.id,course_id:cid,progress:0});
+  if(error){toast('Error: '+error.message,'err');btn.disabled=false;btn.textContent='Enrol Now';return}
+  await logAct(user.id,'enrollment',`Enrolled in: ${ctitle}`,{course_id:cid});
+  btn.className='btn-enr enrd'; btn.textContent='Enrolled'; btn.disabled=true; btn.onclick=null;
+  toast(`Enrolled in "${ctitle}" 📚`,'ok');
+  const {data:enr}=await sb.from('enrollments').select('*, courses(*)').eq('user_id',user.id);
+  renderCrs('my-crs',enr); renderCrs('ov-crs',enr?.slice(0,3));
+  qs('#st-c').textContent=enr?.length||0;
+}
+
+// ── Newsletter ──────────────────────────────────────────────────────
+function togT(el){el.classList.toggle('on')}
+async function saveNl(){
+  const btn=qs('#nl-btn'); btn.disabled=true; btn.textContent='Saving…';
+  const {data:{user}}=await sb.auth.getUser(); if(!user)return;
+  const topics=qsa('.nl-top.on').map(el=>el.textContent);
+  const active=qs('#nl-on').checked;
+  await sb.from('newsletter_preferences').upsert({user_id:user.id,topics,updated_at:new Date().toISOString()});
+  await sb.from('profiles').update({newsletter:active}).eq('id',user.id);
+  await logAct(user.id,'newsletter','Updated newsletter preferences',{topics,active});
+  qs('#st-n').textContent=active?'✅':'⬜';
+  btn.disabled=false; btn.textContent='Save Preferences →';
+  toast('Newsletter preferences saved! ✓','ok');
+}
+
+// ── Save Profile ───────────────────────────────────────────────────
+async function savePf(){
+  const {data:{user}}=await sb.auth.getUser(); if(!user)return;
+  const fn=qs('#pf-fn').value.trim(), ln=qs('#pf-ln').value.trim(), og=qs('#pf-og').value.trim();
+  const {error}=await sb.from('profiles').update({first_name:fn,last_name:ln,full_name:fn+' '+ln,organisation:og}).eq('id',user.id);
+  if(error){toast('Error: '+error.message,'err');return}
+  await logAct(user.id,'profile_update','Profile information updated');
+  const ini=((fn[0]||'')+(ln[0]||'')).toUpperCase();
+  qs('#d-av').textContent=ini; qs('#pf-av').textContent=ini; qs('#pf-nm').textContent=fn+' '+ln;
+  toast('Profile updated! ✓','ok');
+}
+
+// ── Panel switcher ──────────────────────────────────────────────────
+function goPanel(id,el){
+  qsa('.d-panel').forEach(p=>p.classList.remove('on'));
+  qsa('.s-item').forEach(n=>n.classList.remove('on'));
+  qs('#p-'+id)?.classList.add('on');
+  el?.classList.add('on');
+}
+
+// ── Mobile Navigation ────────────────────────────────────────────────
+document.getElementById('hamburger')?.addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.add('open');
+});
+
+document.getElementById('closeNav')?.addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.remove('open');
+});
+
+// ════════════════════════════════════════════════════════════════
+// BOOT — Supabase restores session from localStorage automatically.
+// onAuthStateChange handles: initial load, OAuth redirects, token refresh.
+// ════════════════════════════════════════════════════════════════
+(async()=>{
+  sb.auth.onAuthStateChange(async(event,session)=>{
+    if(event==='SIGNED_IN'&&session){
+      await loadDash(session.user);
+    } else if(event==='SIGNED_OUT'){
+      qs('#dashView').classList.remove('active');
+      qs('#authView').classList.add('active');
+    }
+  });
+
+  const {data:{session}}=await sb.auth.getSession();
+  qs('#boot').classList.add('off');
+  if(session){
+    await loadDash(session.user);
+  } else {
+    qs('#authView').classList.add('active');
+  }
+})();
+
+</html>

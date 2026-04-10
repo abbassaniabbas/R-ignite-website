@@ -1,0 +1,16 @@
+# .env file - Keep this SECRET and never commit to Git
+
+# Gmail Configuration (if using Gmail)
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASSWORD=your-16-character-app-password
+
+# Or use a custom SMTP server
+# SMTP_HOST=smtp.example.com
+# SMTP_PORT=587
+# SMTP_USER=your-email@example.com
+# SMTP_PASSWORD=your-password
+
+PORT=5000
+
+# Optional: Add more variables as needed
+NODE_ENV=production

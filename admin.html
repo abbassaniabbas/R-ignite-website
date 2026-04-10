@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsletter Admin | R-Ignite Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root{
+      --ink:#0A0A0A; --ink-soft:#1C1C1C; --ink-mid:#3A3A3A; --ink-muted:#6B6B6B; --ink-faint:#ADADAD;
+      --rule:#E2E2E2; --rule-dark:#C8C8C8; --surface:#F0EDE8; --white:#FFFFFF; --bg:#FAFAF8;
+      --accent:#0D6B4F; --accent-light:#E8F5F0; --accent-mid:#1A8A65; --accent-dark:#084D38;
+      --danger:#C0392B; --danger-light:#FEF2F2; --success:#1A8A65; --warning:#D97706;
+      --ease:cubic-bezier(0.16,1,0.3,1);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:Outfit,sans-serif;background:var(--surface);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh}
+    p{line-height:1.75;color:var(--ink-mid)}
+
+    /* LOADER */
+    #boot{position:fixed;inset:0;background:var(--white);display:flex;align-items:center;justify-content:center;z-index:9000;transition:opacity .5s,visibility .5s}
+    #boot.off{opacity:0;visibility:hidden;pointer-events:none}
+    .boot-logo{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+    .boot-dot{color:var(--accent)}
+
+    /* TOAST */
+    #toast{position:fixed;bottom:2rem;right:2rem;padding:1rem 1.4rem;background:var(--ink);color:#fff;font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:.7rem;transform:translateY(120px);opacity:0;transition:all .4s var(--ease);z-index:9500;max-width:360px;border-radius:12px;pointer-events:none}
+    #toast.on{transform:translateY(0);opacity:1}
+    #toast.ok{background:var(--accent)}
+    #toast.err{background:var(--danger)}
+    .t-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);flex-shrink:0}
+
+    /* ── LOGIN ───────────────────────── */
+    #loginScreen{min-height:100vh;display:none;align-items:center;justify-content:center;background:var(--surface)}
+    #loginScreen.on{display:flex}
+    .login-box{width:100%;max-width:420px;background:var(--white);border:1px solid var(--rule);border-radius:24px;padding:3rem;box-shadow:0 24px 80px rgba(0,0,0,.08)}
+    .login-logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-bottom:2rem}
+    .login-logo-dot{color:var(--accent)}
+    .login-tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+    .login-title{font-size:1.8rem;font-weight:800;letter-spacing:-.04em;margin-bottom:.5rem}
+    .login-sub{font-size:.9rem;color:var(--ink-muted);margin-bottom:2rem;line-height:1.65}
+    .login-err{padding:.8rem 1rem;background:var(--danger-light);border:1px solid #FECACA;color:var(--danger);font-size:.85rem;border-radius:8px;margin-bottom:1rem;display:none}
+    .login-err.on{display:block}
+    .lfield{margin-bottom:1.2rem}
+    .lfield label{display:block;font-size:.78rem;font-weight:600;color:var(--ink-mid);margin-bottom:.4rem}
+    .lfield input{width:100%;padding:.75rem 1rem;background:var(--surface);border:1px solid var(--rule);border-radius:10px;color:var(--ink);font-family:Outfit,sans-serif;font-size:.92rem;outline:none;transition:border .2s,box-shadow .2s}
+    .lfield input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(13,107,79,.1);background:#fff}
+    .lfield input::placeholder{color:var(--ink-faint)}
+    .btn-login{width:100%;padding:1rem;background:var(--ink);color:#fff;border:none;border-radius:100px;font-family:Outfit,sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .25s var(--ease);margin-top:.5rem}
+    .btn-login:hover:not(:disabled){background:var(--accent);transform:translateY(-2px)}
+    .btn-login:disabled{opacity:.5;cursor:not-allowed}
+
+    /* ── ADMIN APP ───────────────────── */
+    #adminApp{display:none;flex-direction:column;min-height:100vh}
+    #adminApp.on{display:flex}
+
+    .a-nav{position:sticky;top:0;z-index:100;padding:0 3%;height:64px;background:var(--ink);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center}
+    .a-nav-left{display:flex;align-items:center;gap:1.2rem}
+    .a-nav-logo{font-size:1rem;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+    .a-nav-logo-dot{color:var(--accent)}
+    .a-nav-tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);padding:.25rem .7rem;background:var(--surface);border-radius:100px;border:1px solid var(--rule)}
+    .a-nav-right{display:flex;align-items:center;gap:1rem}
+    .sub-count{font-size:.8rem;color:var(--ink-muted);padding:.35rem .8rem;background:var(--surface);border:1px solid var(--rule);border-radius:100px}
+    .sub-count span{font-weight:700;color:var(--ink)}
+    .btn-signout{font-size:.78rem;font-weight:600;padding:.4rem 1rem;background:none;border:1px solid var(--rule);border-radius:100px;cursor:pointer;color:var(--ink-muted);transition:all .2s;font-family:Outfit,sans-serif}
+    .btn-signout:hover{border-color:var(--ink);color:var(--ink)}
+
+    /* BODY LAYOUT */
+    .a-body{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:calc(100vh - 64px)}
+
+    /* EDITOR PANEL */
+    .editor-panel{padding:3rem;border-right:1px solid var(--rule);overflow-y:auto;background:var(--white)}
+    .panel-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
+    .field{margin-bottom:1.8rem}
+    .field label{display:block;font-size:.78rem;font-weight:600;color:var(--ink-mid);margin-bottom:.5rem}
+    .field input[type=text]{width:100%;padding:.75rem 1rem;background:var(--surface);border:1px solid var(--rule);border-radius:10px;color:var(--ink);font-family:Outfit,sans-serif;font-size:.92rem;outline:none;transition:border .2s,box-shadow .2s}
+    .field input[type=text]:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(13,107,79,.1);background:#fff}
+    .field input::placeholder{color:var(--ink-faint)}
+    textarea{width:100%;padding:.75rem 1rem;background:var(--surface);border:1px solid var(--rule);border-radius:10px;color:var(--ink);font-family:Outfit,sans-serif;font-size:.88rem;min-height:100px;outline:none;resize:vertical;transition:border .2s}
+    textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(13,107,79,.1);background:#fff}
+
+    /* RTE */
+    .rte-toolbar{display:flex;flex-wrap:wrap;gap:.3rem;padding:.7rem;background:var(--surface);border:1px solid var(--rule);border-bottom:none;border-radius:10px 10px 0 0}
+    .rte-btn{padding:.35rem .7rem;background:#fff;border:1px solid var(--rule);border-radius:6px;font-size:.8rem;font-weight:600;color:var(--ink-mid);cursor:pointer;transition:all .15s;font-family:Outfit,sans-serif}
+    .rte-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+    .rte-sep{width:1px;background:var(--rule);margin:0 .1rem}
+    .rte-editor{min-height:280px;padding:1.2rem;border:1px solid var(--rule);border-top:none;border-radius:0 0 10px 10px;background:#fff;outline:none;font-size:.92rem;line-height:1.75;color:var(--ink)}
+    .rte-editor:focus{box-shadow:inset 0 0 0 2px rgba(13,107,79,.15)}
+    .rte-editor h1{font-size:1.5rem;font-weight:800;letter-spacing:-.04em;margin:1rem 0 .5rem}
+    .rte-editor h2{font-size:1.2rem;font-weight:700;letter-spacing:-.02em;margin:.8rem 0 .4rem}
+    .rte-editor h3{font-size:1rem;font-weight:700;margin:.6rem 0 .3rem}
+    .rte-editor blockquote{border-left:3px solid var(--accent);padding:.5rem 1rem;background:var(--accent-light);margin:.8rem 0;border-radius:0 8px 8px 0}
+    .rte-editor ul,.rte-editor ol{padding-left:1.5rem;margin:.5rem 0}
+    .rte-editor hr{border:none;border-top:1px solid var(--rule);margin:1rem 0}
+
+    /* TOKENS */
+    .tokens{display:flex;gap:.5rem;flex-wrap:wrap}
+    .token{font-size:.75rem;font-weight:600;padding:.3rem .7rem;background:var(--accent-light);color:var(--accent);border:1px solid var(--accent);border-radius:6px;cursor:pointer;transition:all .2s;font-family:'Courier New',monospace}
+    .token:hover{background:var(--accent);color:#fff}
+
+    /* TOGGLE */
+    .toggle-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+    .toggle{position:relative;width:40px;height:22px;cursor:pointer}
+    .toggle input{opacity:0;width:0;height:0}
+    .toggle-slider{position:absolute;inset:0;background:var(--rule);border-radius:100px;transition:.3s}
+    .toggle-slider::before{content:'';position:absolute;left:3px;bottom:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:.3s}
+    .toggle input:checked+.toggle-slider{background:var(--accent)}
+    .toggle input:checked+.toggle-slider::before{transform:translateX(18px)}
+
+    /* SEND AREA */
+    .send-area{padding:2rem;background:var(--surface);border:1px solid var(--rule);border-radius:16px;margin-top:2rem}
+    .send-row{display:flex;gap:1rem;margin-bottom:1rem}
+    .btn-save-draft{flex:1;padding:.85rem;background:none;border:1.5px solid var(--ink);color:var(--ink);border-radius:100px;font-family:Outfit,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s}
+    .btn-save-draft:hover{border-color:var(--accent);color:var(--accent)}
+    .btn-send{flex:2;padding:.85rem;background:var(--ink);color:#fff;border:none;border-radius:100px;font-family:Outfit,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .25s var(--ease)}
+    .btn-send:hover{background:var(--accent);transform:translateY(-1px)}
+    .send-note{font-size:.8rem;color:var(--ink-muted);line-height:1.5}
+
+    /* RIGHT PANEL */
+    .right-panel{display:flex;flex-direction:column;background:var(--surface);overflow:hidden}
+    .right-tabs{display:flex;padding:1.2rem 3rem 0;background:var(--white);border-bottom:1px solid var(--rule);gap:0}
+    .r-tab{padding:.75rem 1.5rem;font-size:.85rem;font-weight:600;background:none;border:none;cursor:pointer;color:var(--ink-faint);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;font-family:Outfit,sans-serif}
+    .r-tab.on{color:var(--ink);border-bottom-color:var(--ink)}
+    .r-content{flex:1;overflow-y:auto}
+    .r-pane{display:none;padding:2.5rem}
+    .r-pane.on{display:block}
+
+    /* EMAIL PREVIEW */
+    .preview-wrap{background:var(--white);border:1px solid var(--rule);border-radius:16px;overflow:hidden}
+    .preview-top{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;border-bottom:1px solid var(--rule);background:var(--surface)}
+    .preview-label{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted)}
+    .preview-to{font-size:.78rem;color:var(--ink-faint)}
+    .email-shell{padding:2rem}
+    .email-header{text-align:center;padding:1.5rem;background:var(--ink);border-radius:10px;margin-bottom:1.5rem}
+    .email-header-logo{font-size:1rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+    .email-header-logo-dot{color:var(--accent-mid)}
+    .email-meta{padding:.8rem 1rem;background:var(--surface);border-radius:8px;margin-bottom:1.5rem;font-size:.82rem;color:var(--ink-mid)}
+    .email-meta-row{line-height:1.5}
+    .email-body{font-size:.9rem;line-height:1.75;color:var(--ink-mid);min-height:100px}
+    .email-body h1{font-size:1.3rem;font-weight:800;letter-spacing:-.04em;margin:.8rem 0 .4rem;color:var(--ink)}
+    .email-body h2{font-size:1.1rem;font-weight:700;margin:.7rem 0 .3rem;color:var(--ink)}
+    .email-body blockquote{border-left:3px solid var(--accent);padding:.4rem .8rem;background:var(--accent-light);margin:.7rem 0;border-radius:0 6px 6px 0}
+    .email-footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--rule);text-align:center;font-size:.75rem;color:var(--ink-faint);line-height:1.8}
+
+    /* HISTORY */
+    .history-panel{padding:.5rem 0}
+    .hist-item{padding:1.2rem;background:var(--white);border:1px solid var(--rule);border-radius:12px;margin-bottom:.8rem;transition:all .2s}
+    .hist-item:hover{border-color:var(--accent)}
+    .hist-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.4rem}
+    .hist-title{font-size:.9rem;font-weight:700;color:var(--ink)}
+    .hist-date{font-size:.75rem;color:var(--ink-faint);white-space:nowrap}
+    .hist-sub{font-size:.8rem;color:var(--ink-muted);margin-bottom:.5rem}
+    .hist-actions{display:flex;gap:.5rem}
+    .hist-btn{font-size:.72rem;font-weight:600;padding:.25rem .7rem;border:1px solid var(--rule);border-radius:100px;cursor:pointer;background:none;color:var(--ink-muted);transition:all .2s;font-family:Outfit,sans-serif}
+    .hist-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* MODAL */
+    .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:8000;backdrop-filter:blur(4px)}
+    .modal-bg.on{display:flex}
+    .modal{background:var(--white);border-radius:20px;padding:3rem;max-width:440px;width:90%;box-shadow:0 40px 100px rgba(0,0,0,.2)}
+    .modal h3{font-size:1.4rem;font-weight:800;letter-spacing:-.04em;margin-bottom:.7rem}
+    .modal p{font-size:.92rem;color:var(--ink-muted);line-height:1.65;margin-bottom:1.5rem}
+    .modal-stat{font-size:1.5rem;font-weight:800;letter-spacing:-.04em;color:var(--accent);margin-bottom:1.5rem;padding:1rem;background:var(--accent-light);border-radius:12px;text-align:center}
+    .modal-btns{display:flex;gap:1rem}
+    .btn-cancel{flex:1;padding:.9rem;background:none;border:1.5px solid var(--rule);border-radius:100px;font-family:Outfit,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;color:var(--ink-muted);transition:all .2s}
+    .btn-cancel:hover{border-color:var(--ink-mid);color:var(--ink)}
+    .btn-confirm{flex:2;padding:.9rem;background:var(--accent);color:#fff;border:none;border-radius:100px;font-family:Outfit,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .25s}
+    .btn-confirm:hover{background:var(--accent-dark);transform:translateY(-1px)}
+    .btn-confirm:disabled{opacity:.5;cursor:not-allowed}
+
+    @media(max-width:1024px){.a-body{grid-template-columns:1fr}.right-panel{border-top:1px solid var(--rule)}}
+    @media(max-width:768px){.a-nav-tag{display:none}.send-row{flex-direction:column}}
+  </style>
+</head>
+<body>
+
+  <div id="boot"><div class="boot-logo">R<span class="boot-dot">·</span>IGNITE</div></div>
+  <div id="toast"><div class="t-dot"></div><span id="t-msg"></span></div>
+
+  <!-- LOGIN -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <div class="login-logo">R<span class="login-logo-dot">·</span>IGNITE</div>
+      <div class="login-tag">Admin Access Only</div>
+      <h2 class="login-title">Newsletter Editor</h2>
+      <p class="login-sub">Sign in with your admin account to write and send newsletters to all subscribers.</p>
+      <div class="login-err" id="l-err"></div>
+      <form onsubmit="doAdminLogin(event)">
+        <div class="lfield"><label>Email</label><input id="l-em" type="email" placeholder="admin@rignitegroup.com" required></div>
+        <div class="lfield"><label>Password</label><input id="l-pw" type="password" placeholder="Your password" required></div>
+        <button type="submit" class="btn-login" id="l-btn">Sign In to Admin →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADMIN APP -->
+  <div id="adminApp">
+    <div class="a-nav">
+      <div class="a-nav-left">
+        <div class="a-nav-logo">R<span class="a-nav-logo-dot">·</span>IGNITE</div>
+        <span class="a-nav-tag">Newsletter Admin</span>
+      </div>
+      <div class="a-nav-right">
+        <div class="sub-count">📩 <span id="subCount">—</span> subscribers</div>
+        <button class="btn-signout" onclick="doSignOut()">Sign Out</button>
+      </div>
+    </div>
+
+    <div class="a-body">
+      <!-- EDITOR -->
+      <div class="editor-panel">
+        <div class="panel-label">Compose Newsletter</div>
+
+        <div class="field">
+          <label>Newsletter Title (internal reference)</label>
+          <input type="text" id="nl-title" placeholder="e.g. AI in Nigerian Banking — February 2026">
+        </div>
+        <div class="field">
+          <label>Email Subject Line (what subscribers see in inbox)</label>
+          <input type="text" id="nl-subject" placeholder="e.g. Your Weekly R-Ignite Briefing 📊">
+        </div>
+
+        <div class="field">
+          <label>Email Body</label>
+          <div class="rte-toolbar">
+            <button class="rte-btn" onclick="fmt('bold')"><b>B</b></button>
+            <button class="rte-btn" onclick="fmt('italic')"><i>I</i></button>
+            <button class="rte-btn" onclick="fmt('underline')"><u>U</u></button>
+            <div class="rte-sep"></div>
+            <button class="rte-btn" onclick="fmtBlock('h1')">H1</button>
+            <button class="rte-btn" onclick="fmtBlock('h2')">H2</button>
+            <button class="rte-btn" onclick="fmtBlock('h3')">H3</button>
+            <button class="rte-btn" onclick="fmtBlock('p')">P</button>
+            <div class="rte-sep"></div>
+            <button class="rte-btn" onclick="fmt('insertUnorderedList')">• List</button>
+            <button class="rte-btn" onclick="fmt('insertOrderedList')">1. List</button>
+            <button class="rte-btn" onclick="fmtBlock('blockquote')">❝</button>
+            <div class="rte-sep"></div>
+            <button class="rte-btn" onclick="insertHR()">—</button>
+            <button class="rte-btn" onclick="insertLink()">🔗</button>
+            <div class="rte-sep"></div>
+            <button class="rte-btn" onclick="clearEditor()" style="color:var(--danger)">✕ Clear</button>
+          </div>
+          <div class="rte-editor" id="rte" contenteditable="true" oninput="updatePreview()" onkeyup="updatePreview()" spellcheck="true">
+            <p>Start writing your newsletter here… Use the toolbar above to format your content.</p>
+            <p>You can write multiple sections, add headings, bullet points, and more.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Personalisation Tokens — click to insert at cursor</label>
+          <div class="tokens">
+            <div class="token" onclick="insertToken('{{first_name}}')">{{first_name}}</div>
+            <div class="token" onclick="insertToken('{{email}}')">{{email}}</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="toggle-row">
+            <label>Plain Text Fallback</label>
+            <label class="toggle"><input type="checkbox" id="showPlain" onchange="togglePlain()"><div class="toggle-slider"></div></label>
+          </div>
+          <textarea id="nl-plain" placeholder="Write a plain text version of your newsletter here…" style="display:none"></textarea>
+        </div>
+
+        <div class="send-area">
+          <div class="send-row">
+            <button class="btn-save-draft" id="draftBtn" onclick="saveDraft()">Save Draft</button>
+            <button class="btn-send" id="sendBtn" onclick="confirmSend()">Publish &amp; Send Newsletter →</button>
+          </div>
+          <p class="send-note">This will send to <strong id="sendToCount">—</strong> subscribers immediately. Preview your email on the right before sending.</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: PREVIEW + HISTORY -->
+      <div class="right-panel">
+        <div class="right-tabs">
+          <button class="r-tab on" data-p="preview" onclick="switchRTab('preview',this)">Live Preview</button>
+          <button class="r-tab" data-p="history" onclick="switchRTab('history',this)">Sent History</button>
+        </div>
+        <div class="r-content">
+          <div class="r-pane on" id="pane-preview">
+            <div class="preview-wrap">
+              <div class="preview-top">
+                <div class="preview-label">Email Preview</div>
+                <div class="preview-to">To: <span id="prevTo">— subscribers</span></div>
+              </div>
+              <div class="email-shell">
+                <div class="email-header">
+                  <div class="email-header-logo">R<span class="email-header-logo-dot" style="color:var(--accent-mid)">·</span>IGNITE GROUP</div>
+                </div>
+                <div class="email-meta">
+                  <div class="email-meta-row"><span><strong id="prev-subject">Your Weekly R-Ignite Briefing</strong></span></div>
+                  <div class="email-meta-row" style="margin-top:.3rem"><span>To: <strong>Subscriber</strong></span></div>
+                </div>
+                <div class="email-body" id="prev-body">
+                  <p>Start writing your newsletter on the left to see the preview here…</p>
+                </div>
+                <div class="email-footer">
+                  <p>EMPOWER · INNOVATE · EXCEL</p>
+                  <p>© 2026 R-Ignite Group · <a href="#" style="color:var(--accent)">Unsubscribe</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="r-pane" id="pane-history">
+            <div class="history-panel">
+              <div class="panel-label" style="margin-bottom:1.2rem">Sent Newsletters</div>
+              <div id="histList"><div style="color:var(--ink-faint);font-size:.88rem">Loading history…</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRM MODAL -->
+  <div class="modal-bg" id="modal">
+    <div class="modal">
+      <h3>Ready to send?</h3>
+      <p>You're about to send this newsletter to all subscribers right now. This cannot be undone.</p>
+      <div class="modal-stat" id="modal-stat">Sending to — subscribers</div>
+      <div id="modal-details" style="margin-bottom:1.5rem">
+        <div style="font-size:.82rem;color:var(--ink-muted);margin-bottom:.3rem">Subject: <span id="modal-subject" style="color:var(--ink);font-weight:600">—</span></div>
+        <div style="font-size:.82rem;color:var(--ink-muted)">Title: <span id="modal-title" style="color:var(--ink);font-weight:600">—</span></div>
+      </div>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn-confirm" id="confirmBtn" onclick="doSend()">Yes, Send Now →</button>
+      </div>
+    </div>
+  </div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ══════════════════════════════════════════════════════════════
+// CONFIGURATION — Your Supabase credentials
+// ══════════════════════════════════════════════════════════════
+const SB_URL      = 'https://yqdeouclncruyupvkxlw.supabase.co';
+const SB_ANON     = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlxZGVvdWNsbmNydXl1cHZreGx3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4MjE5OTksImV4cCI6MjA4NzM5Nzk5OX0.QAf7Mkwp_VSMQTECjvo249Ndd1CY1Y9r5CPTvOuUp-8';
+
+// ⚠️ Replace with your actual service role key
+// Found in: Supabase Dashboard → Project Settings → Data API → service_role key
+// NEVER share this key or put it in public code
+const SB_SERVICE  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlxZGVvdWNsbmNydXl1cHZreGx3Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTgyMTk5OSwiZXhwIjoyMDg3Mzk3OTk5fQ.Kc_awG8VLkvTYkXBYxaGPkT5RZZJTbyIQXjje5ZCjZU';
+
+const { createClient } = supabase;
+const sb = createClient(SB_URL, SB_ANON, {
+  auth:{ persistSession:true, storageKey:'rignite-admin-v1', storage:window.localStorage, autoRefreshToken:true }
+});
+
+
+
+// ── Toast ─────────────────────────────────────────────────────
+function toast(msg,type=''){
+  const el=document.getElementById('toast');
+  el.className='on '+type;
+  document.getElementById('t-msg').textContent=msg;
+  clearTimeout(el._t);
+  el._t=setTimeout(()=>el.classList.remove('on'),4500);
+}
+
+// ── Admin Login ───────────────────────────────────────────────
+async function doAdminLogin(e){
+  e.preventDefault();
+  const btn=document.getElementById('l-btn');
+  const em=document.getElementById('l-em').value.trim();
+  const pw=document.getElementById('l-pw').value;
+  btn.disabled=true; btn.textContent='Signing in…';
+
+  const {data,error}=await sb.auth.signInWithPassword({email:em,password:pw});
+  if(error){
+    document.getElementById('l-err').textContent=error.message;
+    document.getElementById('l-err').classList.add('on');
+    btn.disabled=false; btn.textContent='Sign In to Admin →';
+    return;
+  }
+
+  // Check admin role
+  const {data:profile}=await sb.from('profiles').select('role').eq('id',data.user.id).single();
+  if(profile?.role !== 'admin'){
+    await sb.auth.signOut();
+    document.getElementById('l-err').textContent='Access denied. This page is for admins only.';
+    document.getElementById('l-err').classList.add('on');
+    btn.disabled=false; btn.textContent='Sign In to Admin →';
+    return;
+  }
+
+  btn.disabled=false; btn.textContent='Sign In to Admin →';
+  await loadAdmin();
+}
+
+// ── Load Admin App ────────────────────────────────────────────
+async function loadAdmin(){
+  document.getElementById('loginScreen').classList.remove('on');
+  document.getElementById('adminApp').classList.add('on');
+
+  // Fetch subscriber count
+  const {count}=await sb.from('profiles').select('*',{count:'exact',head:true}).eq('newsletter',true);
+  const subNum = count || 0;
+  document.getElementById('subCount').textContent = subNum.toLocaleString();
+  document.getElementById('sendToCount').textContent = subNum.toLocaleString();
+  document.getElementById('prevTo').textContent = subNum.toLocaleString()+' subscribers';
+  document.getElementById('modal-stat').textContent = `Sending to ${subNum.toLocaleString()} subscribers`;
+
+  // Load history
+  await loadHistory();
+}
+
+// ── Sign Out ──────────────────────────────────────────────────
+async function doSignOut(){
+  await sb.auth.signOut();
+  document.getElementById('adminApp').classList.remove('on');
+  document.getElementById('loginScreen').classList.add('on');
+  toast('Signed out.');
+}
+
+// ── Rich Text Editor ──────────────────────────────────────────
+function fmt(cmd){ document.execCommand(cmd,false,null); updatePreview(); }
+function fmtBlock(tag){ document.execCommand('formatBlock',false,tag); updatePreview(); }
+function insertHR(){ document.execCommand('insertHTML',false,'<hr/>'); updatePreview(); }
+function insertLink(){
+  const url=prompt('Enter URL:');
+  if(url) document.execCommand('createLink',false,url);
+  updatePreview();
+}
+function clearEditor(){
+  if(confirm('Clear all content?')){
+    document.getElementById('rte').innerHTML='<p>Start writing…</p>';
+    updatePreview();
+  }
+}
+function insertToken(token){
+  document.getElementById('rte').focus();
+  document.execCommand('insertText',false,token);
+  updatePreview();
+}
+
+// ── Live Preview ──────────────────────────────────────────────
+function updatePreview(){
+  const body = document.getElementById('rte').innerHTML;
+  const subject = document.getElementById('nl-subject').value || 'Your Weekly R-Ignite Briefing';
+
+  // Replace tokens with sample values for preview
+  const previewHtml = body
+    .replace(/\{\{first_name\}\}/g, '<span style="color:var(--accent);font-weight:600">Abbas</span>')
+    .replace(/\{\{email\}\}/g, '<span style="color:var(--accent)">subscriber@example.com</span>');
+
+  document.getElementById('prev-body').innerHTML = previewHtml;
+  document.getElementById('prev-subject').textContent = subject;
+  document.getElementById('modal-subject').textContent = subject;
+  document.getElementById('modal-title').textContent = document.getElementById('nl-title').value || '—';
+}
+
+// Update preview when subject changes
+document.getElementById('nl-subject').addEventListener('input', updatePreview);
+document.getElementById('nl-title').addEventListener('input', updatePreview);
+
+// ── Toggle plain text ─────────────────────────────────────────
+function togglePlain(){
+  const show = document.getElementById('showPlain').checked;
+  document.getElementById('nl-plain').style.display = show ? 'block' : 'none';
+}
+
+// ── Right panel tab switcher ──────────────────────────────────
+function switchRTab(id, el){
+  document.querySelectorAll('.r-tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.r-pane').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('pane-'+id).classList.add('on');
+  if(id==='history') loadHistory();
+}
+
+// ── Save Draft ────────────────────────────────────────────────
+async function saveDraft(){
+  const title   = document.getElementById('nl-title').value.trim();
+  const subject = document.getElementById('nl-subject').value.trim();
+  const body    = document.getElementById('rte').innerHTML;
+  const plain   = document.getElementById('nl-plain').value.trim();
+
+  if(!title || !subject){ toast('Please fill in the title and subject line first.','err'); return; }
+  if(!body || body === '<p>Start writing your newsletter here…</p>'){ toast('Please write some content first.','err'); return; }
+
+  const btn = document.getElementById('draftBtn');
+  btn.disabled=true; btn.textContent='Saving…';
+
+  const {error}=await sb.from('newsletters').insert({
+    title, subject, body_html: body, body_text: plain||'', status:'draft'
+  });
+
+  btn.disabled=false; btn.textContent='Save Draft';
+  if(error){ toast('Error saving: '+error.message,'err'); return; }
+  toast('Draft saved! ✓','ok');
+  await loadHistory();
+}
+
+// ── Confirm Send Modal ────────────────────────────────────────
+function confirmSend(){
+  const title   = document.getElementById('nl-title').value.trim();
+  const subject = document.getElementById('nl-subject').value.trim();
+  const body    = document.getElementById('rte').innerHTML;
+
+  if(!title){ toast('Please add a newsletter title first.','err'); return; }
+  if(!subject){ toast('Please add an email subject line first.','err'); return; }
+  if(!body || body.includes('Start writing your newsletter here')){ toast('Please write some content first.','err'); return; }
+
+  document.getElementById('modal').classList.add('on');
+}
+function closeModal(){ document.getElementById('modal').classList.remove('on'); }
+
+// ── Do Send ───────────────────────────────────────────────────
+async function doSend(){
+  const btn = document.getElementById('confirmBtn');
+  btn.disabled=true; btn.textContent='Sending…';
+
+  const title   = document.getElementById('nl-title').value.trim();
+  const subject = document.getElementById('nl-subject').value.trim();
+  const body    = document.getElementById('rte').innerHTML;
+  const plain   = document.getElementById('nl-plain').value.trim();
+
+  // 1. Insert newsletter row with status = 'published'
+  const {data:nl,error:nlErr}=await sb.from('newsletters').insert({
+    title, subject, body_html: body, body_text: plain||'', status:'published'
+  }).select().single();
+
+  if(nlErr){
+    toast('Error creating newsletter: '+nlErr.message,'err');
+    btn.disabled=false; btn.textContent='Yes, Send Now →';
+    return;
+  }
+
+  // 2. Call the Edge Function to send emails
+  try{
+    const res = await fetch(`${SB_URL}/functions/v1/send-newsletter`, {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${SB_SERVICE}`
+      },
+      body: JSON.stringify({ newsletter_id: nl.id })
+    });
+
+    const result = await res.json();
+    closeModal();
+
+    if(result.success){
+      toast(`✅ Newsletter sent to ${result.sent} subscribers!`,'ok');
+      // Clear editor
+      document.getElementById('nl-title').value='';
+      document.getElementById('nl-subject').value='';
+      document.getElementById('rte').innerHTML='<p>Start writing your next newsletter…</p>';
+      document.getElementById('nl-plain').value='';
+      updatePreview();
+      await loadHistory();
+      switchRTab('history', document.querySelector('.r-tab:last-child'));
+    } else {
+      toast('Send error: '+(result.error||'Unknown error'),'err');
+    }
+  } catch(err){
+    closeModal();
+    toast('Network error: '+err.message,'err');
+  }
+
+  btn.disabled=false; btn.textContent='Yes, Send Now →';
+}
+
+// ── Load History ──────────────────────────────────────────────
+async function loadHistory(){
+  const {data:newsletters}=await sb
+    .from('newsletters')
+    .select('*')
+    .order('created_at',{ascending:false})
+    .limit(50);
+
+  const el = document.getElementById('histList');
+  if(!newsletters?.length){
+    el.innerHTML='<div class="hist-empty">No newsletters yet.<br/>Write your first one on the left!</div>';
+    return;
+  }
+
+  const statusClass = { draft:'s-draft', sent:'s-sent', sending:'s-sending', published:'s-published' };
+  const statusLabel = { draft:'Draft', sent:'Sent', sending:'Sending…', published:'Queued' };
+
+  el.innerHTML = newsletters.map(n=>`
+    <div class="hist-item" onclick="loadDraft('${n.id}')">
+      <div>
+        <div class="hist-title">${n.title||'Untitled'}</div>
+        <div class="hist-subject">${n.subject||'No subject'}</div>
+        <div class="hist-meta">${n.published_at ? new Date(n.published_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
+      </div>
+      <div class="hist-right">
+        <div class="hist-status ${statusClass[n.status]||'s-draft'}">${statusLabel[n.status]||n.status}</div>
+        ${n.sent_count ? `<div class="hist-count"><strong>${n.sent_count}</strong> sent</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Load draft into editor ────────────────────────────────────
+async function loadDraft(id){
+  const {data:n}=await sb.from('newsletters').select('*').eq('id',id).single();
+  if(!n) return;
+  if(n.status==='sent'){ toast('This newsletter was already sent — loaded as read-only reference.'); }
+  document.getElementById('nl-title').value = n.title||'';
+  document.getElementById('nl-subject').value = n.subject||'';
+  document.getElementById('rte').innerHTML = n.body_html||'';
+  document.getElementById('nl-plain').value = n.body_text||'';
+  updatePreview();
+  switchRTab('preview', document.querySelector('.r-tab'));
+  toast('Newsletter loaded into editor.','ok');
+}
+
+// ── Boot ──────────────────────────────────────────────────────
+(async()=>{
+  sb.auth.onAuthStateChange(async(event,session)=>{
+    if(event==='SIGNED_OUT'){
+      document.getElementById('adminApp').classList.remove('on');
+      document.getElementById('loginScreen').classList.add('on');
+    }
+  });
+
+  const {data:{session}}=await sb.auth.getSession();
+  document.getElementById('boot').classList.add('off');
+
+  if(session){
+    const {data:profile}=await sb.from('profiles').select('role').eq('id',session.user.id).single();
+    if(profile?.role=
+    showAdmin();
+  } else {
+    showLogin();
+  }
+})();
+</script>
+</html>
