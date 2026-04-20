@@ -5,114 +5,136 @@
   <title>Contact | R-Ignite Group</title>
   <meta name="description" content="Get in touch with R-Ignite Group — Nigeria's premier Data, AI & Digital Transformation consultancy. We respond within 24 hours.">
   <meta property="og:title" content="Contact | R-Ignite Group">
+  <meta property="og:description" content="Start the conversation. Premium enterprise data & AI solutions for Nigerian organisations.">
   <meta name="theme-color" content="#0D6B4F">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --ink:#0A0A0A;--ink-mid:#3A3A3A;--ink-muted:#6B6B6B;--ink-faint:#ADADAD;
-      --rule:#E2E2E2;--surface:#F0EDE8;--white:#FFFFFF;--bg:#FAFAF8;
-      --accent:#0D6B4F;--accent-light:#E8F5F0;--accent-mid:#1A8A65;--accent-dark:#084D38;
-      --danger:#C0392B;--danger-light:#FEF2F2;
+      --ink:#0A0A0A; --ink-mid:#3A3A3A; --ink-muted:#6B6B6B; --ink-faint:#ADADAD;
+      --rule:#E2E2E2; --surface:#F0EDE8; --white:#FFFFFF; --bg:#FAFAF8;
+      --accent:#0D6B4F; --accent-light:#E8F5F0; --accent-mid:#1A8A65; --accent-dark:#084D38;
+      --danger:#C0392B; --danger-light:#FEF2F2;
+      --success-bg:#F0FDF4; --success-border:#86EFAC; --success-text:#166534;
       --ease:cubic-bezier(0.16,1,0.3,1);
     }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{font-family:Outfit,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
     p{line-height:1.75;color:var(--ink-mid)}
-    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='.6' fill='rgba(0,0,0,.04)'/%3E%3C/svg%3E");background-size:4px 4px;pointer-events:none;z-index:0}
-    body > *{position:relative;z-index:1}
 
+    /* NAV */
     nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 5%;height:68px;display:flex;justify-content:space-between;align-items:center;background:var(--ink);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);transition:box-shadow .3s}
     nav.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.35)}
-    .logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#fff;text-decoration:none}
+    .logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#ffffff;text-decoration:none}
     .logo-dot{color:var(--accent)}
-    .nav-links{display:flex;gap:0;list-style:none}
-    .nav-links a{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.55);text-decoration:none;transition:all .2s;padding:.3rem .75rem;border-radius:100px}
-    .nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
-    .nav-links a.active{color:#fff;background:var(--accent)}
-    .nav-cta{font-size:.82rem;font-weight:600;padding:.55rem 1.4rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:100px;border:1px solid rgba(255,255,255,.15);transition:all .2s}
-    .nav-cta:hover{background:var(--accent-mid);transform:translateY(-1px)}
+    .nav-links{display:flex;gap:2.5rem;list-style:none}
+    .nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.55);text-decoration:none;transition:all .2s;padding:.3rem .7rem;border-radius:100px}
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}.nav-links a.active{color:#fff;background:var(--accent);}
+    .nav-cta{font-size:.82rem;font-weight:600;padding:.55rem 1.4rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:100px;transition:all .2s}
+    .nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px)}
     .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-    .hamburger span{width:22px;height:1.5px;background:#fff;display:block;transition:all .3s}
-
-    .mobile-nav{display:none;position:fixed;inset:0;background:var(--ink);z-index:999;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8%}
+    .hamburger span{width:22px;height:1.5px;background:var(--ink);display:block}
+    .mobile-nav{display:none;position:fixed;inset:0;background:var(--white);z-index:999;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8%}
     .mobile-nav.open{display:flex}
-    .mobile-nav a{font-size:clamp(1.8rem,7vw,3rem);font-weight:800;color:rgba(255,255,255,.7);text-decoration:none;letter-spacing:-.04em;line-height:1.35;transition:color .2s}
-    .mobile-nav a:hover{color:#fff}
-    .mobile-nav .close-btn{position:absolute;top:1.5rem;right:5%;font-size:1.5rem;cursor:pointer;background:none;border:none;color:rgba(255,255,255,.5);font-weight:300;line-height:1}
-    .mobile-cta{margin-top:2.5rem}
-    .mobile-cta a{font-size:.88rem;font-weight:700;color:#fff;background:var(--accent);padding:.85rem 2rem;border-radius:100px;text-decoration:none;display:inline-block}
+    .mobile-nav a{font-size:clamp(2rem,8vw,3.5rem);font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.04em;line-height:1.2;transition:color .2s}
+    .mobile-nav a:hover{color:var(--accent)}
+    .mobile-nav .close-btn{position:absolute;top:1.5rem;right:5%;font-size:1.5rem;cursor:pointer;background:none;border:none;color:var(--ink-muted);font-weight:300}
+    .mobile-nav-bottom{position:absolute;bottom:3rem;left:8%}
+    .mobile-nav-bottom a{font-size:.85rem;font-weight:600;color:#fff;background:var(--accent);padding:.8rem 1.8rem;border-radius:100px;text-decoration:none}
 
+    /* PAGE HERO */
     .page-hero{padding:11rem 5% 6rem;border-bottom:1px solid var(--rule);position:relative;overflow:hidden;background:var(--bg)}
-    .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(10,10,10,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(10,10,10,.06) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0}
-    .page-hero::after{content:'';position:absolute;right:0;top:0;width:55%;height:100%;background:radial-gradient(ellipse 70% 80% at 90% 40%,rgba(13,107,79,.1) 0%,transparent 65%);pointer-events:none;z-index:0}
-    .page-hero > *{position:relative;z-index:1}
-    .hero-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+    .page-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 40% 60% at 80% 50%,rgba(13,107,79,.06) 0%,transparent 70%);pointer-events:none}
+    .hero-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;position:relative;z-index:1}
     .hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
-    .page-title{font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:.92;letter-spacing:-.05em}
+    .page-title{font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:.92;letter-spacing:-.05em;position:relative;z-index:1}
     .page-title .accent{color:var(--accent)}
 
-    .contact-section{padding:6rem 5% 8rem}
-    .contact-grid{display:grid;grid-template-columns:1fr 1.65fr;gap:7rem;max-width:1400px;margin:0 auto;align-items:start}
+    /* CONTACT LAYOUT */
+    .contact-layout{padding:6rem 5%;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1.6fr;gap:8rem;align-items:start}
 
+    /* INFO COLUMN */
+    .contact-info{}
     .info-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:2.5rem}
-    .info-item{padding:1.8rem 0;border-bottom:1px solid var(--rule)}
+    .info-item{padding:2rem 0;border-bottom:1px solid var(--rule)}
     .info-item:first-of-type{border-top:1px solid var(--rule)}
-    .info-num{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
-    .info-item h4{font-size:1rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.35rem;color:var(--ink)}
-    .info-item a{font-size:.95rem;color:var(--ink-muted);text-decoration:none;transition:color .2s;display:block;line-height:1.65}
+    .info-num{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem}
+    .info-item h4{font-size:1rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.4rem;color:var(--ink)}
+    .info-item a{font-size:.95rem;color:var(--ink-muted);text-decoration:none;transition:color .2s;display:block}
     .info-item a:hover{color:var(--accent)}
-    .info-item p{font-size:.95rem;color:var(--ink-muted);line-height:1.65}
-    .location-badge{display:inline-flex;align-items:center;gap:.4rem;margin-top:.6rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .9rem;background:var(--accent-light);color:var(--accent);border-radius:100px}
+    .info-item p{font-size:.95rem;color:var(--ink-muted)}
+    .location-badge{display:inline-flex;align-items:center;gap:.4rem;margin-top:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .8rem;background:var(--accent-light);color:var(--accent);border-radius:100px}
 
-    .response-badge{display:flex;align-items:center;gap:1rem;margin-top:2.5rem;padding:1.2rem 1.5rem;background:var(--accent-light);border:1px solid rgba(13,107,79,.2);border-radius:14px}
-    .response-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pulsedot 2s ease-in-out infinite}
-    @keyframes pulsedot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+    /* RESPONSE TIME BADGE */
+    .response-badge{display:flex;align-items:center;gap:.8rem;margin-top:3rem;padding:1.2rem 1.5rem;background:var(--accent-light);border:1px solid rgba(13,107,79,.2);border-radius:14px}
+    .response-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite}
+    @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
     .response-text{font-size:.85rem;font-weight:600;color:var(--accent-dark)}
-    .response-sub{font-size:.75rem;color:var(--accent-mid);margin-top:.25rem}
+    .response-sub{font-size:.78rem;color:var(--accent-mid);margin-top:.1rem}
 
-    .form-card{background:var(--white);border:1px solid var(--rule);border-radius:24px;padding:3.5rem;box-shadow:0 8px 40px rgba(0,0,0,.06)}
-    .form-title{font-size:1.75rem;font-weight:800;letter-spacing:-.04em;margin-bottom:.4rem;color:var(--ink)}
-    .form-sub{font-size:.9rem;color:var(--ink-muted);margin-bottom:2.5rem;line-height:1.65}
+    /* FORM */
+    .form-wrap{background:var(--surface);padding:3.5rem;border-radius:24px;border:1px solid var(--rule)}
+    .form-title{font-size:1.8rem;font-weight:800;letter-spacing:-.04em;margin-bottom:.4rem}
+    .form-sub{font-size:.9rem;color:var(--ink-muted);margin-bottom:2.5rem;line-height:1.6}
 
-    .form-status{padding:1rem 1.25rem;border-radius:10px;margin-bottom:1.5rem;font-size:.875rem;font-weight:500;line-height:1.5;display:none;animation:slideup .3s var(--ease)}
+    /* STATUS */
+    .form-status{padding:1rem 1.2rem;border-radius:10px;margin-bottom:1.5rem;font-size:.875rem;font-weight:500;display:none;animation:slideIn .3s var(--ease)}
     .form-status.show{display:block}
-    .form-status.success{background:#F0FDF4;border:1px solid #86EFAC;color:#166534}
+    .form-status.success{background:var(--success-bg);border:1px solid var(--success-border);color:var(--success-text)}
     .form-status.error{background:var(--danger-light);border:1px solid #FECACA;color:var(--danger)}
     .form-status.loading{background:var(--surface);border:1px solid var(--rule);color:var(--ink-muted)}
-    @keyframes slideup{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 
-    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-    .form-group{margin-bottom:1.25rem}
-    .form-group label{display:block;font-size:.78rem;font-weight:600;color:var(--ink-mid);margin-bottom:.4rem;letter-spacing:.01em}
-    .req{color:var(--accent);margin-left:1px}
-    .form-group input,.form-group textarea,.form-group select{
+    /* FORM FIELDS */
+    .form-group{margin-bottom:1.4rem}
+    .form-group label{display:block;font-size:.78rem;font-weight:600;color:var(--ink-mid);margin-bottom:.45rem;letter-spacing:.01em}
+    .form-group input,
+    .form-group textarea,
+    .form-group select{
       width:100%;padding:.8rem 1rem;
-      background:var(--bg);border:1.5px solid var(--rule);border-radius:10px;
-      color:var(--ink);font-family:Outfit,sans-serif;font-size:.93rem;
-      outline:none;transition:border-color .2s,box-shadow .2s,background .2s;-webkit-appearance:none;
+      background:var(--white);
+      border:1px solid var(--rule);
+      border-radius:10px;
+      color:var(--ink);
+      font-family:Outfit,sans-serif;
+      font-size:.95rem;
+      transition:border .2s,box-shadow .2s;
+      outline:none;
+      -webkit-appearance:none;
     }
-    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{
-      border-color:var(--accent);background:var(--white);box-shadow:0 0 0 3px rgba(13,107,79,.1);
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(13,107,79,.1);
     }
-    .form-group input::placeholder,.form-group textarea::placeholder{color:var(--ink-faint);font-size:.9rem}
-    .form-group textarea{min-height:140px;resize:vertical;line-height:1.65}
-    .form-group select{cursor:pointer;color:var(--ink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+    .form-group input::placeholder,
+    .form-group textarea::placeholder{color:var(--ink-faint)}
+    .form-group textarea{min-height:130px;resize:vertical;line-height:1.6}
+    .form-group select{cursor:pointer;color:var(--ink)}
+    .form-group select option{color:var(--ink)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
 
+    /* SUBMIT BUTTON */
     .btn-submit{
-      width:100%;padding:1.05rem 2rem;background:var(--ink);color:#fff;
-      border:none;border-radius:100px;font-family:Outfit,sans-serif;font-size:.93rem;font-weight:700;
-      cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;
-      transition:all .25s var(--ease);margin-top:.25rem;
+      width:100%;padding:1.05rem;
+      background:var(--ink);color:#fff;
+      border:none;border-radius:100px;
+      font-family:Outfit,sans-serif;
+      font-size:.92rem;font-weight:700;
+      cursor:pointer;
+      transition:all .25s var(--ease);
+      margin-top:.5rem;
+      display:flex;align-items:center;justify-content:center;gap:.6rem;
     }
     .btn-submit:hover:not(:disabled){background:var(--accent);transform:translateY(-2px);box-shadow:0 12px 32px rgba(13,107,79,.25)}
-    .btn-submit:active:not(:disabled){transform:translateY(0)}
-    .btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .btn-submit:disabled{opacity:.55;cursor:not-allowed;transform:none}
     .btn-arrow{transition:transform .25s var(--ease)}
-    .btn-submit:hover:not(:disabled) .btn-arrow{transform:translateX(4px)}
+    .btn-submit:hover:not(:disabled) .btn-arrow{transform:translateX(3px)}
 
+    /* FOOTER */
     footer{padding:4rem 5%;border-top:1px solid var(--rule);background:var(--ink)}
     .footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem}
     .footer-logo{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#fff}
@@ -120,25 +142,41 @@
     .footer-tagline{font-size:.8rem;color:rgba(255,255,255,.35);letter-spacing:.05em}
     .footer-copy{font-size:.78rem;color:rgba(255,255,255,.25)}
 
+    /* REVEAL */
     .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
     .reveal.visible{opacity:1;transform:translateY(0)}
-    .reveal-delay-1{transition-delay:.12s}
+    .reveal-delay-1{transition-delay:.1s}
+    .reveal-delay-2{transition-delay:.2s}
+
+    /* ACCESSIBILITY */
     :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 
-    @media(max-width:1024px){.contact-grid{grid-template-columns:1fr;gap:4rem}}
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .contact-layout{grid-template-columns:1fr;gap:4rem}
+    }
     @media(max-width:768px){
       .nav-links,.nav-cta{display:none}
       .hamburger{display:flex}
-      .field-row{grid-template-columns:1fr}
-      .form-card{padding:2rem 1.5rem;border-radius:16px}
+      .form-row{grid-template-columns:1fr}
+      .form-wrap{padding:2rem 1.5rem}
       .footer-inner{flex-direction:column}
+      .footer-copy,.footer-tagline{text-align:left}
     }
+
+    /* Rich background textures */
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='.6' fill='rgba(0,0,0,.045)'/%3E%3C/svg%3E");background-size:4px 4px;pointer-events:none;z-index:0;opacity:1}
+    body > *{position:relative;z-index:1}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(10,10,10,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(10,10,10,.055) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0}
+    .page-hero > *{position:relative;z-index:1}
+    .page-hero::after{content:'';position:absolute;right:0;top:0;width:50%;height:100%;background:radial-gradient(ellipse 70% 80% at 90% 40%,rgba(13,107,79,.09) 0%,transparent 65%);pointer-events:none;z-index:0}
   </style>
 </head>
 <body>
 
+  <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav">
-    <button class="close-btn" id="closeNav">&#x2715;</button>
+    <button class="close-btn" id="closeNav">✕</button>
     <a href="../index.html">Home</a>
     <a href="../about.html">About</a>
     <a href="../services.html">Services</a>
@@ -146,11 +184,12 @@
     <a href="../strategy.html">Strategy</a>
     <a href="../milestones.html">Milestones</a>
     <a href="../team.html">Team</a>
-    <div class="mobile-cta"><a href="contact.html">Get in Touch</a></div>
+    <div class="mobile-nav-bottom"><a href="contact.html">Contact</a></div>
   </div>
 
+  <!-- NAV -->
   <nav id="mainNav">
-    <a class="logo" href="../index.html">R<span class="logo-dot">&#xB7;</span>IGNITE</a>
+    <a class="logo" href="../index.html">R<span class="logo-dot">·</span>IGNITE</a>
     <ul class="nav-links">
       <li><a href="../index.html">Home</a></li>
       <li><a href="../about.html">About</a></li>
@@ -166,193 +205,167 @@
     </button>
   </nav>
 
+  <!-- HERO -->
   <section class="page-hero">
     <div class="hero-eyebrow">Start the Conversation</div>
     <h1 class="page-title">Let's Work<br/>Together on<br/><span class="accent">Something Big.</span></h1>
   </section>
 
-  <section class="contact-section">
-    <div class="contact-grid">
+  <!-- CONTACT LAYOUT -->
+  <section class="contact-layout">
 
-      <div class="reveal">
-        <div class="info-label">Get in Touch</div>
+    <!-- INFO -->
+    <div class="contact-info reveal">
+      <div class="info-label">Get in Touch</div>
 
-        <div class="info-item">
-          <div class="info-num">01</div>
-          <h4>Email Us</h4>
-          <a href="mailto:rignitegroup@gmail.com">rignitegroup@gmail.com</a>
-        </div>
-
-        <div class="info-item">
-          <div class="info-num">02</div>
-          <h4>Call Us</h4>
-          <a href="tel:+2347030579173">+234 703 057 9173</a>
-        </div>
-
-        <div class="info-item">
-          <div class="info-num">03</div>
-          <h4>Follow Us</h4>
-          <p>@RigniteGroup</p>
-        </div>
-
-        <div class="info-item">
-          <div class="info-num">04</div>
-          <h4>Our Office</h4>
-          <p>Abuja, Federal Capital Territory</p>
-          <p>Nigeria</p>
-          <div class="location-badge">&#x1F4CD; FCT &middot; Nigeria</div>
-        </div>
-
-        <div class="response-badge">
-          <div class="response-dot"></div>
-          <div>
-            <div class="response-text">Typically replies within 24 hours</div>
-            <div class="response-sub">Mon &ndash; Fri &nbsp;&middot;&nbsp; 8 am &ndash; 6 pm WAT</div>
-          </div>
-        </div>
+      <div class="info-item">
+        <div class="info-num">01</div>
+        <h4>Email Us</h4>
+        <a href="/cdn-cgi/l/email-protection#f08299979e99849597829f8580b0979d91999cde939f9d"><span class="__cf_email__" data-cfemail="8af8e3ede4e3feefedf8e5fffacaede7ebe3e6a4e9e5e7">[email&#160;protected]</span></a>
       </div>
 
-      <div class="form-card reveal reveal-delay-1">
-        <h2 class="form-title">Send a Message</h2>
-        <p class="form-sub">Tell us about your project, challenge, or question and we'll get back to you promptly.</p>
-
-        <div class="form-status" id="formStatus" role="alert" aria-live="polite"></div>
-
-        <form id="contactForm" novalidate>
-
-          <div class="field-row">
-            <div class="form-group">
-              <label for="name">Full Name <span class="req">*</span></label>
-              <input type="text" id="name" name="name" placeholder="Your full name" required autocomplete="name">
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address <span class="req">*</span></label>
-              <input type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="email">
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="form-group">
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone" placeholder="+234 ..." autocomplete="tel">
-            </div>
-            <div class="form-group">
-              <label for="org">Organisation</label>
-              <input type="text" id="org" name="org" placeholder="Company or institution" autocomplete="organization">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="service">Service of Interest</label>
-            <select id="service" name="service">
-              <option value="" disabled selected>Select a service...</option>
-              <option value="bi-analytics">Business Intelligence &amp; Analytics</option>
-              <option value="ai-automation">AI-Powered Process Automation</option>
-              <option value="erp-crm">ERP &amp; CRM Implementation</option>
-              <option value="data-infra">Data Infrastructure &amp; Engineering</option>
-              <option value="custom-software">Custom Enterprise Software</option>
-              <option value="managed-services">Managed Services &amp; Retainers</option>
-              <option value="other">Other / Not sure yet</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="subject">Subject <span class="req">*</span></label>
-            <input type="text" id="subject" name="subject" placeholder="What is this about?" required>
-          </div>
-
-          <div class="form-group">
-            <label for="message">Message <span class="req">*</span></label>
-            <textarea id="message" name="message" placeholder="Describe your project or data challenge in as much detail as possible." required></textarea>
-          </div>
-
-          <button type="submit" class="btn-submit" id="submitBtn">
-            Send Message
-            <span class="btn-arrow">&#x2192;</span>
-          </button>
-
-        </form>
+      <div class="info-item">
+        <div class="info-num">02</div>
+        <h4>Call Us</h4>
+        <a href="tel:+2347030579173">+234 703 057 9173</a>
       </div>
 
+      <div class="info-item">
+        <div class="info-num">03</div>
+        <h4>Follow Us</h4>
+        <p>@RigniteGroup</p>
+      </div>
+
+      <div class="info-item">
+        <div class="info-num">04</div>
+        <h4>Location</h4>
+        <p>Abuja, Nigeria</p>
+        <div class="location-badge">📍 FCT · Nigeria</div>
+      </div>
+
+      <div class="response-badge">
+        <div class="response-dot"></div>
+        <div>
+          <div class="response-text">Typically replies within 24 hours</div>
+          <div class="response-sub">Mon – Fri, 8am – 6pm WAT</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-wrap reveal reveal-delay-1">
+      <h2 class="form-title">Send a Message</h2>
+      <p class="form-sub">Tell us about your project, challenge, or question and we'll get back to you promptly.</p>
+
+      <div class="form-status" id="formStatus" role="alert"></div>
+
+      <form id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+234 …" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label for="org">Organisation</label>
+            <input type="text" id="org" name="org" placeholder="Your company or institution" autocomplete="organization">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" placeholder="Tell us about your project or data challenge — the more detail, the better." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn">
+          Send Message
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-logo">R<span class="footer-logo-dot">&#xB7;</span>IGNITE GROUP</div>
-      <div class="footer-tagline">Empower &middot; Innovate &middot; Excel</div>
-      <div class="footer-copy">&copy; 2025 R-Ignite Group. Abuja, Nigeria.</div>
+      <div class="footer-logo">R<span class="footer-logo-dot">·</span>IGNITE GROUP</div>
+      <div class="footer-tagline">Empower · Innovate · Excel</div>
+      <div class="footer-copy">© 2025 R-Ignite Group. Abuja, Nigeria.</div>
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Nav scroll
     const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 
-    document.getElementById('hamburger').addEventListener('click', () => {
-      document.getElementById('mobileNav').classList.add('open');
-    });
-    document.getElementById('closeNav').addEventListener('click', () => {
-      document.getElementById('mobileNav').classList.remove('open');
-    });
+    // Mobile nav
+    document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.add('open'));
+    document.getElementById('closeNav').addEventListener('click', () => document.getElementById('mobileNav').classList.remove('open'));
 
-    const revObs = new IntersectionObserver(es => {
-      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); } });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+    // Scroll reveal
+    const obs = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    }), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 
+    // ── Contact Form Submission ───────────────────────
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-      const statusEl  = document.getElementById('formStatus');
-      const submitBtn = document.getElementById('submitBtn');
 
-      const data = {
+      const formStatus = document.getElementById('formStatus');
+      const submitBtn  = document.getElementById('submitBtn');
+
+      const formData = {
         name:    document.getElementById('name').value.trim(),
         email:   document.getElementById('email').value.trim(),
         phone:   document.getElementById('phone').value.trim(),
         org:     document.getElementById('org').value.trim(),
-        service: document.getElementById('service').value,
         subject: document.getElementById('subject').value.trim(),
         message: document.getElementById('message').value.trim()
       };
 
-      if (!data.name)  { showStatus('Please enter your full name.', 'error'); return; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) { showStatus('Please enter a valid email address.', 'error'); return; }
-      if (!data.subject) { showStatus('Please enter a subject.', 'error'); return; }
-      if (!data.message) { showStatus('Please write a message.', 'error'); return; }
+      // Client-side email validation
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        showStatus('Please enter a valid email address.', 'error');
+        return;
+      }
 
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span style="opacity:.6;font-weight:600">Sending...</span>';
-      showStatus('Sending your message...', 'loading');
+      submitBtn.innerHTML = '<span style="opacity:.6">Sending…</span>';
+      showStatus('Sending your message…', 'loading');
 
       try {
-        const res = await fetch('http://localhost:5001/api/send-email', {
+        const response = await fetch('http://localhost:5001/api/send-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: JSON.stringify(formData)
         });
-        if (res.ok) {
-          showStatus('Message sent! We will be in touch within 24 hours.', 'success');
+
+        if (response.ok) {
+          showStatus('✓ Message sent! We\'ll be in touch within 24 hours.', 'success');
           this.reset();
-          setTimeout(() => statusEl.classList.remove('show'), 7000);
+          setTimeout(() => {
+            formStatus.classList.remove('show');
+          }, 6000);
         } else {
-          const err = await res.json().catch(() => ({}));
-          showStatus('Error: ' + (err.message || 'Failed to send. Please try again.'), 'error');
+          const err = await response.json();
+          showStatus('Error: ' + (err.message || 'Failed to send message. Please try again.'), 'error');
         }
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error('Form submission error:', error);
         showStatus('Could not reach the server. Please email us directly at rignitegroup@gmail.com', 'error');
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Send Message <span class="btn-arrow">&#x2192;</span>';
-      }
-    });
-
-    function showStatus(msg, type) {
-      const el = document.getElementById('formStatus');
-      el.textContent = msg;
-      el.className = 'form-status show ' + type;
-    }
-  </script>
-</body>
-</html>
+        submitBtn.innerHTML = 'Send Message <span class="btn-
