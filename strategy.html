@@ -47,6 +47,20 @@
     .rev-cell p { font-size: .88rem; color: var(--ink-muted); line-height: 1.7; }
 
     @media(max-width:1024px){ .strategy-row{ grid-template-columns:50px 1fr; } .s-badge{ display:none; } .pos-grid{ grid-template-columns:1fr; } .rev-grid{ grid-template-columns:1fr; } }
+
+    @media(max-width:1024px){
+      .strategy-row { grid-template-columns:44px 1fr; gap:2rem; }
+      .s-badge { display:none; }
+      .pos-grid { grid-template-columns:1fr; }
+      .rev-grid { grid-template-columns:1fr; }
+    }
+    @media(max-width:768px){
+      .strategy-main { padding:5rem 5%; }
+      .positioning { padding:5rem 5%; }
+      .revenue { padding:5rem 5%; }
+      .strategy-row { gap:1.2rem; padding:2rem 0; }
+    }
+    @media(max-width:480px){ .s-body p { font-size:.9rem; } }
   </style>
 </head>
 <body>

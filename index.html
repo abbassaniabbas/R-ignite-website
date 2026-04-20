@@ -4,177 +4,140 @@
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>R-Ignite Group | Data. AI. Transformation.</title>
   <meta name="description" content="Premium Data, AI & Digital Transformation company serving Nigerian enterprises.">
-  <meta name="theme-color" content="#2D3348">
+  <meta name="theme-color" content="#1E2235">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="theme.css">
   <style>
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh; display: flex; flex-direction: column;
-      justify-content: flex-end; padding: 0 5% 6rem;
-      position: relative; overflow: hidden;
-      background: var(--navy-deep);
-    }
-    .hero-decor {
-      position: absolute; inset: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 55% 65% at 90% 40%, rgba(155,35,53,.28) 0%, transparent 60%),
-        radial-gradient(ellipse 30% 40% at 5% 90%, rgba(155,35,53,.12) 0%, transparent 60%);
-    }
-    .hero-grid {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 70px 70px;
-    }
-    .hero-content { position: relative; z-index: 1; }
-    .hero-eyebrow {
-      font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--crimson-mid); margin-bottom: 2rem;
-      display: flex; align-items: center; gap: .8rem;
-      opacity: 0; animation: fadeUp .7s var(--ease) forwards .2s;
-    }
+    /* HERO */
+    .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 5% 6rem; position:relative; overflow:hidden; background:var(--navy-deep); }
+    .hero-decor { position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 55% 65% at 90% 40%, rgba(155,35,53,.28) 0%, transparent 60%), radial-gradient(ellipse 30% 40% at 5% 90%, rgba(155,35,53,.12) 0%, transparent 60%); }
+    .hero-grid { position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:70px 70px; }
+    .hero-content { position:relative; z-index:1; }
+    .hero-eyebrow { font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--crimson-mid); margin-bottom:2rem; display:flex; align-items:center; gap:.8rem; opacity:0; animation:fadeUp .7s var(--ease) forwards .2s; min-height:unset; min-width:unset; }
     .hero-eyebrow::before { content:''; width:20px; height:1px; background:var(--crimson-mid); }
-    .hero-headline {
-      font-family: var(--serif); font-size: clamp(3.5rem,9vw,8.5rem);
-      font-weight: 400; line-height: 1; letter-spacing: -.01em;
-      color: #fff; margin-bottom: 3.5rem;
-    }
+    .hero-headline { font-family:var(--serif); font-size:clamp(3rem,9vw,8.5rem); font-weight:400; line-height:1; letter-spacing:-.01em; color:#fff; margin-bottom:3rem; }
     .hero-headline .line { display:block; overflow:hidden; }
     .hero-headline .line-inner { display:block; opacity:0; transform:translateY(110%); }
-    .hero-headline .line:nth-child(1) .line-inner { animation: lineUp .9s var(--ease) forwards .3s; }
-    .hero-headline .line:nth-child(2) .line-inner { animation: lineUp .9s var(--ease) forwards .5s; }
-    .hero-headline .line:nth-child(3) .line-inner { animation: lineUp .9s var(--ease) forwards .7s; }
-    .hero-headline .accent { color: var(--crimson-mid); font-style: italic; }
-    .hero-bottom {
-      display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem;
-      opacity: 0; animation: fadeUp .8s var(--ease) forwards 1s;
-    }
-    .hero-desc { max-width: 420px; font-size: 1rem; color: rgba(255,255,255,.55); line-height: 1.8; }
-    .hero-actions { display: flex; gap: 1rem; flex-shrink: 0; flex-wrap: wrap; }
-    .scroll-hint {
-      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: .5rem;
-      font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-      color: rgba(255,255,255,.25);
-      opacity: 0; animation: fadeUp .8s var(--ease) forwards 1.5s;
-    }
-    .scroll-line { width: 1px; height: 40px; background: linear-gradient(180deg, rgba(255,255,255,.25), transparent); animation: pulse 2s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+    .hero-headline .line:nth-child(1) .line-inner { animation:lineUp .9s var(--ease) forwards .3s; }
+    .hero-headline .line:nth-child(2) .line-inner { animation:lineUp .9s var(--ease) forwards .5s; }
+    .hero-headline .line:nth-child(3) .line-inner { animation:lineUp .9s var(--ease) forwards .7s; }
+    .hero-headline .accent { color:var(--crimson-mid); font-style:italic; }
+    .hero-bottom { display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; opacity:0; animation:fadeUp .8s var(--ease) forwards 1s; }
+    .hero-desc { max-width:420px; font-size:1rem; color:rgba(255,255,255,.55); line-height:1.8; }
+    .hero-actions { display:flex; gap:1rem; flex-shrink:0; flex-wrap:wrap; }
+    .scroll-hint { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.5rem; font-size:.65rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.25); opacity:0; animation:fadeUp .8s var(--ease) forwards 1.5s; min-height:unset; min-width:unset; }
+    .scroll-line { width:1px; height:40px; background:linear-gradient(180deg,rgba(255,255,255,.25),transparent); animation:pulse 2s ease-in-out infinite; }
+    @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
-    /* ── STATS ── */
-    .stats-section { background: var(--navy); }
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(4,1fr);
-      max-width: 1400px; margin: 0 auto;
-      border-left: 1px solid rgba(255,255,255,.07);
-    }
-    .stat-cell {
-      padding: 3.5rem 3rem; border-right: 1px solid rgba(255,255,255,.07);
-      border-bottom: 1px solid rgba(255,255,255,.07);
-      transition: background .3s;
-    }
-    .stat-cell:hover { background: rgba(155,35,53,.1); }
-    .stat-idx { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--crimson-mid); margin-bottom: 1.5rem; }
-    .stat-value { font-family: var(--serif); font-size: clamp(2.2rem,3.5vw,3.5rem); color: #fff; line-height: 1; margin-bottom: .6rem; }
-    .stat-label { font-size: .82rem; color: rgba(255,255,255,.4); line-height: 1.5; }
+    /* STATS */
+    .stats-section { background:var(--navy); }
+    .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); max-width:1400px; margin:0 auto; border-left:1px solid rgba(255,255,255,.07); }
+    .stat-cell { padding:3rem 2.5rem; border-right:1px solid rgba(255,255,255,.07); border-bottom:1px solid rgba(255,255,255,.07); transition:background .3s; }
+    .stat-cell:hover { background:rgba(155,35,53,.1); }
+    .stat-idx { font-size:.65rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--crimson-mid); margin-bottom:1.5rem; min-height:unset; min-width:unset; display:block; }
+    .stat-value { font-family:var(--serif); font-size:clamp(2rem,3.5vw,3.5rem); color:#fff; line-height:1; margin-bottom:.6rem; }
+    .stat-label { font-size:.82rem; color:rgba(255,255,255,.4); line-height:1.5; }
 
-    /* ── ABOUT ── */
-    .about-strip { padding: 9rem 5%; background: var(--navy); }
-    .about-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.6fr; gap: 8rem; align-items: start; }
-    .about-sticky { position: sticky; top: 8rem; }
-    .about-sticky .section-title { color: #fff; }
-    .about-text { font-size: 1.05rem; line-height: 1.85; color: rgba(255,255,255,.5); margin-bottom: 1.5rem; }
-    .about-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2rem; }
-    .tag {
-      font-size: .72rem; font-weight: 600; letter-spacing: .04em;
-      padding: .35rem .9rem; border: 1px solid rgba(255,255,255,.15);
-      color: rgba(255,255,255,.4); border-radius: 4px; transition: all .2s;
-    }
-    .tag:hover { border-color: var(--crimson-mid); color: var(--crimson-mid); }
+    /* ABOUT */
+    .about-strip { padding:8rem 5%; background:var(--navy); }
+    .about-inner { max-width:1400px; margin:0 auto; display:grid; grid-template-columns:1fr 1.6fr; gap:7rem; align-items:start; }
+    .about-sticky { position:sticky; top:8rem; }
+    .about-sticky .section-title { color:#fff; }
+    .about-text { font-size:1rem; line-height:1.85; color:rgba(255,255,255,.5); margin-bottom:1.5rem; }
+    .about-tags { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:2rem; }
+    .tag { font-size:.7rem; font-weight:600; letter-spacing:.04em; padding:.35rem .9rem; border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.4); border-radius:4px; transition:all .2s; min-height:unset; min-width:unset; display:revert; }
+    .tag:hover { border-color:var(--crimson-mid); color:var(--crimson-mid); }
 
-    /* ── SERVICES LIST ── */
-    .services-section { padding: 9rem 5%; max-width: 1400px; margin: 0 auto; }
-    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--ink); }
-    .section-link { font-size: .8rem; font-weight: 700; color: var(--ink-muted); text-decoration: none; transition: color .2s; }
-    .section-link:hover { color: var(--crimson); }
-    .svc-row {
-      display: grid; grid-template-columns: 50px 1fr auto auto;
-      align-items: center; gap: 2rem; padding: 1.8rem 0;
-      border-bottom: 1px solid var(--rule); text-decoration: none; color: inherit;
-      transition: all .25s;
-    }
-    .svc-row:hover { padding-left: 1rem; background: var(--crimson-light); margin: 0 -1rem; padding-right: 1rem; border-radius: 8px; border-bottom-color: transparent; }
-    .svc-n { font-size: .72rem; font-weight: 700; letter-spacing: .06em; color: var(--ink-faint); }
-    .svc-row:hover .svc-n { color: var(--crimson); }
-    .svc-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .25rem; color: var(--ink); }
-    .svc-info p { font-size: .85rem; color: var(--ink-muted); margin: 0; }
-    .svc-badge { font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: .3rem .7rem; background: var(--surface); color: var(--ink-muted); border-radius: 4px; white-space: nowrap; }
-    .svc-arr { font-size: 1.1rem; color: var(--ink-faint); transition: all .25s; }
-    .svc-row:hover .svc-arr { color: var(--crimson); transform: translate(3px,-3px); }
+    /* SERVICES LIST */
+    .services-section { padding:8rem 5%; max-width:1400px; margin:0 auto; }
+    .section-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3rem; padding-bottom:1.5rem; border-bottom:2px solid var(--ink); }
+    .section-link { font-size:.8rem; font-weight:700; color:var(--ink-muted); text-decoration:none; transition:color .2s; min-height:unset; min-width:unset; display:revert; }
+    .section-link:hover { color:var(--crimson); }
+    .svc-row { display:grid; grid-template-columns:50px 1fr auto auto; align-items:center; gap:2rem; padding:1.8rem 0; border-bottom:1px solid var(--rule); text-decoration:none; color:inherit; transition:all .25s; }
+    .svc-row:hover { padding-left:1rem; background:var(--crimson-light); margin:0 -1rem; padding-right:1rem; border-radius:8px; border-bottom-color:transparent; }
+    .svc-n { font-size:.72rem; font-weight:700; letter-spacing:.06em; color:var(--ink-faint); min-height:unset; min-width:unset; display:revert; }
+    .svc-row:hover .svc-n { color:var(--crimson); }
+    .svc-info h3 { font-size:1.05rem; font-weight:700; margin-bottom:.25rem; color:var(--ink); }
+    .svc-info p { font-size:.85rem; color:var(--ink-muted); margin:0; }
+    .svc-badge { font-size:.65rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.3rem .7rem; background:var(--surface); color:var(--ink-muted); border-radius:4px; white-space:nowrap; min-height:unset; min-width:unset; display:revert; }
+    .svc-row:hover .svc-badge { background:#fff; }
+    .svc-arr { font-size:1.1rem; color:var(--ink-faint); transition:all .25s; min-height:unset; min-width:unset; display:revert; }
+    .svc-row:hover .svc-arr { color:var(--crimson); transform:translate(3px,-3px); }
 
-    /* ── PILLARS ── */
-    .pillars { padding: 9rem 5%; background: var(--navy); }
-    .pillars-inner { max-width: 1400px; margin: 0 auto; }
-    .pillars-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,.08); }
-    .pillars-header .section-label { color: var(--crimson-mid); }
-    .pillars-header .section-title { color: #fff; font-size: clamp(1.8rem,3.5vw,3rem); }
-    .pillars-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,.07); }
-    .pillar-card { padding: 3.5rem 2.5rem; background: var(--navy); transition: background .3s; position: relative; overflow: hidden; }
+    /* PILLARS */
+    .pillars { padding:8rem 5%; background:var(--navy); }
+    .pillars-inner { max-width:1400px; margin:0 auto; }
+    .pillars-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3.5rem; padding-bottom:2rem; border-bottom:1px solid rgba(255,255,255,.08); }
+    .pillars-header .section-label { color:var(--crimson-mid); }
+    .pillars-header .section-title { color:#fff; }
+    .pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,.07); }
+    .pillar-card { padding:3rem 2.5rem; background:var(--navy); transition:background .3s; position:relative; overflow:hidden; }
     .pillar-card::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:2px; background:var(--crimson); transform:scaleX(0); transform-origin:left; transition:transform .5s var(--ease); }
-    .pillar-card:hover { background: rgba(255,255,255,.03); }
-    .pillar-card:hover::after { transform: scaleX(1); }
-    .pillar-n { font-size: .65rem; font-weight: 700; letter-spacing: .12em; color: var(--crimson-mid); margin-bottom: 1.5rem; }
-    .pillar-icon { font-size: 1.8rem; margin-bottom: 1rem; }
-    .pillar-card h3 { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: .8rem; font-weight: 400; }
-    .pillar-card p { font-size: .88rem; color: rgba(255,255,255,.4); line-height: 1.7; }
+    .pillar-card:hover { background:rgba(255,255,255,.03); }
+    .pillar-card:hover::after { transform:scaleX(1); }
+    .pillar-n { font-size:.65rem; font-weight:700; letter-spacing:.12em; color:var(--crimson-mid); margin-bottom:1.5rem; min-height:unset; min-width:unset; display:block; }
+    .pillar-icon { font-size:1.8rem; margin-bottom:1rem; }
+    .pillar-card h3 { font-family:var(--serif); font-size:1.25rem; color:#fff; margin-bottom:.8rem; font-weight:400; }
+    .pillar-card p { font-size:.88rem; color:rgba(255,255,255,.4); line-height:1.7; }
 
-    /* ── STAGES ── */
-    .stages-section { padding: 9rem 5%; max-width: 1400px; margin: 0 auto; }
-    .stages-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 4rem; }
-    .stage-card {
-      padding: 2.5rem; border: 1px solid var(--rule); border-radius: 10px;
-      position: relative; overflow: hidden; transition: all .35s var(--ease);
-    }
-    .stage-card:hover { border-color: var(--crimson); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(155,35,53,.08); }
-    .stage-num-bg { position: absolute; right: 1.5rem; bottom: .5rem; font-family: var(--serif); font-size: 6rem; line-height: 1; color: rgba(0,0,0,.04); }
-    .stage-phase { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--crimson); margin-bottom: 1.5rem; }
-    .stage-card h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: .8rem; }
-    .stage-card p { font-size: .88rem; color: var(--ink-muted); line-height: 1.7; margin-bottom: 1.5rem; }
-    .stage-target { font-size: .78rem; font-weight: 700; color: var(--ink); padding: .6rem 0; border-top: 1px solid var(--rule); }
+    /* STAGES */
+    .stages-section { padding:8rem 5%; max-width:1400px; margin:0 auto; }
+    .stages-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:4rem; }
+    .stage-card { padding:2.5rem; border:1px solid var(--rule); border-radius:10px; position:relative; overflow:hidden; transition:all .35s var(--ease); }
+    .stage-card:hover { border-color:var(--crimson); transform:translateY(-4px); box-shadow:0 20px 60px rgba(155,35,53,.08); }
+    .stage-num-bg { position:absolute; right:1.5rem; bottom:.5rem; font-family:var(--serif); font-size:6rem; line-height:1; color:rgba(0,0,0,.04); }
+    .stage-phase { font-size:.65rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--crimson); margin-bottom:1.5rem; min-height:unset; min-width:unset; display:block; }
+    .stage-card h3 { font-family:var(--serif); font-size:1.25rem; font-weight:400; margin-bottom:.8rem; }
+    .stage-card p { font-size:.88rem; color:var(--ink-muted); line-height:1.7; margin-bottom:1.5rem; }
+    .stage-target { font-size:.78rem; font-weight:700; color:var(--ink); padding:.6rem 0; border-top:1px solid var(--rule); min-height:unset; min-width:unset; display:block; }
 
-    /* ── CTA ── */
-    .bottom-cta { padding: 12rem 5%; text-align: center; background: var(--navy-deep); position: relative; overflow: hidden; }
-    .bottom-cta::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(155,35,53,.25) 0%, transparent 70%); pointer-events:none; }
-    .cta-eyebrow { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--crimson-mid); margin-bottom: 1.5rem; }
-    .cta-headline { font-family: var(--serif); font-size: clamp(3rem,8vw,7rem); font-weight: 400; line-height: 1; color: #fff; margin-bottom: 3rem; position: relative; }
-    .cta-headline .accent { color: var(--crimson-mid); font-style: italic; }
-    .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; position: relative; }
+    /* CTA */
+    .bottom-cta { padding:10rem 5%; text-align:center; background:var(--navy-deep); position:relative; overflow:hidden; }
+    .bottom-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 50% 50%, rgba(155,35,53,.25) 0%, transparent 70%); pointer-events:none; }
+    .cta-eyebrow { font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--crimson-mid); margin-bottom:1.5rem; min-height:unset; min-width:unset; display:block; }
+    .cta-headline { font-family:var(--serif); font-size:clamp(2.5rem,7vw,7rem); font-weight:400; line-height:1; color:#fff; margin-bottom:3rem; position:relative; }
+    .cta-headline .accent { color:var(--crimson-mid); font-style:italic; }
+    .cta-actions { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; position:relative; }
 
-    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes lineUp { from{opacity:0;transform:translateY(110%)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes lineUp{from{opacity:0;transform:translateY(110%)}to{opacity:1;transform:translateY(0)}}
 
+    /* ── TABLET (≤1024px) ── */
     @media(max-width:1024px){
-      .stats-grid { grid-template-columns: repeat(2,1fr); }
-      .pillars-grid { grid-template-columns: 1fr 1fr; }
-      .stages-grid { grid-template-columns: 1fr 1fr; }
-      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .about-sticky { position: static; }
-      .svc-row { grid-template-columns: 40px 1fr 30px; }
-      .svc-badge { display: none; }
-      .pillars-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .stats-grid { grid-template-columns:repeat(2,1fr); }
+      .pillars-grid { grid-template-columns:1fr 1fr; }
+      .stages-grid { grid-template-columns:1fr 1fr; }
+      .about-inner { grid-template-columns:1fr; gap:3rem; }
+      .about-sticky { position:static; }
+      .svc-row { grid-template-columns:44px 1fr 28px; gap:1.2rem; }
+      .svc-badge { display:none; }
+      .pillars-header { flex-direction:column; align-items:flex-start; gap:.8rem; }
     }
+
+    /* ── MOBILE (≤768px) ── */
     @media(max-width:768px){
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .pillars-grid, .stages-grid { grid-template-columns: 1fr; }
-      .hero-bottom { flex-direction: column; align-items: flex-start; }
-      .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .hero { padding:0 5% 5rem; }
+      .hero-bottom { flex-direction:column; align-items:flex-start; gap:1.5rem; }
+      .hero-actions { width:100%; }
+      .hero-actions .btn-primary, .hero-actions .btn-outline { flex:1; justify-content:center; }
+      .section-header { flex-direction:column; align-items:flex-start; gap:1rem; }
+      .about-strip { padding:5rem 5%; }
+      .services-section, .stages-section { padding:5rem 5%; }
+      .pillars { padding:5rem 5%; }
+      .pillars-grid { grid-template-columns:1fr; }
+      .stages-grid { grid-template-columns:1fr; }
+      .svc-row { grid-template-columns:36px 1fr 22px; gap:.8rem; padding:1.4rem 0; }
+      .scroll-hint { display:none; }
+      .bottom-cta { padding:6rem 5%; }
     }
+
+    /* ── SMALL MOBILE (≤480px) ── */
     @media(max-width:480px){
-      .stats-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns:1fr; }
+      .stages-grid { grid-template-columns:1fr; }
+      .stat-cell { padding:2rem 1.5rem; }
     }
   </style>
 </head>
@@ -186,25 +149,20 @@
     <a href="team.html">Team</a>
     <div class="mobile-nav-bottom"><a href="my-backend/contact.html">Get in Touch</a></div>
   </div>
-
   <nav id="mainNav">
     <a class="logo" href="index.html"><span class="logo-mark">R</span>-Ignite Group</a>
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="goals.html">Goals</a></li>
-      <li><a href="strategy.html">Strategy</a></li>
-      <li><a href="milestones.html">Milestones</a></li>
-      <li><a href="team.html">Team</a></li>
+      <li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li>
+      <li><a href="goals.html">Goals</a></li><li><a href="strategy.html">Strategy</a></li>
+      <li><a href="milestones.html">Milestones</a></li><li><a href="team.html">Team</a></li>
     </ul>
     <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
     <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </nav>
 
   <section class="hero">
-    <div class="hero-decor"></div>
-    <div class="hero-grid"></div>
+    <div class="hero-decor"></div><div class="hero-grid"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Nigeria's Premier Data &amp; AI Company</div>
       <h1 class="hero-headline">
@@ -246,26 +204,10 @@
 
   <section class="stats-section">
     <div class="stats-grid">
-      <div class="stat-cell reveal">
-        <div class="stat-idx">01</div>
-        <div class="stat-value" data-target="3.9" data-suffix="B" data-prefix="$">$0</div>
-        <div class="stat-label">Total available market in Nigerian tech</div>
-      </div>
-      <div class="stat-cell reveal reveal-d1">
-        <div class="stat-idx">02</div>
-        <div class="stat-value" data-target="250" data-suffix="M" data-prefix="₦">₦0</div>
-        <div class="stat-label">Revenue target in first 24 months</div>
-      </div>
-      <div class="stat-cell reveal reveal-d2">
-        <div class="stat-idx">03</div>
-        <div class="stat-value" data-target="60" data-suffix="%">0%</div>
-        <div class="stat-label">Recurring revenue target by Year 4</div>
-      </div>
-      <div class="stat-cell reveal reveal-d3">
-        <div class="stat-idx">04</div>
-        <div class="stat-value" data-target="10" data-suffix="x">0x</div>
-        <div class="stat-label">Valuation multiple from SaaS productisation</div>
-      </div>
+      <div class="stat-cell reveal"><div class="stat-idx">01</div><div class="stat-value" data-target="3.9" data-suffix="B" data-prefix="$">$0</div><div class="stat-label">Total available market in Nigerian tech</div></div>
+      <div class="stat-cell reveal reveal-d1"><div class="stat-idx">02</div><div class="stat-value" data-target="250" data-suffix="M" data-prefix="₦">₦0</div><div class="stat-label">Revenue target in first 24 months</div></div>
+      <div class="stat-cell reveal reveal-d2"><div class="stat-idx">03</div><div class="stat-value" data-target="60" data-suffix="%">0%</div><div class="stat-label">Recurring revenue target by Year 4</div></div>
+      <div class="stat-cell reveal reveal-d3"><div class="stat-idx">04</div><div class="stat-value" data-target="10" data-suffix="x">0x</div><div class="stat-label">Valuation multiple from SaaS productisation</div></div>
     </div>
   </section>
 
@@ -288,100 +230,33 @@
 
   <section class="services-section">
     <div class="section-header reveal">
-      <div>
-        <div class="section-label">What We Do</div>
-        <h2 class="section-title">Our Services</h2>
-      </div>
+      <div><div class="section-label">What We Do</div><h2 class="section-title">Our Services</h2></div>
       <a href="services.html" class="section-link">All services →</a>
     </div>
-    <a href="services.html" class="svc-row reveal">
-      <div class="svc-n">01</div>
-      <div class="svc-info"><h3>Business Intelligence &amp; Analytics</h3><p>Power BI, Tableau, data warehouses, executive KPI dashboards</p></div>
-      <div class="svc-badge">Core</div><div class="svc-arr">↗</div>
-    </a>
-    <a href="services.html" class="svc-row reveal reveal-d1">
-      <div class="svc-n">02</div>
-      <div class="svc-info"><h3>AI-Powered Process Automation</h3><p>RPA, intelligent workflows, NLP applications, predictive analytics</p></div>
-      <div class="svc-badge">High Value</div><div class="svc-arr">↗</div>
-    </a>
-    <a href="services.html" class="svc-row reveal reveal-d2">
-      <div class="svc-n">03</div>
-      <div class="svc-info"><h3>ERP &amp; CRM Implementation</h3><p>Salesforce, Dynamics, custom modules, legacy integration</p></div>
-      <div class="svc-badge">Enterprise</div><div class="svc-arr">↗</div>
-    </a>
-    <a href="services.html" class="svc-row reveal reveal-d3">
-      <div class="svc-n">04</div>
-      <div class="svc-info"><h3>Data Infrastructure &amp; Engineering</h3><p>Cloud platforms (AWS, Azure, GCP), ETL pipelines, data lakes</p></div>
-      <div class="svc-badge">Foundation</div><div class="svc-arr">↗</div>
-    </a>
-    <a href="services.html" class="svc-row reveal reveal-d4">
-      <div class="svc-n">05</div>
-      <div class="svc-info"><h3>Managed Services &amp; Retainers</h3><p>Annual contracts, AI monitoring, continuous improvement programs</p></div>
-      <div class="svc-badge">Recurring</div><div class="svc-arr">↗</div>
-    </a>
+    <a href="services.html" class="svc-row reveal"><div class="svc-n">01</div><div class="svc-info"><h3>Business Intelligence &amp; Analytics</h3><p>Power BI, Tableau, data warehouses, executive KPI dashboards</p></div><div class="svc-badge">Core</div><div class="svc-arr">↗</div></a>
+    <a href="services.html" class="svc-row reveal reveal-d1"><div class="svc-n">02</div><div class="svc-info"><h3>AI-Powered Process Automation</h3><p>RPA, intelligent workflows, NLP applications, predictive analytics</p></div><div class="svc-badge">High Value</div><div class="svc-arr">↗</div></a>
+    <a href="services.html" class="svc-row reveal reveal-d2"><div class="svc-n">03</div><div class="svc-info"><h3>ERP &amp; CRM Implementation</h3><p>Salesforce, Dynamics, custom modules, legacy integration</p></div><div class="svc-badge">Enterprise</div><div class="svc-arr">↗</div></a>
+    <a href="services.html" class="svc-row reveal reveal-d3"><div class="svc-n">04</div><div class="svc-info"><h3>Data Infrastructure &amp; Engineering</h3><p>Cloud platforms (AWS, Azure, GCP), ETL pipelines, data lakes</p></div><div class="svc-badge">Foundation</div><div class="svc-arr">↗</div></a>
+    <a href="services.html" class="svc-row reveal reveal-d4"><div class="svc-n">05</div><div class="svc-info"><h3>Managed Services &amp; Retainers</h3><p>Annual contracts, AI monitoring, continuous improvement programs</p></div><div class="svc-badge">Recurring</div><div class="svc-arr">↗</div></a>
   </section>
 
   <section class="pillars">
     <div class="pillars-inner">
-      <div class="pillars-header reveal">
-        <div>
-          <div class="section-label">Why Choose Us</div>
-          <h2 class="section-title">What Sets Us Apart</h2>
-        </div>
-      </div>
+      <div class="pillars-header reveal"><div><div class="section-label">Why Choose Us</div><h2 class="section-title">What Sets Us Apart</h2></div></div>
       <div class="pillars-grid">
-        <div class="pillar-card reveal">
-          <div class="pillar-n">01</div>
-          <div class="pillar-icon">◎</div>
-          <h3>Premium Positioning</h3>
-          <p>We don't compete on price. We compete on outcomes. Our solutions are engineered for mission-critical enterprise environments where failure is not an option.</p>
-        </div>
-        <div class="pillar-card reveal reveal-d1">
-          <div class="pillar-n">02</div>
-          <div class="pillar-icon">⟳</div>
-          <h3>Recurring Partnership Model</h3>
-          <p>We convert one-time projects into long-term retainers. Our clients don't just hire us once — they build lasting data partnerships that compound in value.</p>
-        </div>
-        <div class="pillar-card reveal reveal-d2">
-          <div class="pillar-n">03</div>
-          <div class="pillar-icon">⬡</div>
-          <h3>Product Roadmap</h3>
-          <p>As we identify patterns across client engagements, we build SaaS products — transforming from a service firm into a hybrid service + product company.</p>
-        </div>
+        <div class="pillar-card reveal"><div class="pillar-n">01</div><div class="pillar-icon">◎</div><h3>Premium Positioning</h3><p>We don't compete on price. We compete on outcomes. Our solutions are engineered for mission-critical enterprise environments where failure is not an option.</p></div>
+        <div class="pillar-card reveal reveal-d1"><div class="pillar-n">02</div><div class="pillar-icon">⟳</div><h3>Recurring Partnership Model</h3><p>We convert one-time projects into long-term retainers. Our clients don't just hire us once — they build lasting data partnerships that compound in value.</p></div>
+        <div class="pillar-card reveal reveal-d2"><div class="pillar-n">03</div><div class="pillar-icon">⬡</div><h3>Product Roadmap</h3><p>As we identify patterns across client engagements, we build SaaS products — transforming from a service firm into a hybrid service + product company.</p></div>
       </div>
     </div>
   </section>
 
   <section class="stages-section">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-label">Our Blueprint</div>
-        <h2 class="section-title">The 6-Year Plan</h2>
-      </div>
-      <a href="goals.html" class="section-link">Full roadmap →</a>
-    </div>
+    <div class="section-header reveal"><div><div class="section-label">Our Blueprint</div><h2 class="section-title">The 6-Year Plan</h2></div><a href="goals.html" class="section-link">Full roadmap →</a></div>
     <div class="stages-grid">
-      <div class="stage-card reveal">
-        <div class="stage-num-bg">01</div>
-        <div class="stage-phase">Years 0–2 · Stage 1</div>
-        <h3>Cash Engine</h3>
-        <p>Build a lean, premium B2B service company delivering high-ticket enterprise solutions with fast cash flow.</p>
-        <div class="stage-target">Target: ₦100M–₦250M revenue</div>
-      </div>
-      <div class="stage-card reveal reveal-d1">
-        <div class="stage-num-bg">02</div>
-        <div class="stage-phase">Years 2–4 · Stage 2</div>
-        <h3>Recurring Revenue</h3>
-        <p>Convert project clients into long-term contracts. Build a 60%+ recurring revenue base with predictable income.</p>
-        <div class="stage-target">Target: 60%+ recurring revenue</div>
-      </div>
-      <div class="stage-card reveal reveal-d2">
-        <div class="stage-num-bg">03</div>
-        <div class="stage-phase">Years 4–6 · Stage 3</div>
-        <h3>Productisation</h3>
-        <p>Identify patterns across engagements and build SaaS products that scale beyond consulting hours.</p>
-        <div class="stage-target">Target: 10x valuation multiple</div>
-      </div>
+      <div class="stage-card reveal"><div class="stage-num-bg">01</div><div class="stage-phase">Years 0–2 · Stage 1</div><h3>Cash Engine</h3><p>Build a lean, premium B2B service company delivering high-ticket enterprise solutions with fast cash flow.</p><div class="stage-target">Target: ₦100M–₦250M revenue</div></div>
+      <div class="stage-card reveal reveal-d1"><div class="stage-num-bg">02</div><div class="stage-phase">Years 2–4 · Stage 2</div><h3>Recurring Revenue</h3><p>Convert project clients into long-term contracts. Build a 60%+ recurring revenue base with predictable income.</p><div class="stage-target">Target: 60%+ recurring revenue</div></div>
+      <div class="stage-card reveal reveal-d2"><div class="stage-num-bg">03</div><div class="stage-phase">Years 4–6 · Stage 3</div><h3>Productisation</h3><p>Identify patterns across engagements and build SaaS products that scale beyond consulting hours.</p><div class="stage-target">Target: 10x valuation multiple</div></div>
     </div>
   </section>
 
@@ -403,22 +278,22 @@
   </footer>
 
   <script>
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
-    document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.add('open'));
-    document.getElementById('closeNav').addEventListener('click', () => document.getElementById('mobileNav').classList.remove('open'));
-    const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), {threshold:.1});
-    document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
-    function animateCounter(el) {
-      const target = parseFloat(el.dataset.target), suffix = el.dataset.suffix||'', prefix = el.dataset.prefix||'';
-      const isFloat = target%1!==0, dur=2000, start=performance.now();
-      function tick(now){ const p=Math.min((now-start)/dur,1), ease=1-Math.pow(1-p,4), val=target*ease;
+    const nav=document.getElementById('mainNav');
+    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+    document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
+    document.getElementById('closeNav').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
+    const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+    function animateCounter(el){
+      const target=parseFloat(el.dataset.target),suffix=el.dataset.suffix||'',prefix=el.dataset.prefix||'';
+      const isFloat=target%1!==0,dur=2000,start=performance.now();
+      function tick(now){const p=Math.min((now-start)/dur,1),ease=1-Math.pow(1-p,4),val=target*ease;
         el.textContent=prefix+(isFloat?val.toFixed(1):Math.floor(val))+suffix;
-        if(p<1)requestAnimationFrame(tick); else el.textContent=prefix+(isFloat?target.toFixed(1):target)+suffix; }
+        if(p<1)requestAnimationFrame(tick);else el.textContent=prefix+(isFloat?target.toFixed(1):target)+suffix;}
       requestAnimationFrame(tick);
     }
-    const cObs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting&&e.target.dataset.target){ animateCounter(e.target); cObs.unobserve(e.target); } }), {threshold:.5});
-    document.querySelectorAll('.stat-value[data-target]').forEach(el => cObs.observe(el));
+    const cObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.target.dataset.target){animateCounter(e.target);cObs.unobserve(e.target);}}),{threshold:.5});
+    document.querySelectorAll('.stat-value[data-target]').forEach(el=>cObs.observe(el));
   </script>
 </body>
 </html>

@@ -45,6 +45,25 @@
 
     @media(max-width:1024px){ .about-intro{ grid-template-columns:1fr; gap:3rem; } .team-intro{ grid-template-columns:1fr; gap:2rem; } .values-grid{ grid-template-columns:1fr 1fr; } }
     @media(max-width:768px){ .values-grid{ grid-template-columns:1fr; } }
+
+    /* TABLET */
+    @media(max-width:1024px){
+      .about-intro { grid-template-columns:1fr; gap:3rem; }
+      .team-intro { grid-template-columns:1fr; gap:2rem; }
+      .values-grid { grid-template-columns:1fr 1fr; }
+    }
+    /* MOBILE */
+    @media(max-width:768px){
+      .about-main { padding:5rem 5%; }
+      .about-intro { margin-bottom:4rem; padding-bottom:4rem; }
+      .values { margin-bottom:4rem; }
+      .values-grid { grid-template-columns:1fr; }
+      .team-strip { padding:4rem 5%; margin:0; }
+      .clients { margin-top:4rem; }
+    }
+    @media(max-width:480px){
+      .value-card { padding:1.8rem; }
+    }
   </style>
 </head>
 <body>

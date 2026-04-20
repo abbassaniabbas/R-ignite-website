@@ -43,6 +43,20 @@
 
     @media(max-width:1024px){ .stage-full{ grid-template-columns:1fr; gap:2rem; } .stage-left{ position:static; } .outcomes-grid{ grid-template-columns:1fr 1fr; } }
     @media(max-width:768px){ .outcomes-grid{ grid-template-columns:1fr; } }
+
+    @media(max-width:1024px){
+      .stage-full { grid-template-columns:1fr; gap:2rem; padding:3.5rem 0; }
+      .stage-left { position:static; }
+      .stage-num-big { font-size:4rem; }
+      .outcomes-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:768px){
+      .stages-section { padding:5rem 5%; }
+      .outcomes { padding:5rem 5%; }
+      .outcomes-grid { grid-template-columns:1fr; }
+      .stage-full { padding:2.5rem 0; }
+    }
+    @media(max-width:480px){ .stage-bullets li { font-size:.88rem; } }
   </style>
 </head>
 <body>
