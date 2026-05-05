@@ -287,7 +287,10 @@
 
       <div class="form-status" id="formStatus" role="alert"></div>
 
-      <form id="contactForm" novalidate>
+      <form id="contactForm" action="https://formsubmit.co/rignitegroup@gmail.com" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New contact form submission">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_url" value="">
         <div class="form-row">
           <div class="form-group">
             <label for="name">Full Name *</label>
@@ -350,13 +353,20 @@
     const formStatus = document.getElementById('formStatus');
     const submitBtn = document.getElementById('submitBtn');
     const defaultSubmitLabel = submitBtn.innerHTML;
+    const formSubmitSubjectField = contactForm.querySelector('input[name="_subject"]');
+    const formSubmitUrlField = contactForm.querySelector('input[name="_url"]');
     const configuredApiBase =
       (window.CONTACT_API_URL || document.documentElement.dataset.contactApiBase || '').trim();
-    const contactApiUrl = configuredApiBase
+    const backendApiUrl = configuredApiBase
       ? configuredApiBase.replace(/\/$/, '') + '/api/send-email'
-      : window.location.protocol === 'file:'
-        ? 'http://localhost:5001/api/send-email'
-        : '/api/send-email';
+      : '';
+    const formSubmitAjaxUrl = 'https://formsubmit.co/ajax/rignitegroup@gmail.com';
+    const usingBackendApi = Boolean(backendApiUrl);
+    const contactApiUrl = usingBackendApi ? backendApiUrl : formSubmitAjaxUrl;
+
+    if (formSubmitUrlField) {
+      formSubmitUrlField.value = window.location.href;
+    }
 
     // Form submission
     contactForm.addEventListener('submit', async function(e) {
@@ -385,23 +395,47 @@
       submitBtn.innerHTML = '<span style="opacity:.6">Sending…</span>';
       showStatus('Sending your message…', 'loading');
 
+      if (formSubmitSubjectField) {
+        formSubmitSubjectField.value = `New enquiry: ${formData.subject}`;
+      }
+
       try {
+        const payload = usingBackendApi ? formData : {
+          ...formData,
+          _subject: `New enquiry: ${formData.subject}`,
+          _template: 'table',
+          _url: window.location.href
+        };
+
         const response = await fetch(contactApiUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
         });
 
-        if (response.ok) {
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok && result.success !== false && result.success !== 'false') {
           showStatus('✓ Message sent! We\'ll be in touch within 24 hours.', 'success');
           this.reset();
+          if (formSubmitUrlField) {
+            formSubmitUrlField.value = window.location.href;
+          }
           setTimeout(() => formStatus.classList.remove('show'), 6000);
         } else {
-          const err = await response.json().catch(() => ({}));
-          showStatus('Error: ' + (err.message || 'Failed to send. Please try again.'), 'error');
+          showStatus('Error: ' + (result.message || 'Failed to send. Please try again.'), 'error');
         }
       } catch (error) {
-        showStatus('Could not reach the server. Please try again or use the contact details on this page.', 'error');
+        if (!usingBackendApi) {
+          showStatus('Completing your message submission…', 'loading');
+          HTMLFormElement.prototype.submit.call(contactForm);
+          return;
+        }
+
+        showStatus('Could not send your message right now. Please try again or use the contact details on this page.', 'error');
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = defaultSubmitLabel;

@@ -8,7 +8,8 @@ Your contact form now sends emails directly to inboxes instead of opening a mail
 - ✅ Form still looks the same
 - ✅ Shows loading/success/error messages
 - ✅ Validates email format
-- ✅ Sends to a backend server instead of mailto
+- ✅ Sends through FormSubmit by default
+- ✅ Can use your own backend if you set `window.CONTACT_API_URL`
 
 ### Backend (Choose One)
 
@@ -53,11 +54,7 @@ You have **two backend options**:
    npm start
    ```
 
-5. **Update contact.html**:
-   Find the contact API base in the JavaScript section:
-   ```javascript
-   const contactApiUrl = configuredApiBase
-   ```
+5. **Optional: Use your own backend instead of FormSubmit**:
    Set `window.CONTACT_API_URL` or `data-contact-api-base` if your backend lives on a different domain.
 
 ---

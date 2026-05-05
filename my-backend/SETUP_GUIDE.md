@@ -80,7 +80,8 @@ The server should start on `http://localhost:5001`
    - Deploy!
 
 5. **Update your HTML**:
-   If your backend is on a different domain, set the API base before the contact form script runs:
+   This is optional. The contact form already works through FormSubmit by default.
+   If you want to use your own backend on a different domain, set the API base before the contact form script runs:
    ```html
    <script>window.CONTACT_API_URL = 'https://your-app.vercel.app';</script>
    ```
@@ -153,6 +154,7 @@ Your updated `contact-updated.html` already includes:
 - Loading/success/error messages
 - Email validation
 - Disabled button during submission
+- FormSubmit delivery by default, with optional custom backend support
 
 Just replace your current contact.html with the updated version and deploy the backend!
 
