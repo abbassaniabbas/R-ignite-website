@@ -346,11 +346,21 @@
     }), { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('submitBtn');
+    const defaultSubmitLabel = submitBtn.innerHTML;
+    const configuredApiBase =
+      (window.CONTACT_API_URL || document.documentElement.dataset.contactApiBase || '').trim();
+    const contactApiUrl = configuredApiBase
+      ? configuredApiBase.replace(/\/$/, '') + '/api/send-email'
+      : window.location.protocol === 'file:'
+        ? 'http://localhost:5001/api/send-email'
+        : '/api/send-email';
+
     // Form submission
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    contactForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      const formStatus = document.getElementById('formStatus');
-      const submitBtn  = document.getElementById('submitBtn');
 
       const formData = {
         name:    document.getElementById('name').value.trim(),
@@ -360,6 +370,11 @@
         subject: document.getElementById('subject').value.trim(),
         message: document.getElementById('message').value.trim()
       };
+
+      if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+        showStatus('Please fill in all required fields.', 'error');
+        return;
+      }
 
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
         showStatus('Please enter a valid email address.', 'error');
@@ -371,7 +386,7 @@
       showStatus('Sending your message…', 'loading');
 
       try {
-        const response = await fetch('http://localhost:5001/api/send-email', {
+        const response = await fetch(contactApiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
@@ -382,14 +397,14 @@
           this.reset();
           setTimeout(() => formStatus.classList.remove('show'), 6000);
         } else {
-          const err = await response.json();
+          const err = await response.json().catch(() => ({}));
           showStatus('Error: ' + (err.message || 'Failed to send. Please try again.'), 'error');
         }
       } catch (error) {
-        showStatus('Could not reach the server. Please email us directly at abbassani@r-ignite.com', 'error');
+        showStatus('Could not reach the server. Please try again or use the contact details on this page.', 'error');
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Send Message <span class="btn-arrow">→</span>';
+        submitBtn.innerHTML = defaultSubmitLabel;
       }
     });
 

@@ -23,7 +23,8 @@ This backend service handles email submissions from your contact form. Users fil
 ```
 EMAIL_USER=your-email@gmail.com
 EMAIL_PASSWORD=your-16-character-app-password
-PORT=5000
+RECIPIENT_EMAIL=rignitegroup@gmail.com
+PORT=5001
 ```
 
 ### Step 4: Install Dependencies
@@ -36,7 +37,7 @@ npm install
 npm start
 ```
 
-The server should start on `http://localhost:5000`
+The server should start on `http://localhost:5001`
 
 ---
 
@@ -79,9 +80,9 @@ The server should start on `http://localhost:5000`
    - Deploy!
 
 5. **Update your HTML**:
-   Change the fetch URL from `/api/send-email` to your Vercel URL:
-   ```javascript
-   const response = await fetch('https://your-app.vercel.app/api/send-email', {
+   If your backend is on a different domain, set the API base before the contact form script runs:
+   ```html
+   <script>window.CONTACT_API_URL = 'https://your-app.vercel.app';</script>
    ```
 
 ---
@@ -107,9 +108,9 @@ git push heroku main
 npm start
 ```
 
-2. Update your HTML file to point to localhost:
-```javascript
-const response = await fetch('http://localhost:5000/api/send-email', {
+2. If you are opening the contact page from a different host during local testing, set:
+```html
+<script>window.CONTACT_API_URL = 'http://localhost:5001';</script>
 ```
 
 3. Open your contact page and test the form

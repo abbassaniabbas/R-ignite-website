@@ -43,7 +43,8 @@ You have **two backend options**:
    ```
    EMAIL_USER=your-email@gmail.com
    EMAIL_PASSWORD=your-16-char-app-password
-   PORT=5000
+   RECIPIENT_EMAIL=rignitegroup@gmail.com
+   PORT=5001
    ```
 
 4. **Install and Run**:
@@ -53,11 +54,11 @@ You have **two backend options**:
    ```
 
 5. **Update contact.html**:
-   Find this line in the JavaScript section:
+   Find the contact API base in the JavaScript section:
    ```javascript
-   const response = await fetch('/api/send-email', {
+   const contactApiUrl = configuredApiBase
    ```
-   Replace with your server address when you deploy.
+   Set `window.CONTACT_API_URL` or `data-contact-api-base` if your backend lives on a different domain.
 
 ---
 
