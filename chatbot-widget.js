@@ -74,12 +74,10 @@
   widget.className = 'ri-chatbot';
   widget.setAttribute('aria-label', 'R-Ignite AI assistant');
   widget.innerHTML = [
-    '<div class="ri-chatbot-pill">Questions before support?</div>',
     '<div class="ri-chatbot-panel" id="ri-chatbot-panel" role="dialog" aria-modal="false" aria-hidden="true">',
       '<div class="ri-chatbot-head">',
         '<div>',
-          '<div class="ri-chatbot-eyebrow">R-Ignite AI Guide</div>',
-          '<h2>Ask about services, sectors, or next steps.</h2>',
+          '<h2>R-Ignite AI</h2>',
         '</div>',
         '<button type="button" class="ri-chatbot-close" aria-label="Close assistant">×</button>',
       '</div>',
