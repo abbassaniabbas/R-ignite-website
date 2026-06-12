@@ -12,29 +12,31 @@
   <link rel="stylesheet" href="theme.css">
   <style>
     .team-intro {
-      padding: 5rem 5% 2.5rem;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(236, 241, 246, 0.8) 100%);
+      padding: 3.4rem 5% 1.6rem;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(153, 31, 38, 0.07), transparent 20rem),
+        linear-gradient(155deg, #f1f1f1 0%, #d8d5d6 100%);
     }
 
     .team-intro-inner {
       max-width: 1360px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      gap: 3rem;
-      align-items: end;
-      padding-bottom: 2rem;
+      padding-bottom: 1.4rem;
       border-bottom: 1px solid rgba(24, 25, 27, 0.08);
     }
 
-    .team-intro-inner p {
-      max-width: 60ch;
-      font-size: 0.98rem;
-      color: var(--ink-muted);
+    .founders-heading {
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5vw, 4.8rem);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.04em;
     }
 
     .founders {
       padding: 2rem 5% 5rem;
+      background: linear-gradient(180deg, #d8d5d6 0%, #c6c1c3 100%);
     }
 
     .founders-grid {
@@ -53,7 +55,7 @@
 
     .founder-image {
       min-height: 100%;
-      background: #dbe1e7;
+      background: #8e8588;
     }
 
     .founder-image img {
@@ -103,7 +105,7 @@
       padding: 0.54rem 0.76rem;
       border-radius: 999px;
       border: 1px solid rgba(24, 25, 27, 0.08);
-      background: rgba(216, 224, 232, 0.9);
+      background: rgba(201, 205, 209, 0.72);
       color: var(--ink-mid);
       font-size: 0.74rem;
       font-weight: 700;
@@ -127,6 +129,9 @@
 
     .leadership-panels {
       padding: 0 5% 6rem;
+      background:
+        radial-gradient(circle at 10% 90%, rgba(153, 31, 38, 0.08), transparent 20rem),
+        linear-gradient(180deg, #c6c1c3 0%, #ece9ea 100%);
     }
 
     .leadership-grid {
@@ -139,6 +144,22 @@
 
     .leadership-card {
       padding: 1.7rem;
+    }
+
+    .leadership-card:nth-child(2) {
+      border-color: rgba(255, 255, 255, 0.1);
+      background:
+        radial-gradient(circle at top right, rgba(153, 31, 38, 0.13), transparent 40%),
+        linear-gradient(145deg, #45484e 0%, #2d3035 100%);
+    }
+
+    .leadership-card:nth-child(2) strong {
+      color: #d3ccce;
+    }
+
+    .leadership-card:nth-child(2) h3,
+    .leadership-card:nth-child(2) p {
+      color: #fff;
     }
 
     .leadership-card strong {
@@ -166,49 +187,7 @@
       line-height: 1.7;
     }
 
-    .team-cta {
-      padding: 0 5% 6rem;
-    }
-
-    .team-cta-card {
-      max-width: 1360px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 2rem;
-      align-items: end;
-      padding: 2.5rem;
-    }
-
-    .team-cta-card h2 {
-      max-width: 11ch;
-      margin-top: 1rem;
-      margin-bottom: 0.8rem;
-      color: var(--ink);
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-
-    .team-cta-card h2 em {
-      color: var(--red);
-      font-style: italic;
-    }
-
-    .team-cta-card p {
-      max-width: 56ch;
-      color: var(--ink-muted);
-      font-size: 0.95rem;
-    }
-
     @media (max-width: 1080px) {
-      .team-intro-inner,
-      .team-cta-card {
-        grid-template-columns: 1fr;
-      }
-
       .leadership-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -236,8 +215,7 @@
       }
 
       .founder-body,
-      .leadership-card,
-      .team-cta-card {
+      .leadership-card {
         padding: 1.5rem;
       }
     }
@@ -274,11 +252,7 @@
 
   <section class="team-intro">
     <div class="team-intro-inner reveal">
-      <div>
-        <span class="section-label">Founders</span>
-        <h2 class="section-title">Professional, focused leadership with clear technology and growth responsibilities.</h2>
-      </div>
-      <p>The team page should feel clean and credible. It presents the founders as the people responsible for execution, technical direction, and strategic growth rather than turning the company story into something overly personal.</p>
+      <h2 class="founders-heading">Founders</h2>
     </div>
   </section>
 
@@ -350,26 +324,42 @@
     </div>
   </section>
 
-  <section class="team-cta">
-    <div class="team-cta-card surface-card reveal">
-      <div>
-        <span class="section-label">Start A Conversation</span>
-        <h2>If the fit feels right, we can move into the <em>real brief</em>.</h2>
-        <p>The next step is a focused conversation around your organisation, the challenge in front of you, and whether the right route is intelligence, engineering, advisory, or emerging technology research.</p>
-      </div>
-      <div>
-        <a href="my-backend/contact.html" class="btn-primary">Get in Touch</a>
-      </div>
-    </div>
-  </section>
-
   <footer>
     <div class="footer-inner">
-      <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
-        <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
-      </a>
-      <div class="footer-tagline">Data. Software. Emerging Systems.</div>
-      <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
+          <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
+        </a>
+        <div class="footer-tagline">Data. Software. Emerging Systems.</div>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <a href="about.html">About Us</a>
+          <a href="careers.html">Careers</a>
+          <a href="my-backend/contact.html">Contact Us</a>
+        </div>
+        <div class="footer-column">
+          <h3>Services</h3>
+          <a href="services.html#ai-data-intelligence">AI &amp; Data Intelligence</a>
+          <a href="services.html#software-development">Software Development</a>
+          <a href="services.html#emerging-technology-research">Emerging Technology Research</a>
+          <a href="services.html#digital-transformation">Digital Transformation</a>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="insights.html">Insights / Blog</a>
+          <a href="industries.html">Industries</a>
+        </div>
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
+      </div>
     </div>
   </footer>
 

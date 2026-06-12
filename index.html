@@ -13,10 +13,10 @@
   <style>
     .hero {
       padding: 9.8rem 5% 4.7rem;
-      border-bottom: 1px solid rgba(24, 25, 27, 0.08);
+      border-bottom: 1px solid rgba(57, 55, 58, 0.14);
       background:
-        radial-gradient(circle at top right, rgba(166, 35, 41, 0.08), transparent 22%),
-        linear-gradient(112deg, #ffffff 0%, #ffffff 50%, #ebf0f5 50%, #e2e8ee 100%);
+        radial-gradient(circle at 78% 22%, rgba(153, 31, 38, 0.1), transparent 17rem),
+        linear-gradient(112deg, #f2f2f2 0%, #d9d6d7 57%, #45484e 57%, #292c31 100%);
     }
 
     .hero-inner {
@@ -69,13 +69,17 @@
 
     .hero-panel {
       padding: 2rem;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(236, 241, 246, 0.98) 100%);
+      border-color: rgba(255, 255, 255, 0.14);
+      background:
+        radial-gradient(circle at top right, rgba(153, 31, 38, 0.14), transparent 38%),
+        linear-gradient(145deg, rgba(60, 63, 69, 0.98) 0%, rgba(38, 40, 45, 0.98) 100%);
+      box-shadow: 0 28px 70px rgba(37, 15, 19, 0.28);
     }
 
     .hero-panel-label {
       display: block;
       margin-bottom: 1rem;
-      color: var(--ink-faint);
+      color: #ded3d5;
       font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.14em;
@@ -85,7 +89,7 @@
     .hero-panel h2 {
       max-width: 13ch;
       margin-bottom: 1rem;
-      color: var(--ink);
+      color: #fff;
       font-family: var(--serif);
       font-size: 2rem;
       font-weight: 400;
@@ -96,7 +100,7 @@
     .hero-panel p {
       margin-bottom: 1.4rem;
       font-size: 0.93rem;
-      color: var(--ink-muted);
+      color: #d8d1d2;
     }
 
     .hero-panel-grid {
@@ -106,13 +110,13 @@
 
     .hero-panel-item {
       padding-top: 0.85rem;
-      border-top: 1px solid rgba(24, 25, 27, 0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .hero-panel-item strong {
       display: block;
       margin-bottom: 0.3rem;
-      color: var(--ink);
+      color: #fff;
       font-size: 0.78rem;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -122,44 +126,43 @@
     .hero-panel-item span {
       display: block;
       font-size: 0.88rem;
-      color: var(--ink-mid);
+      color: #c9c1c3;
       line-height: 1.6;
     }
 
     .pillars-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.4rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+      border-top: 1px solid rgba(57, 55, 58, 0.18);
+      border-bottom: 1px solid rgba(57, 55, 58, 0.18);
     }
 
     .pillar-card {
-      padding: 1.55rem;
+      min-height: 260px;
+      padding: 1.55rem 1.4rem;
+      border-right: 1px solid rgba(57, 55, 58, 0.14);
     }
 
-    .pillar-card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.1rem;
+    .pillar-card:nth-child(odd) {
+      background: rgba(201, 205, 209, 0.42);
+    }
+
+    .pillar-card:nth-child(even) {
+      background: rgba(185, 170, 173, 0.3);
+    }
+
+    .pillar-card:last-child {
+      border-right: 0;
     }
 
     .pillar-number {
-      color: var(--red);
+      display: block;
+      margin-bottom: 2.3rem;
+      color: var(--ink-muted);
       font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .pillar-badge {
-      padding: 0.45rem 0.75rem;
-      border-radius: 999px;
-      background: rgba(214, 222, 231, 0.96);
-      color: var(--ink-muted);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
@@ -173,25 +176,32 @@
     }
 
     .pillar-card p {
-      margin-bottom: 0.95rem;
+      margin-bottom: 1.4rem;
       font-size: 0.88rem;
       color: var(--ink-muted);
     }
 
-    .pillar-list {
-      display: grid;
+    .pillar-link {
+      min-width: unset;
+      min-height: unset;
+      display: inline-flex;
+      align-items: center;
       gap: 0.55rem;
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-decoration: none;
     }
 
-    .pillar-list li {
-      list-style: none;
-      padding: 0.68rem 0.8rem;
-      border-radius: 16px;
-      background: rgba(216, 224, 232, 0.9);
-      color: var(--ink-mid);
-      font-size: 0.8rem;
-      font-weight: 600;
-      line-height: 1.55;
+    .pillar-link::after {
+      content: "↗";
+      color: var(--red);
+      font-size: 0.95rem;
+    }
+
+    .pillar-link:hover {
+      color: var(--red);
     }
 
     .closing-card {
@@ -200,14 +210,18 @@
       gap: 2rem;
       align-items: end;
       padding: 2.2rem;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(233, 239, 245, 0.98) 62%, rgba(166, 35, 41, 0.06) 100%);
+      border-color: rgba(255, 255, 255, 0.12);
+      background:
+        radial-gradient(circle at 82% 18%, rgba(153, 31, 38, 0.13), transparent 17rem),
+        linear-gradient(135deg, #45484e 0%, #303238 62%, #292b30 100%);
+      box-shadow: 0 24px 60px rgba(36, 30, 32, 0.22);
     }
 
     .closing-card h2 {
       max-width: 11ch;
       margin-top: 1rem;
       margin-bottom: 0.8rem;
-      color: var(--ink);
+      color: #fff;
       font-family: var(--serif);
       font-size: clamp(2rem, 4vw, 3.7rem);
       font-weight: 400;
@@ -216,13 +230,13 @@
     }
 
     .closing-card h2 em {
-      color: var(--red);
+      color: #ded3d5;
       font-style: italic;
     }
 
     .closing-card p {
       max-width: 56ch;
-      color: var(--ink-muted);
+      color: #e4dcdd;
       font-size: 0.95rem;
     }
 
@@ -231,11 +245,25 @@
       .closing-card {
         grid-template-columns: 1fr;
       }
+
+      .hero {
+        background:
+          radial-gradient(circle at 86% 18%, rgba(153, 31, 38, 0.08), transparent 17rem),
+          linear-gradient(145deg, #f2f2f2 0%, #d9d6d7 100%);
+      }
     }
 
     @media (max-width: 900px) {
       .pillars-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pillar-card:nth-child(2) {
+        border-right: 0;
+      }
+
+      .pillar-card:nth-child(-n+2) {
+        border-bottom: 1px solid rgba(57, 55, 58, 0.14);
       }
     }
 
@@ -245,9 +273,23 @@
       }
 
       .hero-panel,
-      .pillar-card,
       .closing-card {
         padding: 1.5rem;
+      }
+
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pillar-card,
+      .pillar-card:nth-child(2) {
+        min-height: unset;
+        border-right: 0;
+        border-bottom: 1px solid rgba(57, 55, 58, 0.14);
+      }
+
+      .pillar-card:last-child {
+        border-bottom: 0;
       }
     }
   </style>
@@ -310,63 +352,39 @@
     <div class="section-inner">
       <div class="section-header reveal">
         <div>
-          <span class="section-label">Core Service Pillars</span>
-          <h2 class="section-title">A short view of what we do.</h2>
+          <span class="section-label">Services</span>
+          <h2 class="section-title">What we deliver.</h2>
         </div>
-        <p class="section-copy">The deeper detail lives on the Services page. This homepage keeps it simple.</p>
+        <p class="section-copy">Four connected capabilities for organisations improving decisions, operations, products, and technology direction.</p>
       </div>
 
       <div class="pillars-grid">
-        <article class="pillar-card surface-card reveal">
-          <div class="pillar-card-top">
-            <span class="pillar-number">Pillar 01</span>
-            <span class="pillar-badge">AI &amp; Data</span>
-          </div>
+        <article class="pillar-card reveal">
+          <span class="pillar-number">01 / Intelligence</span>
           <h3>AI &amp; Data Intelligence</h3>
-          <p>Practical AI and data systems for productivity, insight, and decision support.</p>
-          <ul class="pillar-list">
-            <li>Dashboards, analytics, and reporting systems</li>
-            <li>Automation, modelling, and responsible AI advisory</li>
-          </ul>
+          <p>Analytics, reporting, automation, and decision-support systems built around real operational needs.</p>
+          <a class="pillar-link" href="services.html#ai-data-intelligence">Explore service</a>
         </article>
 
-        <article class="pillar-card surface-card reveal reveal-d1">
-          <div class="pillar-card-top">
-            <span class="pillar-number">Pillar 02</span>
-            <span class="pillar-badge">Engineering</span>
-          </div>
+        <article class="pillar-card reveal reveal-d1">
+          <span class="pillar-number">02 / Engineering</span>
           <h3>Software Engineering &amp; Digital Products</h3>
-          <p>Complete software delivery for organisations that need dependable digital systems.</p>
-          <ul class="pillar-list">
-            <li>Web platforms, portals, apps, and internal systems</li>
-            <li>Integrations, maintenance, and product improvement</li>
-          </ul>
+          <p>Web platforms, business systems, portals, integrations, and products designed for dependable use.</p>
+          <a class="pillar-link" href="services.html#software-development">Explore service</a>
         </article>
 
-        <article class="pillar-card surface-card reveal reveal-d2">
-          <div class="pillar-card-top">
-            <span class="pillar-number">Pillar 03</span>
-            <span class="pillar-badge">Research</span>
-          </div>
+        <article class="pillar-card reveal reveal-d2">
+          <span class="pillar-number">03 / Research</span>
           <h3>Emerging Technology &amp; Hardware Research</h3>
-          <p>Research and prototyping for clients exploring what comes next.</p>
-          <ul class="pillar-list">
-            <li>Drone research, IoT concepts, sensing, and field systems</li>
-            <li>Prototype development with compliance-aware framing</li>
-          </ul>
+          <p>Research and prototyping across drones, IoT, sensors, field systems, and hardware-software concepts.</p>
+          <a class="pillar-link" href="services.html#emerging-technology-research">Explore service</a>
         </article>
 
-        <article class="pillar-card surface-card reveal reveal-d3">
-          <div class="pillar-card-top">
-            <span class="pillar-number">Pillar 04</span>
-            <span class="pillar-badge">Advisory</span>
-          </div>
+        <article class="pillar-card reveal reveal-d3">
+          <span class="pillar-number">04 / Advisory</span>
           <h3>Technology Advisory &amp; Digital Transformation</h3>
-          <p>Strategy support for clients who need direction before or alongside delivery.</p>
-          <ul class="pillar-list">
-            <li>Transformation planning, audits, and readiness assessments</li>
-            <li>Architecture, product strategy, and innovation roadmaps</li>
-          </ul>
+          <p>Assessments, architecture, strategy, and transformation planning before or alongside delivery.</p>
+          <a class="pillar-link" href="services.html#digital-transformation">Explore service</a>
         </article>
       </div>
     </div>
@@ -389,11 +407,40 @@
 
   <footer>
     <div class="footer-inner">
-      <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
-        <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
-      </a>
-      <div class="footer-tagline">Data. Software. Emerging Systems.</div>
-      <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
+          <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
+        </a>
+        <div class="footer-tagline">Data. Software. Emerging Systems.</div>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <a href="about.html">About Us</a>
+          <a href="careers.html">Careers</a>
+          <a href="my-backend/contact.html">Contact Us</a>
+        </div>
+        <div class="footer-column">
+          <h3>Services</h3>
+          <a href="services.html#ai-data-intelligence">AI &amp; Data Intelligence</a>
+          <a href="services.html#software-development">Software Development</a>
+          <a href="services.html#emerging-technology-research">Emerging Technology Research</a>
+          <a href="services.html#digital-transformation">Digital Transformation</a>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="insights.html">Insights / Blog</a>
+          <a href="industries.html">Industries</a>
+        </div>
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
+      </div>
     </div>
   </footer>
 

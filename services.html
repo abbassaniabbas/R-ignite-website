@@ -13,7 +13,9 @@
   <style>
     .services-intro {
       padding: 3.8rem 5% 0;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(235, 240, 245, 0.78) 100%);
+      background:
+        radial-gradient(circle at 88% 12%, rgba(153, 31, 38, 0.07), transparent 20rem),
+        linear-gradient(155deg, #f1f1f1 0%, #d8d5d6 100%);
     }
 
     .services-intro-inner {
@@ -35,6 +37,10 @@
 
     .services-flow {
       padding: 0 5% 4.8rem;
+      background:
+        linear-gradient(90deg, rgba(70, 67, 70, 0.06) 1px, transparent 1px),
+        linear-gradient(180deg, #d8d5d6 0%, #f0eff0 48%, #c9c4c6 100%);
+      background-size: 72px 72px, auto;
     }
 
     .services-flow-inner {
@@ -48,7 +54,7 @@
       gap: 3rem;
       align-items: start;
       padding: 3.1rem 0;
-      border-bottom: 1px solid rgba(24, 25, 27, 0.08);
+      border-bottom: 1px solid rgba(95, 45, 51, 0.14);
     }
 
     .service-left {
@@ -78,8 +84,8 @@
       display: inline-block;
       padding: 0.85rem 0.95rem;
       border-radius: 16px;
-      border: 1px solid rgba(24, 25, 27, 0.08);
-      background: rgba(214, 222, 231, 0.92);
+      border: 1px solid rgba(70, 67, 70, 0.14);
+      background: rgba(185, 170, 173, 0.48);
       color: var(--ink-mid);
       font-size: 0.84rem;
       font-weight: 700;
@@ -113,15 +119,15 @@
     .service-card {
       padding: 1.35rem 1.35rem 1.4rem;
       border-radius: 22px;
-      background: linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(235, 240, 245, 0.98) 100%);
-      border: 1px solid rgba(24, 25, 27, 0.08);
+      background: linear-gradient(145deg, rgba(248, 248, 248, 0.98) 0%, rgba(214, 210, 212, 0.98) 100%);
+      border: 1px solid rgba(95, 45, 51, 0.13);
       box-shadow: var(--shadow-soft);
     }
 
     .service-card strong {
       display: block;
       margin-bottom: 0.65rem;
-      color: var(--red);
+      color: var(--ink-soft);
       font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.12em;
@@ -143,8 +149,8 @@
     .service-capability {
       padding: 0.72rem 0.95rem;
       border-radius: 999px;
-      border: 1px solid rgba(24, 25, 27, 0.08);
-      background: rgba(216, 224, 232, 0.9);
+      border: 1px solid rgba(70, 67, 70, 0.13);
+      background: rgba(201, 205, 209, 0.7);
       color: var(--ink-mid);
       font-size: 0.8rem;
       font-weight: 700;
@@ -153,8 +159,8 @@
     .delivery-note {
       margin-top: 1.5rem;
       padding: 1rem 1.05rem;
-      border-left: 2px solid rgba(166, 35, 41, 0.28);
-      background: rgba(216, 224, 232, 0.82);
+      border-left: 2px solid var(--warm-grey-deep);
+      background: rgba(185, 170, 173, 0.38);
     }
 
     .delivery-note strong {
@@ -185,7 +191,7 @@
     .example-card strong {
       display: block;
       margin-bottom: 0.75rem;
-      color: var(--red);
+      color: var(--warm-grey-deep);
       font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.12em;
@@ -209,6 +215,7 @@
 
     .services-cta {
       padding: 0 5% 4.8rem;
+      background: linear-gradient(180deg, #c9c4c6 0%, #e6e3e4 100%);
     }
 
     .services-cta-card {
@@ -219,13 +226,17 @@
       gap: 2rem;
       align-items: end;
       padding: 2rem;
+      border-color: rgba(255, 255, 255, 0.12);
+      background:
+        radial-gradient(circle at 84% 20%, rgba(153, 31, 38, 0.13), transparent 17rem),
+        linear-gradient(135deg, #45484e 0%, #303238 70%, #292b30 100%);
     }
 
     .services-cta-card h2 {
       max-width: 11ch;
       margin-top: 1rem;
       margin-bottom: 0.8rem;
-      color: var(--ink);
+      color: #fff;
       font-family: var(--serif);
       font-size: clamp(2rem, 4vw, 3.5rem);
       font-weight: 400;
@@ -234,13 +245,13 @@
     }
 
     .services-cta-card h2 em {
-      color: var(--red);
+      color: #ded3d5;
       font-style: italic;
     }
 
     .services-cta-card p {
       max-width: 56ch;
-      color: var(--ink-muted);
+      color: #ddd5d6;
       font-size: 0.95rem;
     }
 
@@ -335,7 +346,7 @@
 
   <section class="services-flow">
     <div class="services-flow-inner">
-      <article class="service-full reveal">
+      <article class="service-full reveal" id="ai-data-intelligence">
         <div class="service-left">
           <span class="service-stage">Pillar 01</span>
           <div class="service-number">01</div>
@@ -364,7 +375,7 @@
         </div>
       </article>
 
-      <article class="service-full reveal">
+      <article class="service-full reveal" id="software-development">
         <div class="service-left">
           <span class="service-stage">Pillar 02</span>
           <div class="service-number">02</div>
@@ -393,7 +404,7 @@
         </div>
       </article>
 
-      <article class="service-full reveal">
+      <article class="service-full reveal" id="emerging-technology-research">
         <div class="service-left">
           <span class="service-stage">Pillar 03</span>
           <div class="service-number">03</div>
@@ -426,7 +437,7 @@
         </div>
       </article>
 
-      <article class="service-full reveal">
+      <article class="service-full reveal" id="digital-transformation">
         <div class="service-left">
           <span class="service-stage">Pillar 04</span>
           <div class="service-number">04</div>
@@ -472,11 +483,40 @@
 
   <footer>
     <div class="footer-inner">
-      <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
-        <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
-      </a>
-      <div class="footer-tagline">Data. Software. Emerging Systems.</div>
-      <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
+          <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
+        </a>
+        <div class="footer-tagline">Data. Software. Emerging Systems.</div>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <a href="about.html">About Us</a>
+          <a href="careers.html">Careers</a>
+          <a href="my-backend/contact.html">Contact Us</a>
+        </div>
+        <div class="footer-column">
+          <h3>Services</h3>
+          <a href="services.html#ai-data-intelligence">AI &amp; Data Intelligence</a>
+          <a href="services.html#software-development">Software Development</a>
+          <a href="services.html#emerging-technology-research">Emerging Technology Research</a>
+          <a href="services.html#digital-transformation">Digital Transformation</a>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="insights.html">Insights / Blog</a>
+          <a href="industries.html">Industries</a>
+        </div>
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
+      </div>
     </div>
   </footer>
 

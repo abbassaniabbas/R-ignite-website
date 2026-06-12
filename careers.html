@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers | R-Ignite Solutions Limited</title>
+  <meta name="description" content="Explore careers and future opportunities at R-Ignite Solutions Limited." />
+  <meta name="theme-color" content="#f2f4f7" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    .simple-main { padding: 4.5rem 5% 5rem; }
+    .simple-inner { max-width: 1080px; margin: 0 auto; display: grid; gap: 1.4rem; }
+    .simple-card { padding: 2rem; }
+    .simple-card h2 {
+      margin-bottom: 0.8rem;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.06;
+    }
+    .simple-card p { max-width: 60ch; font-size: 0.95rem; color: var(--ink-muted); }
+    @media (max-width: 768px) {
+      .simple-main { padding: 4rem 5% 4.5rem; }
+      .simple-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="closeNav" aria-label="Close menu">×</button>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="team.html">Team</a>
+    <div class="mobile-nav-bottom"><a href="my-backend/contact.html">Get in Touch</a></div>
+  </div>
+  <nav id="mainNav">
+    <a class="logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
+      <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="team.html">Team</a></li>
+    </ul>
+    <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </nav>
+  <section class="page-hero">
+    <span class="eyebrow">Careers</span>
+    <h1 class="page-title">Future opportunities at <span class="accent">R-Ignite.</span></h1>
+  </section>
+  <section class="simple-main">
+    <div class="simple-inner">
+      <article class="simple-card surface-card reveal">
+        <h2>We are building carefully.</h2>
+        <p>Open roles and collaboration opportunities will be posted here as the team grows. If you are interested in future opportunities with R-Ignite Solutions Limited, the best next step is to reach out through the contact page.</p>
+      </article>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home"><img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo"></a>
+        <div class="footer-tagline">Data. Software. Emerging Systems.</div>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <a href="about.html">About Us</a>
+          <a href="careers.html">Careers</a>
+          <a href="my-backend/contact.html">Contact Us</a>
+        </div>
+        <div class="footer-column">
+          <h3>Services</h3>
+          <a href="services.html#ai-data-intelligence">AI &amp; Data Intelligence</a>
+          <a href="services.html#software-development">Software Development</a>
+          <a href="services.html#emerging-technology-research">Emerging Technology Research</a>
+          <a href="services.html#digital-transformation">Digital Transformation</a>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="insights.html">Insights / Blog</a>
+          <a href="industries.html">Industries</a>
+        </div>
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
+      </div>
+    </div>
+  </footer>
+  <script src="chatbot-widget.js" defer></script>
+  <script>
+    const nav = document.getElementById('mainNav');
+    const mobileNav = document.getElementById('mobileNav');
+    const hamburger = document.getElementById('hamburger');
+    const closeNav = document.getElementById('closeNav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 24));
+    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+    closeNav.addEventListener('click', () => mobileNav.classList.remove('open'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>

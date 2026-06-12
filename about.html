@@ -14,7 +14,9 @@
     .about-main {
       padding: 5.5rem 5% 6rem;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.68) 0%, rgba(236, 241, 246, 0.82) 100%);
+        radial-gradient(circle at 12% 16%, rgba(153, 31, 38, 0.07), transparent 22rem),
+        radial-gradient(circle at 88% 76%, rgba(70, 67, 70, 0.13), transparent 24rem),
+        linear-gradient(155deg, #f1f1f1 0%, #d8d4d6 100%);
     }
 
     .about-inner {
@@ -27,8 +29,7 @@
     .overview-grid,
     .positioning-grid,
     .industries-grid,
-    .trust-grid,
-    .cta-card {
+    .trust-grid {
       display: grid;
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
       gap: 1.4rem;
@@ -72,7 +73,7 @@
     .approach-card span {
       display: block;
       margin-bottom: 0.85rem;
-      color: var(--red);
+      color: var(--warm-grey-deep);
       font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.12em;
@@ -97,6 +98,58 @@
       color: var(--ink-muted);
     }
 
+    .overview-grid .section-block:first-child {
+      border-color: rgba(255, 255, 255, 0.1);
+      background:
+        radial-gradient(circle at top right, rgba(153, 31, 38, 0.13), transparent 40%),
+        linear-gradient(145deg, #45484e 0%, #2d3035 100%);
+    }
+
+    .overview-grid .section-block:first-child h2 {
+      color: #fff;
+    }
+
+    .overview-grid .section-block:first-child .section-label {
+      color: #d6cfd1;
+    }
+
+    .overview-grid .section-block:first-child .section-label::before {
+      background: #d6cfd1;
+    }
+
+    .vision-card:first-child {
+      border-color: rgba(93, 52, 57, 0.14);
+      background:
+        radial-gradient(circle at top right, rgba(153, 31, 38, 0.08), transparent 42%),
+        linear-gradient(145deg, #dedadc 0%, #b9aaad 100%);
+    }
+
+    .vision-card:nth-child(2) {
+      border-color: rgba(255, 255, 255, 0.1);
+      background: linear-gradient(145deg, #4b4e54 0%, #303238 100%);
+    }
+
+    .vision-card:first-child strong {
+      color: var(--ink-soft);
+    }
+
+    .vision-card:first-child h3 {
+      color: var(--ink);
+    }
+
+    .vision-card:first-child p {
+      color: var(--ink-mid);
+    }
+
+    .vision-card:nth-child(2) strong {
+      color: #d5ced0;
+    }
+
+    .vision-card:nth-child(2) h3,
+    .vision-card:nth-child(2) p {
+      color: #fff;
+    }
+
     .industries-copy,
     .trust-copy {
       padding: 2rem;
@@ -114,45 +167,11 @@
       gap: 1.4rem;
     }
 
-    .cta-card {
-      padding: 2.5rem;
-    }
-
-    .cta-card h2 {
-      max-width: 10.8ch;
-      margin-top: 1rem;
-      margin-bottom: 0.8rem;
-      color: var(--ink);
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-
-    .cta-card h2 em {
-      color: var(--red);
-      font-style: italic;
-    }
-
-    .cta-card p {
-      max-width: 56ch;
-      color: var(--ink-muted);
-      font-size: 0.95rem;
-    }
-
-    .cta-actions {
-      display: flex;
-      align-items: end;
-      justify-content: flex-end;
-    }
-
     @media (max-width: 1080px) {
       .overview-grid,
       .positioning-grid,
       .industries-grid,
-      .trust-grid,
-      .cta-card {
+      .trust-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -175,8 +194,7 @@
       .trust-copy,
       .vision-card,
       .reason-card,
-      .approach-card,
-      .cta-card {
+      .approach-card {
         padding: 1.5rem;
       }
     }
@@ -275,26 +293,45 @@
         </article>
       </div>
 
-      <div class="cta-card surface-card reveal">
-        <div>
-          <span class="section-label">Next Step</span>
-          <h2>If the direction is clear, we can shape the <em>right starting point</em>.</h2>
-          <p>Whether the need is AI and data intelligence, software engineering, advisory, or emerging technology research, the best next move is a focused conversation around the problem and the outcome required.</p>
-        </div>
-        <div class="cta-actions">
-          <a href="my-backend/contact.html" class="btn-primary">Get in Touch</a>
-        </div>
-      </div>
     </div>
   </section>
 
   <footer>
     <div class="footer-inner">
-      <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
-        <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
-      </a>
-      <div class="footer-tagline">Data. Software. Emerging Systems.</div>
-      <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
+          <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
+        </a>
+        <div class="footer-tagline">Data. Software. Emerging Systems.</div>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <a href="about.html">About Us</a>
+          <a href="careers.html">Careers</a>
+          <a href="my-backend/contact.html">Contact Us</a>
+        </div>
+        <div class="footer-column">
+          <h3>Services</h3>
+          <a href="services.html#ai-data-intelligence">AI &amp; Data Intelligence</a>
+          <a href="services.html#software-development">Software Development</a>
+          <a href="services.html#emerging-technology-research">Emerging Technology Research</a>
+          <a href="services.html#digital-transformation">Digital Transformation</a>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="insights.html">Insights / Blog</a>
+          <a href="industries.html">Industries</a>
+        </div>
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
+      </div>
     </div>
   </footer>
 
