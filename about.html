@@ -28,12 +28,15 @@
 
     .overview-grid,
     .positioning-grid,
-    .industries-grid,
-    .trust-grid {
+    .industries-grid {
       display: grid;
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
       gap: 1.4rem;
       align-items: start;
+    }
+
+    .industries-grid {
+      grid-template-columns: 1fr;
     }
 
     .section-block {
@@ -117,34 +120,21 @@
       background: #d6cfd1;
     }
 
-    .vision-card:first-child {
-      border-color: rgba(93, 52, 57, 0.14);
-      background:
-        radial-gradient(circle at top right, rgba(151, 20, 58, 0.15), transparent 42%),
-        linear-gradient(145deg, #e3c9d8 0%, #ad7597 100%);
-    }
-
+    .vision-card:first-child,
     .vision-card:nth-child(2) {
       border-color: rgba(255, 255, 255, 0.1);
-      background: linear-gradient(145deg, #394765 0%, #1f2b43 62%, #4d304b 100%);
+      background:
+        radial-gradient(circle at top right, rgba(180, 41, 85, 0.24), transparent 42%),
+        linear-gradient(145deg, #394765 0%, #1f2b43 62%, #4d304b 100%);
     }
 
-    .vision-card:first-child strong {
-      color: var(--ink-soft);
-    }
-
-    .vision-card:first-child h3 {
-      color: var(--ink);
-    }
-
-    .vision-card:first-child p {
-      color: var(--ink-mid);
-    }
-
+    .vision-card:first-child strong,
     .vision-card:nth-child(2) strong {
       color: #d5ced0;
     }
 
+    .vision-card:first-child h3,
+    .vision-card:first-child p,
     .vision-card:nth-child(2) h3,
     .vision-card:nth-child(2) p {
       color: #fff;
@@ -170,8 +160,7 @@
     @media (max-width: 1080px) {
       .overview-grid,
       .positioning-grid,
-      .industries-grid,
-      .trust-grid {
+      .industries-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -221,7 +210,7 @@
       <li><a href="team.html">Team</a></li>
     </ul>
     <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
-    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
   </nav>
 
   <section class="page-hero">
@@ -234,11 +223,11 @@
       <div class="overview-grid">
         <article class="section-block surface-card reveal">
           <span class="section-label">Who We Are</span>
-          <h2>R-Ignite Solutions Limited is positioned around intelligence, engineering, and innovation.</h2>
+          <h2>We build intelligent technology for modern organisations.</h2>
         </article>
         <article class="section-block surface-card reveal reveal-d1">
-          <p>R-Ignite Solutions Limited is a Nigerian technology company delivering AI, data, software, and emerging technology solutions for forward-looking organisations. We work with businesses, institutions, and public-sector clients that want stronger decision-making, better operations, and digital systems that can scale with real use.</p>
-          <p>Our direction is broader than a single service line but still focused: practical intelligence systems, software products, research-led emerging technology work, and advisory support for organisations navigating digital change.</p>
+          <p>R-Ignite Solutions Limited is a Nigerian technology company delivering AI, data, software, and emerging systems for businesses, institutions, and public-sector clients.</p>
+          <p>We improve decision-making, automate operations, and build practical digital products that can scale with real use.</p>
         </article>
       </div>
 
@@ -246,20 +235,18 @@
         <article class="vision-card surface-card reveal">
           <strong>Vision</strong>
           <h3>To help African organisations operate with stronger intelligence, better systems, and more confident technology decisions.</h3>
-          <p>We want R-Ignite to be known for thoughtful execution, practical innovation, and systems that make organisations more capable over time.</p>
         </article>
 
         <article class="vision-card surface-card reveal reveal-d1">
           <strong>Mission</strong>
           <h3>To deliver AI, data, software, and emerging technology solutions that solve real operational problems.</h3>
-          <p>We combine analysis, engineering, research, and advisory work to help clients move from manual or fragmented processes to more intelligent, reliable ways of operating.</p>
         </article>
       </div>
 
       <div class="industries-grid">
         <article class="industries-copy surface-card reveal">
           <span class="section-label">Industries Served</span>
-          <p>Our strongest fit is with organisations facing operational complexity, reporting pressure, fragmented systems, or a need to modernise core workflows without losing control. That includes enterprise, institutional, and public-sector environments where technology decisions have strategic weight.</p>
+          <p>We work best with organisations facing operational complexity, reporting pressure, fragmented systems, or the need to modernise core workflows. Our Nigerian market understanding, practical delivery approach, and ability to move from strategy into build work make us a strong fit across these sectors.</p>
           <div class="tag-list">
             <span class="tag">Financial Services</span>
             <span class="tag">Government &amp; Public Sector</span>
@@ -271,27 +258,13 @@
             <span class="tag">SMEs &amp; Enterprise Operations</span>
           </div>
         </article>
-
-        <article class="industries-copy surface-card reveal reveal-d1">
-          <span class="section-label">Why It Fits</span>
-          <p>Clients in these sectors often need stronger intelligence, dependable systems, and advice that reflects the Nigerian operating context.</p>
-          <p>That is where the company should feel differentiated: local understanding, practical delivery, and the ability to move from strategy into build work without losing clarity.</p>
-        </article>
       </div>
 
-      <div class="trust-grid">
-        <article class="trust-copy surface-card reveal">
-          <span class="section-label">Compliance &amp; Trust</span>
-          <p>Technology credibility depends on trust. We reflect that in how we talk about data protection, cybersecurity awareness, privacy, responsible AI, and the governance expectations that come with institutional and enterprise delivery.</p>
-          <p>Where emerging technology work involves drones, sensing, or field systems, we describe it as research, prototyping, and use-case exploration subject to applicable aviation, data protection, and safety requirements.</p>
-        </article>
-
-        <article class="trust-copy surface-card reveal reveal-d1">
-          <span class="section-label">Why Choose Us</span>
-          <p>R-Ignite combines practical AI and data expertise, full software delivery capability, local market understanding, and a disciplined approach to innovation research.</p>
-          <p><a href="team.html" class="btn-dark">Meet the Founders</a></p>
-        </article>
-      </div>
+      <article class="trust-copy surface-card reveal">
+        <span class="section-label">Compliance &amp; Trust</span>
+        <p>Technology credibility depends on trust. We reflect that in how we talk about data protection, cybersecurity awareness, privacy, responsible AI, and the governance expectations that come with institutional and enterprise delivery.</p>
+        <p>Where emerging technology work involves drones, sensing, or field systems, we describe it as research, prototyping, and use-case exploration subject to applicable aviation, data protection, and safety requirements.</p>
+      </article>
 
     </div>
   </section>
@@ -343,8 +316,14 @@
     const closeNav = document.getElementById('closeNav');
 
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 24));
-    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
-    closeNav.addEventListener('click', () => mobileNav.classList.remove('open'));
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+    closeNav.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {

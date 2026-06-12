@@ -62,7 +62,7 @@
       <li><a href="services.html">Services</a></li><li><a href="team.html">Team</a></li>
     </ul>
     <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
   </nav>
 
   <section class="page-hero">
@@ -184,8 +184,17 @@
   <script>
     const nav=document.getElementById('mainNav');
     window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
-    document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
-    document.getElementById('closeNav').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
+    const hamburger=document.getElementById('hamburger');
+    const mobileNav=document.getElementById('mobileNav');
+    const closeNav=document.getElementById('closeNav');
+    hamburger.addEventListener('click',()=>{
+      const isOpen=mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded',String(isOpen));
+    });
+    closeNav.addEventListener('click',()=>{
+      mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded','false');
+    });
     const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
     document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
   </script>

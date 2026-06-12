@@ -315,7 +315,7 @@
       <li><a href="team.html">Team</a></li>
     </ul>
     <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
-    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
   </nav>
 
   <section class="hero">
@@ -452,8 +452,14 @@
     const closeNav = document.getElementById('closeNav');
 
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 24));
-    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
-    closeNav.addEventListener('click', () => mobileNav.classList.remove('open'));
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+    closeNav.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
