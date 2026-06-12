@@ -6,28 +6,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
 
 :root {
-  --ink: #292d33;
-  --ink-soft: #373a40;
-  --ink-mid: #55545a;
-  --ink-muted: #706c70;
-  --ink-faint: #918b8d;
-  --red: #991f26;
-  --red-bright: #b72c34;
-  --red-deep: #68151a;
-  --red-dark: #471014;
-  --red-soft: rgba(153, 31, 38, 0.11);
-  --warm-grey: #756d70;
-  --warm-grey-deep: #5e585b;
-  --rose-grey: #b9aaad;
-  --rose-soft: #ded3d5;
-  --silver: #c9cdd1;
-  --silver-light: #edf0f2;
-  --mist: #c9c4c5;
-  --mist-deep: #ada6a8;
-  --canvas: #e5e3e4;
-  --canvas-deep: #cbc7c9;
-  --surface: #d8d5d7;
-  --surface-strong: #f0eff0;
+  --ink: #192234;
+  --ink-soft: #273149;
+  --ink-mid: #4f5565;
+  --ink-muted: #6b6d79;
+  --ink-faint: #8f909b;
+  --red: #8d1232;
+  --red-bright: #a52248;
+  --red-deep: #650d27;
+  --red-dark: #44091b;
+  --red-soft: rgba(141, 18, 50, 0.11);
+  --navy: #192338;
+  --navy-soft: #2a354e;
+  --plum: #68445e;
+  --plum-deep: #452d43;
+  --mauve: #a36f8d;
+  --mauve-soft: #dcc1d0;
+  --blue-grey: #7f8ba4;
+  --blue-grey-soft: #d1d8e3;
+  --silver: #cbd0d8;
+  --silver-light: #f0f2f5;
+  --canvas: #e4e5ea;
+  --canvas-deep: #c8cbd3;
+  --surface: #d8d9e0;
+  --surface-strong: #f1f1f4;
   --panel: #ffffff;
   --rule: #b9b1b3;
   --rule-strong: #9d9497;
@@ -55,9 +57,9 @@ body {
   font-family: var(--sans);
   color: var(--ink);
   background:
-    radial-gradient(circle at 92% 8%, rgba(153, 31, 38, 0.08), transparent 22rem),
-    radial-gradient(circle at 8% 88%, rgba(90, 88, 92, 0.16), transparent 24rem),
-    linear-gradient(145deg, #f3f3f3 0%, #dfdcdd 52%, #c8c4c6 100%);
+    radial-gradient(circle at 92% 8%, rgba(141, 18, 50, 0.14), transparent 22rem),
+    radial-gradient(circle at 8% 88%, rgba(104, 68, 94, 0.24), transparent 24rem),
+    linear-gradient(145deg, #f2f3f6 0%, #d9dde5 50%, #b7bfcd 100%);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -106,7 +108,7 @@ nav.scrolled {
 
 .logo img {
   width: auto;
-  height: 30px;
+  height: 44px;
 }
 
 .nav-links {
@@ -133,8 +135,8 @@ nav.scrolled {
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--ink);
-  border-bottom-color: var(--warm-grey-deep);
+  color: var(--red);
+  border-bottom-color: var(--red);
 }
 
 .nav-cta {
@@ -191,8 +193,8 @@ nav.scrolled {
   gap: 0.4rem;
   padding: 2rem 8%;
   background:
-    radial-gradient(circle at top right, rgba(153, 31, 38, 0.1), transparent 32%),
-    linear-gradient(180deg, #ffffff 0%, #e7e4e5 100%);
+    radial-gradient(circle at top right, rgba(141, 18, 50, 0.13), transparent 32%),
+    linear-gradient(180deg, #ffffff 0%, #e0e3e9 100%);
 }
 
 .mobile-nav.open {
@@ -250,8 +252,8 @@ nav.scrolled {
   padding: 9.2rem 5% 3.7rem;
   border-bottom: 1px solid rgba(57, 55, 58, 0.14);
   background:
-    radial-gradient(circle at 72% 22%, rgba(153, 31, 38, 0.1), transparent 15rem),
-    linear-gradient(112deg, #f2f2f2 0%, #d9d6d7 64%, #45484e 64%, #2c2f34 100%);
+    radial-gradient(circle at 72% 22%, rgba(141, 18, 50, 0.16), transparent 15rem),
+    linear-gradient(112deg, #f1f2f5 0%, #d5d9e1 64%, #29344d 64%, #192338 100%);
 }
 
 .page-hero::after {
@@ -298,7 +300,7 @@ nav.scrolled {
   border: 0;
   border-radius: 0;
   background: none;
-  color: var(--ink-mid);
+  color: var(--plum);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -318,15 +320,15 @@ nav.scrolled {
 .section-shell {
   padding: 4.6rem 5%;
   background:
-    radial-gradient(circle at 90% 12%, rgba(153, 31, 38, 0.07), transparent 20rem),
-    radial-gradient(circle at 8% 86%, rgba(81, 79, 83, 0.1), transparent 18rem),
-    linear-gradient(155deg, #f1f1f1 0%, #d8d5d6 100%);
+    radial-gradient(circle at 90% 12%, rgba(141, 18, 50, 0.13), transparent 20rem),
+    radial-gradient(circle at 8% 86%, rgba(104, 68, 94, 0.16), transparent 18rem),
+    linear-gradient(155deg, #edf0f5 0%, #c7cfdb 100%);
 }
 
 .section-shell.alt {
   background:
-    radial-gradient(circle at top left, rgba(153, 31, 38, 0.13), transparent 24%),
-    linear-gradient(145deg, #45484e 0%, #303238 54%, #25272c 100%);
+    radial-gradient(circle at top left, rgba(165, 34, 72, 0.2), transparent 24%),
+    linear-gradient(145deg, #313c56 0%, #202b41 54%, #38283f 100%);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -338,7 +340,7 @@ nav.scrolled {
 }
 
 .section-shell.alt .section-label {
-  color: #ded3d5;
+  color: #e2cbd7;
 }
 
 .section-shell.alt .section-label::before {
@@ -379,8 +381,8 @@ nav.scrolled {
 .surface-card {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(145deg, rgba(248, 248, 248, 0.98) 0%, rgba(215, 211, 213, 0.98) 100%);
-  border: 1px solid rgba(70, 67, 70, 0.13);
+  background: linear-gradient(145deg, rgba(247, 248, 251, 0.98) 0%, rgba(193, 199, 212, 0.98) 100%);
+  border: 1px solid rgba(57, 48, 66, 0.14);
   border-radius: 24px;
   box-shadow: var(--shadow-soft);
 }
@@ -404,8 +406,8 @@ nav.scrolled {
 .tag {
   padding: 0.72rem 0.95rem;
   border-radius: 999px;
-  border: 1px solid rgba(93, 52, 57, 0.13);
-  background: rgba(201, 196, 198, 0.76);
+  border: 1px solid rgba(87, 64, 87, 0.16);
+  background: rgba(127, 139, 164, 0.62);
   color: var(--ink-mid);
   font-size: 0.8rem;
   font-weight: 700;
@@ -443,7 +445,7 @@ nav.scrolled {
 
 .btn-outline {
   background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(70, 67, 70, 0.22);
+  border: 1px solid rgba(87, 64, 87, 0.24);
   color: var(--ink);
 }
 
@@ -476,7 +478,7 @@ footer::before {
   position: absolute;
   inset: 0 0 auto;
   height: 4px;
-  background: linear-gradient(90deg, var(--ink) 0 50%, var(--warm-grey) 50% 82%, var(--rose-grey) 82% 94%, var(--red) 94% 100%);
+  background: linear-gradient(90deg, var(--navy) 0 46%, var(--plum) 46% 73%, var(--mauve) 73% 90%, var(--red) 90% 100%);
 }
 
 .footer-inner {
@@ -585,7 +587,7 @@ footer::before {
   grid-template-rows: auto minmax(0, 1fr) auto auto auto;
   border: 1px solid rgba(24, 25, 27, 0.08);
   border-radius: 24px;
-  background: rgba(229, 226, 227, 0.98);
+  background: rgba(221, 224, 232, 0.98);
   box-shadow: 0 24px 64px rgba(48, 25, 29, 0.22);
   backdrop-filter: blur(18px);
   transform: translateY(18px) scale(0.97);
@@ -609,7 +611,7 @@ footer::before {
   border-bottom: 1px solid rgba(24, 25, 27, 0.08);
   background:
     linear-gradient(90deg, var(--red) 0 5px, transparent 5px),
-    linear-gradient(135deg, var(--ink-soft) 0%, var(--ink) 100%);
+    linear-gradient(135deg, var(--navy-soft) 0%, var(--plum-deep) 100%);
 }
 
 .ri-chatbot-head h2 {
@@ -666,7 +668,7 @@ footer::before {
 
 .ri-chatbot-message-user .ri-chatbot-bubble {
   border-top-right-radius: 7px;
-  background: linear-gradient(135deg, var(--ink-soft), var(--ink));
+  background: linear-gradient(135deg, var(--navy-soft), var(--plum-deep));
   color: #fff;
 }
 
@@ -718,7 +720,7 @@ footer::before {
   padding: 0.82rem 1rem;
   border-radius: 16px;
   border: 1px solid rgba(24, 25, 27, 0.08);
-  background: rgba(201, 196, 198, 0.86);
+  background: rgba(157, 167, 183, 0.72);
   color: var(--ink);
   text-decoration: none;
   font-size: 0.82rem;
@@ -729,7 +731,7 @@ footer::before {
 .ri-chatbot-form {
   padding: 0 1rem 1rem;
   border-top: 1px solid rgba(24, 25, 27, 0.08);
-  background: rgba(229, 226, 227, 0.98);
+  background: rgba(221, 224, 232, 0.98);
 }
 
 .ri-chatbot-label {
@@ -773,7 +775,7 @@ footer::before {
   padding: 0 1rem;
   border: none;
   border-radius: 15px;
-  background: linear-gradient(135deg, var(--ink-soft), var(--ink));
+  background: linear-gradient(135deg, var(--navy-soft), var(--plum-deep));
   color: #fff;
   font-family: var(--sans);
   font-size: 0.82rem;
@@ -792,7 +794,7 @@ footer::before {
   border: 1px solid rgba(24, 25, 27, 0.08);
   border-radius: 999px;
   border-color: rgba(70, 67, 70, 0.18);
-  background: linear-gradient(135deg, var(--ink-soft), var(--ink));
+  background: linear-gradient(135deg, var(--navy-soft), var(--plum-deep));
   color: #fff;
   font-family: var(--sans);
   font-size: 0.82rem;
@@ -875,7 +877,7 @@ button,
 
 @media (max-width: 600px) {
   .logo img {
-    height: 36px;
+    height: 40px;
   }
 
   .footer-logo img {
