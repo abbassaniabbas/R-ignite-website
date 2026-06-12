@@ -11,19 +11,19 @@
   --ink-mid: #4f5565;
   --ink-muted: #6b6d79;
   --ink-faint: #8f909b;
-  --red: #8d1232;
-  --red-bright: #a52248;
-  --red-deep: #650d27;
+  --red: #97143a;
+  --red-bright: #b42955;
+  --red-deep: #6d0d2b;
   --red-dark: #44091b;
   --red-soft: rgba(141, 18, 50, 0.11);
-  --navy: #192338;
-  --navy-soft: #2a354e;
-  --plum: #68445e;
-  --plum-deep: #452d43;
-  --mauve: #a36f8d;
-  --mauve-soft: #dcc1d0;
-  --blue-grey: #7f8ba4;
-  --blue-grey-soft: #d1d8e3;
+  --navy: #151f35;
+  --navy-soft: #303c59;
+  --plum: #724662;
+  --plum-deep: #4d304b;
+  --mauve: #ad7597;
+  --mauve-soft: #dfbfd0;
+  --blue-grey: #7483a2;
+  --blue-grey-soft: #cbd4e2;
   --silver: #cbd0d8;
   --silver-light: #f0f2f5;
   --canvas: #e4e5ea;
@@ -57,9 +57,9 @@ body {
   font-family: var(--sans);
   color: var(--ink);
   background:
-    radial-gradient(circle at 92% 8%, rgba(141, 18, 50, 0.14), transparent 22rem),
-    radial-gradient(circle at 8% 88%, rgba(104, 68, 94, 0.24), transparent 24rem),
-    linear-gradient(145deg, #f2f3f6 0%, #d9dde5 50%, #b7bfcd 100%);
+    radial-gradient(circle at 92% 8%, rgba(151, 20, 58, 0.17), transparent 22rem),
+    radial-gradient(circle at 8% 88%, rgba(114, 70, 98, 0.28), transparent 24rem),
+    linear-gradient(145deg, #f2f3f6 0%, #d4d9e3 50%, #aeb8c9 100%);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -252,8 +252,8 @@ nav.scrolled {
   padding: 9.2rem 5% 3.7rem;
   border-bottom: 1px solid rgba(57, 55, 58, 0.14);
   background:
-    radial-gradient(circle at 72% 22%, rgba(141, 18, 50, 0.16), transparent 15rem),
-    linear-gradient(112deg, #f1f2f5 0%, #d5d9e1 64%, #29344d 64%, #192338 100%);
+    radial-gradient(circle at 72% 22%, rgba(151, 20, 58, 0.2), transparent 15rem),
+    linear-gradient(112deg, #f1f2f5 0%, #ced4df 64%, #303c59 64%, #151f35 100%);
 }
 
 .page-hero::after {
@@ -320,15 +320,15 @@ nav.scrolled {
 .section-shell {
   padding: 4.6rem 5%;
   background:
-    radial-gradient(circle at 90% 12%, rgba(141, 18, 50, 0.13), transparent 20rem),
-    radial-gradient(circle at 8% 86%, rgba(104, 68, 94, 0.16), transparent 18rem),
-    linear-gradient(155deg, #edf0f5 0%, #c7cfdb 100%);
+    radial-gradient(circle at 90% 12%, rgba(151, 20, 58, 0.16), transparent 20rem),
+    radial-gradient(circle at 8% 86%, rgba(114, 70, 98, 0.2), transparent 18rem),
+    linear-gradient(155deg, #edf0f5 0%, #bec8d7 100%);
 }
 
 .section-shell.alt {
   background:
-    radial-gradient(circle at top left, rgba(165, 34, 72, 0.2), transparent 24%),
-    linear-gradient(145deg, #313c56 0%, #202b41 54%, #38283f 100%);
+    radial-gradient(circle at top left, rgba(180, 41, 85, 0.24), transparent 24%),
+    linear-gradient(145deg, #303c59 0%, #1d2940 54%, #432c45 100%);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -381,7 +381,7 @@ nav.scrolled {
 .surface-card {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(145deg, rgba(247, 248, 251, 0.98) 0%, rgba(193, 199, 212, 0.98) 100%);
+  background: linear-gradient(145deg, rgba(247, 248, 251, 0.98) 0%, rgba(184, 192, 208, 0.98) 100%);
   border: 1px solid rgba(57, 48, 66, 0.14);
   border-radius: 24px;
   box-shadow: var(--shadow-soft);
@@ -407,7 +407,7 @@ nav.scrolled {
   padding: 0.72rem 0.95rem;
   border-radius: 999px;
   border: 1px solid rgba(87, 64, 87, 0.16);
-  background: rgba(127, 139, 164, 0.62);
+  background: rgba(116, 131, 162, 0.7);
   color: var(--ink-mid);
   font-size: 0.8rem;
   font-weight: 700;
