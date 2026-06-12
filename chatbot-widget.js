@@ -13,39 +13,21 @@
   var quickReplyMap = {
     'index.html': [
       'What services do you offer?',
-      'Who do you work with?',
-      'Where are you based?',
+      'Which sectors do you serve?',
+      'Do you build software products?',
       'How do we get started?'
     ],
     'about.html': [
       'What does R-Ignite do?',
-      'Which sectors do you serve?',
       'What makes you different?',
+      'Which sectors do you serve?',
       'How do we get started?'
     ],
     'services.html': [
-      'Break down your services',
-      'Do you offer BI dashboards?',
-      'Do you implement ERP and CRM?',
-      'Do you offer managed retainers?'
-    ],
-    'goals.html': [
-      'What is your 6-year plan?',
-      'What happens in stage 1?',
-      'What happens in stage 2?',
-      'What happens in stage 3?'
-    ],
-    'strategy.html': [
-      'What is your strategy?',
-      'Who do you work with?',
-      'How do you grow?',
-      'How do we get started?'
-    ],
-    'milestones.html': [
-      'What milestones are you targeting?',
-      'What is your roadmap?',
-      'How do you work with clients?',
-      'How do we get started?'
+      'Break down your service pillars',
+      'Do you offer AI and data work?',
+      'Do you build portals or apps?',
+      'Do you work on drones or IoT?'
     ],
     'team.html': [
       'Who leads R-Ignite?',
@@ -55,19 +37,16 @@
     ],
     'contact.html': [
       'How fast do you respond?',
-      'Where are you located?',
       'What services do you offer?',
-      'Do you work with banks or government?'
+      'Do you work with government or banks?',
+      'What is your website?'
     ]
   };
 
   var greetingMap = {
-    'services.html': 'Ask me about dashboards, automation, ERP or CRM delivery, custom software, or managed retainers.',
-    'goals.html': 'I can explain the three-stage roadmap, revenue goals, and long-term direction.',
-    'strategy.html': 'Ask about positioning, growth strategy, or the enterprise sectors R-Ignite targets.',
-    'milestones.html': 'I can help summarize the roadmap, timing, and business milestones.',
-    'team.html': 'Ask about the founders, leadership, or the best way to reach the team.',
-    'contact.html': 'If you have a quick question before filling the form, I can help here first.'
+    'services.html': 'Ask about the four service pillars, sectors we serve, or the best place to start.',
+    'team.html': 'Ask about the founders, leadership focus, or how to reach the team.',
+    'contact.html': 'If you want a quick answer before filling the form, I can help here first.'
   };
 
   var widget = document.createElement('section');
@@ -76,9 +55,7 @@
   widget.innerHTML = [
     '<div class="ri-chatbot-panel" id="ri-chatbot-panel" role="dialog" aria-modal="false" aria-hidden="true">',
       '<div class="ri-chatbot-head">',
-        '<div>',
-          '<h2>R-Ignite AI</h2>',
-        '</div>',
+        '<div><h2>R-Ignite AI</h2></div>',
         '<button type="button" class="ri-chatbot-close" aria-label="Close assistant">×</button>',
       '</div>',
       '<div class="ri-chatbot-log" aria-live="polite"></div>',
@@ -89,7 +66,7 @@
       '<form class="ri-chatbot-form">',
         '<label class="ri-chatbot-label" for="riChatbotInput">Ask a question</label>',
         '<div class="ri-chatbot-input-row">',
-          '<input id="riChatbotInput" class="ri-chatbot-input" type="text" autocomplete="off" placeholder="Ask about services, pricing, location..." />',
+          '<input id="riChatbotInput" class="ri-chatbot-input" type="text" autocomplete="off" placeholder="Ask about AI, software, sectors, or next steps..." />',
           '<button type="submit" class="ri-chatbot-send">Send</button>',
         '</div>',
       '</form>',
@@ -109,213 +86,141 @@
   var quickReplies = widget.querySelector('.ri-chatbot-replies');
   var form = widget.querySelector('.ri-chatbot-form');
   var input = widget.querySelector('.ri-chatbot-input');
+  var hasOpened = false;
 
   var intents = [
     {
-      id: 'greeting',
-      phrases: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
-      keywords: ['hello', 'hi', 'hey'],
+      keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
       answer: function () {
         return {
-          html: 'Hello. I am R-Ignite&apos;s site guide, and I answer using the information on this website. ' + escapeHtml(getGreeting()),
+          html: 'Hello. I answer using the information on this website. ' + escapeHtml(getGreeting()),
           replies: getQuickReplies()
         };
       }
     },
     {
-      id: 'about',
-      phrases: ['what is r ignite', 'what is r-ignite', 'who are you', 'what do you do', 'about r ignite', 'about r-ignite'],
-      keywords: ['about', 'company', 'consultancy', 'consulting'],
+      keywords: ['what is r ignite', 'what is r-ignite', 'who are you', 'what do you do', 'about r ignite', 'about r-ignite'],
       answer: function () {
         return {
-          html: 'R-Ignite Group is a premium Data, AI and Digital Transformation company serving Nigerian mid-to-large organisations. The firm focuses on mission-critical enterprise solutions, operates from Abuja, and works across major sectors such as banks, government, telecoms, oil and gas, and large SMEs.',
+          html: 'R-Ignite Solutions Limited is a Nigerian technology company delivering AI, data, software, and emerging technology solutions for forward-looking organisations.',
           replies: ['What services do you offer?', 'Which sectors do you serve?', 'How do we get started?']
         };
       }
     },
     {
-      id: 'services',
-      phrases: ['what services do you offer', 'services', 'what do you offer', 'what can you help with'],
-      keywords: ['services', 'offer', 'solutions', 'help'],
+      keywords: ['services', 'service pillars', 'what services do you offer', 'what can you help with', 'offer'],
       answer: function () {
         return {
-          html: 'R-Ignite&apos;s core services are Business Intelligence and Analytics, AI-Powered Process Automation, ERP and CRM Implementation, Data Infrastructure and Engineering, Custom Enterprise Software, and Managed Services and Retainers.',
-          replies: ['Do you offer BI dashboards?', 'Do you implement ERP and CRM?', 'Do you offer managed retainers?']
+          html: 'The company&apos;s four core service pillars are AI &amp; Data Intelligence, Software Engineering &amp; Digital Products, Emerging Technology &amp; Hardware Research, and Technology Advisory &amp; Digital Transformation.',
+          replies: ['Do you offer AI and data work?', 'Do you build portals or apps?', 'Do you work on drones or IoT?']
         };
       }
     },
     {
-      id: 'bi',
-      phrases: ['power bi', 'tableau', 'bi dashboards', 'business intelligence', 'analytics dashboards'],
-      keywords: ['dashboard', 'analytics', 'tableau', 'power', 'kpi', 'reporting'],
+      keywords: ['ai', 'data', 'dashboard', 'reporting', 'analytics', 'predictive', 'business intelligence'],
       answer: function () {
         return {
-          html: 'Yes. R-Ignite offers Business Intelligence and Analytics work including Power BI, Tableau, data warehouses, executive KPIs, real-time reporting, and data governance.',
-          replies: ['Do you work with banks or government?', 'How do we get started?', 'What other services do you offer?']
+          html: 'Yes. R-Ignite&apos;s strongest pillar is AI &amp; Data Intelligence, including analytics, dashboards, reporting systems, workflow automation, predictive analytics, data modelling, reconciliation, and responsible AI advisory.',
+          replies: ['Do you build software products?', 'Which sectors do you serve?', 'How do we get started?']
         };
       }
     },
     {
-      id: 'automation',
-      phrases: ['ai automation', 'process automation', 'workflow ai', 'document processing', 'predictive analytics'],
-      keywords: ['automation', 'rpa', 'ocr', 'workflow', 'predictive', 'nlp'],
+      keywords: ['software', 'portal', 'app', 'application', 'saas', 'mobile', 'api', 'customer portal'],
       answer: function () {
         return {
-          html: 'Yes. R-Ignite provides AI-powered process automation, including RPA, workflow AI, OCR and document processing, predictive analytics, and NLP applications.',
-          replies: ['Do you build custom software too?', 'Do you offer managed retainers?', 'How do we get started?']
+          html: 'Yes. R-Ignite builds software and digital products such as web applications, SaaS platforms, internal systems, customer portals, mobile applications, and integrated database-backed tools.',
+          replies: ['Do you offer AI and data work?', 'Do you work with banks or government?', 'How do we get started?']
         };
       }
     },
     {
-      id: 'erp',
-      phrases: ['erp', 'crm', 'salesforce', 'dynamics 365', 'erp crm'],
-      keywords: ['erp', 'crm', 'salesforce', 'dynamics', 'integration'],
+      keywords: ['drone', 'uav', 'iot', 'sensor', 'robotics', 'hardware', 'prototype', 'emerging technology'],
       answer: function () {
         return {
-          html: 'Yes. R-Ignite handles ERP and CRM implementation from system selection through go-live, including Salesforce, Dynamics 365, custom modules, legacy integration, and change management.',
-          replies: ['Do you build custom software too?', 'What services do you offer?', 'How do we get started?']
+          html: 'Yes. R-Ignite has an Emerging Technology &amp; Hardware Research pillar covering drone and UAV use-case research, IoT and sensor systems, field data collection concepts, hardware-software integration, and prototype development. The site presents this work as research and prototyping subject to applicable requirements where relevant.',
+          replies: ['Which sectors do you serve?', 'Do you also give advisory support?', 'How do we get started?']
         };
       }
     },
     {
-      id: 'data',
-      phrases: ['data infrastructure', 'data engineering', 'etl', 'data lakes', 'aws', 'azure', 'gcp'],
-      keywords: ['data', 'etl', 'lake', 'aws', 'azure', 'gcp', 'api', 'database'],
+      keywords: ['advisory', 'strategy', 'transformation', 'audit', 'readiness', 'roadmap', 'architecture'],
       answer: function () {
         return {
-          html: 'R-Ignite also builds enterprise data infrastructure, including AWS, Azure, GCP, ETL pipelines, data lakes, API development, and database optimisation.',
-          replies: ['Do you offer BI dashboards?', 'Do you build custom software?', 'How do we get started?']
+          html: 'Yes. R-Ignite provides technology advisory and digital transformation support including technology audits, product strategy, data maturity assessment, AI readiness assessment, automation advisory, and software architecture guidance.',
+          replies: ['What services do you offer?', 'Which sectors do you serve?', 'How do we get started?']
         };
       }
     },
     {
-      id: 'software',
-      phrases: ['custom software', 'bespoke software', 'enterprise software', 'admin portals', 'compliance systems'],
-      keywords: ['software', 'portal', 'app', 'application', 'compliance', 'mobile'],
+      keywords: ['sector', 'industry', 'industries', 'banks', 'government', 'schools', 'health', 'logistics', 'agriculture'],
       answer: function () {
         return {
-          html: 'Yes. R-Ignite builds bespoke enterprise applications such as admin portals, compliance systems, mobile enterprise tools, and workflow management software tailored to each organisation.',
-          replies: ['Do you offer managed retainers?', 'What sectors do you serve?', 'How do we get started?']
+          html: 'The site positions R-Ignite for financial services, government and public sector, education, agriculture, health, logistics, real estate and construction, and SMEs or enterprise operations.',
+          replies: ['Do you build software products?', 'Do you offer AI and data work?', 'Where are you based?']
         };
       }
     },
     {
-      id: 'retainers',
-      phrases: ['managed services', 'retainers', 'annual contracts', 'priority support', 'continuous improvement'],
-      keywords: ['retainer', 'managed', 'monitoring', 'support', 'contract'],
+      keywords: ['pricing', 'price', 'cost', 'quote', 'budget', 'how much'],
       answer: function () {
         return {
-          html: 'Yes. Managed Services and Retainers are part of the offer. That includes annual contracts, managed analytics, AI monitoring, priority support, and continuous improvement.',
-          replies: ['How fast do you respond?', 'How do we get started?', 'What services do you offer?']
-        };
-      }
-    },
-    {
-      id: 'sectors',
-      phrases: ['who do you work with', 'which sectors do you serve', 'industries', 'sectors'],
-      keywords: ['banks', 'government', 'telecoms', 'insurance', 'retail', 'healthcare', 'smes', 'industries'],
-      answer: function () {
-        return {
-          html: 'R-Ignite serves banks, government agencies, telecoms, oil and gas companies, large SMEs, insurance firms, large retail groups, and healthcare organisations.',
-          replies: ['What services do you offer?', 'Where are you based?', 'How do we get started?']
-        };
-      }
-    },
-    {
-      id: 'pricing',
-      phrases: ['how much', 'price', 'pricing', 'cost', 'quote', 'budget'],
-      keywords: ['price', 'pricing', 'cost', 'quote', 'budget'],
-      answer: function () {
-        return {
-          html: 'The site does not list fixed prices. R-Ignite positions itself as a premium consultancy, so pricing will depend on your goals, scope, integrations, and support needs. The best next step for a tailored quote is the <a href="' + contactLink + '">Get in Touch page</a>.',
+          html: 'The site does not publish fixed prices. R-Ignite is positioned as a premium company, so pricing depends on scope, systems involved, and the outcome you need. The best next step is the <a href="' + contactLink + '">Get in Touch page</a>.',
           replies: ['How do we get started?', 'What services do you offer?', 'How fast do you respond?']
         };
       }
     },
     {
-      id: 'contact',
-      phrases: ['contact', 'talk to support', 'speak to someone', 'email', 'phone', 'call'],
-      keywords: ['contact', 'support', 'email', 'phone', 'call', 'reach'],
+      keywords: ['how do we get started', 'get started', 'start', 'next step'],
+      answer: function () {
+        return {
+          html: 'The best starting point is a focused conversation about your organisation, the challenge you want to solve, and whether the right route is AI and data work, software engineering, advisory, or emerging technology research. You can begin on the <a href="' + contactLink + '">Get in Touch page</a>.',
+          replies: ['What services do you offer?', 'How fast do you respond?', 'How do I contact the team?']
+        };
+      }
+    },
+    {
+      keywords: ['contact', 'support', 'email', 'phone', 'call', 'reach', 'talk to someone'],
       answer: function () {
         return {
           html: 'You can reach the team through the <a href="' + contactLink + '">Get in Touch page</a>. The public contact details on the site include abbassani@r-ignite.com, samuelurieto@r-ignite.com, and the phone numbers +234 703 057 9173 and +234 807 885 1998.',
-          replies: ['How fast do you respond?', 'Where are you located?', 'Who leads R-Ignite?']
+          replies: ['How fast do you respond?', 'Where are you located?', 'What is your website?']
         };
       }
     },
     {
-      id: 'location',
-      phrases: ['where are you based', 'where are you located', 'location', 'abuja'],
-      keywords: ['location', 'address', 'abuja', 'apo', 'based'],
+      keywords: ['where are you based', 'where are you located', 'location', 'abuja', 'address'],
       answer: function () {
         return {
           html: 'R-Ignite is based in Abuja. The address shown on the site is House 1, Shekinah Luxury Estate, Apo, Abuja, Nigeria.',
-          replies: ['Who do you work with?', 'How fast do you respond?', 'How do we get started?']
+          replies: ['How do I contact the team?', 'How fast do you respond?', 'Which sectors do you serve?']
         };
       }
     },
     {
-      id: 'response',
-      phrases: ['how fast do you respond', 'response time', 'when will you reply', 'how long'],
-      keywords: ['response', 'reply', 'hours', 'when', 'quickly'],
+      keywords: ['response', 'reply', 'how fast', 'how long', 'when will you reply'],
       answer: function () {
         return {
           html: 'The site says the team typically replies within 24 hours, Monday to Friday, 8am to 6pm WAT.',
-          replies: ['How do we get started?', 'Where are you located?', 'What services do you offer?']
+          replies: ['How do we get started?', 'What services do you offer?', 'How do I contact the team?']
         };
       }
     },
     {
-      id: 'team',
-      phrases: ['who leads', 'who founded', 'team', 'founders', 'leadership'],
-      keywords: ['founder', 'leadership', 'team', 'ceo', 'cto'],
+      keywords: ['founder', 'founders', 'leadership', 'team', 'ceo', 'cto', 'who leads'],
       answer: function () {
         return {
-          html: 'R-Ignite is led by Abbas S. Abbas, Co-Founder and CEO, and Samuel E. Urieto, Co-Founder and CTO.',
-          replies: ['How do I contact the team?', 'Where are you based?', 'What services do you offer?']
+          html: 'R-Ignite is led by Abbas S. Abbas, Co-Founder and Chief Executive Officer, and Samuel E. Urieto, Co-Founder and Chief Technology Officer.',
+          replies: ['How do I contact the team?', 'What services do you offer?', 'Where are you based?']
         };
       }
     },
     {
-      id: 'roadmap',
-      phrases: ['roadmap', '6 year plan', 'six year plan', 'goals', 'stage 1', 'stage 2', 'stage 3'],
-      keywords: ['roadmap', 'stage', 'years', 'goals', 'plan'],
-      answer: function (query) {
-        if (query.indexOf('stage 1') !== -1 || query.indexOf('cash engine') !== -1) {
-          return {
-            html: 'Stage 1 covers years 0 to 2. The focus is building a lean premium B2B service company, targeting ₦100M to ₦250M in revenue through high-value enterprise delivery.',
-            replies: ['What happens in stage 2?', 'What happens in stage 3?', 'Who do you work with?']
-          };
-        }
-
-        if (query.indexOf('stage 2') !== -1 || query.indexOf('recurring revenue') !== -1) {
-          return {
-            html: 'Stage 2 covers years 2 to 4. The goal is converting project clients into long-term contracts and building a 60%+ recurring revenue base.',
-            replies: ['What happens in stage 3?', 'Do you offer managed retainers?', 'How do we get started?']
-          };
-        }
-
-        if (query.indexOf('stage 3') !== -1 || query.indexOf('productisation') !== -1 || query.indexOf('productization') !== -1) {
-          return {
-            html: 'Stage 3 covers years 4 to 6. The focus is productisation: turning repeated client problems into SaaS products and moving toward a hybrid service + product model.',
-            replies: ['What services do you offer?', 'Who do you work with?', 'How do we get started?']
-          };
-        }
-
-        return {
-          html: 'R-Ignite&apos;s roadmap is a three-stage, six-year plan: Stage 1 builds the cash engine, Stage 2 grows recurring revenue, and Stage 3 focuses on productisation.',
-          replies: ['What happens in stage 1?', 'What happens in stage 2?', 'What happens in stage 3?']
-        };
-      }
-    },
-    {
-      id: 'website',
-      phrases: ['website', 'site link', 'web address'],
-      keywords: ['website', 'site', 'link'],
+      keywords: ['website', 'site link', 'web address'],
       answer: function () {
         return {
           html: 'The website listed on the site is <a href="' + websiteLink + '" target="_blank" rel="noopener">www.rignitegroup.com</a>.',
-          replies: ['How do I contact the team?', 'Where are you based?', 'What services do you offer?']
+          replies: ['How do I contact the team?', 'What services do you offer?', 'Where are you located?']
         };
       }
     }
@@ -342,7 +247,7 @@
   }
 
   function getGreeting() {
-    return greetingMap[pageId] || 'Ask about services, sectors, leadership, response times, location, or how to get started.';
+    return greetingMap[pageId] || 'Ask about services, sectors, leadership, location, response times, or next steps.';
   }
 
   function getQuickReplies() {
@@ -359,7 +264,6 @@
 
     var bubble = document.createElement('div');
     bubble.className = 'ri-chatbot-bubble';
-
     if (allowHtml) {
       bubble.innerHTML = content;
     } else {
@@ -371,133 +275,77 @@
     scrollLog();
   }
 
-  function setQuickReplies(replies) {
+  function renderReplies(replies) {
     quickReplies.innerHTML = '';
-
-    (replies || []).slice(0, 4).forEach(function (reply) {
+    (replies || []).forEach(function (reply) {
       var button = document.createElement('button');
       button.type = 'button';
       button.className = 'ri-chatbot-reply';
       button.textContent = reply;
       button.addEventListener('click', function () {
-        handleQuestion(reply);
+        handleQuery(reply);
       });
       quickReplies.appendChild(button);
     });
   }
 
-  function scoreIntent(query, intent) {
-    var tokens = query.split(' ');
-    var tokenMap = {};
-    var score = 0;
+  function matchIntent(query) {
+    var normalized = normalize(query);
 
-    tokens.forEach(function (token) {
-      tokenMap[token] = true;
-    });
-
-    intent.phrases.forEach(function (phrase) {
-      if (query.indexOf(phrase) !== -1) {
-        score += phrase.indexOf(' ') !== -1 ? 8 : 4;
-      }
-    });
-
-    intent.keywords.forEach(function (keyword) {
-      if (keyword.indexOf(' ') !== -1) {
-        if (query.indexOf(keyword) !== -1) {
-          score += 4;
+    for (var i = 0; i < intents.length; i += 1) {
+      var intent = intents[i];
+      for (var j = 0; j < intent.keywords.length; j += 1) {
+        if (normalized.indexOf(normalize(intent.keywords[j])) !== -1) {
+          return intent.answer(normalized);
         }
-      } else if (tokenMap[keyword]) {
-        score += 2;
       }
-    });
-
-    if (pageId === 'services.html' && /services|dashboard|automation|erp|crm|software|retainer|data/.test(query)) {
-      score += 1;
     }
 
-    if (pageId === 'contact.html' && /contact|reply|email|phone|location|support/.test(query)) {
-      score += 1;
-    }
-
-    if ((pageId === 'goals.html' || pageId === 'strategy.html' || pageId === 'milestones.html') && /stage|roadmap|plan|goal|strategy/.test(query)) {
-      score += 1;
-    }
-
-    return score;
+    return {
+      html: 'I can help with questions about R-Ignite&apos;s service pillars, sectors, leadership, location, response times, and next steps. If you need a tailored discussion, please use the <a href="' + contactLink + '">Get in Touch page</a>.',
+      replies: getQuickReplies()
+    };
   }
 
-  function findBestAnswer(rawQuestion) {
-    var normalizedQuestion = normalize(rawQuestion);
-    var bestIntent = null;
-    var bestScore = 0;
+  function handleQuery(question) {
+    appendMessage('user', question, false);
+    var answer = matchIntent(question);
+    appendMessage('bot', answer.html, true);
+    renderReplies(answer.replies);
+  }
 
-    intents.forEach(function (intent) {
-      var score = scoreIntent(normalizedQuestion, intent);
-      if (score > bestScore) {
-        bestScore = score;
-        bestIntent = intent;
+  function setOpenState(isOpen) {
+    widget.classList.toggle('is-open', isOpen);
+    panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    launcher.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+    if (isOpen) {
+      if (!hasOpened) {
+        appendMessage('bot', 'Hello. I am R-Ignite AI. ' + escapeHtml(getGreeting()), false);
+        renderReplies(getQuickReplies());
+        hasOpened = true;
       }
-    });
-
-    if (!bestIntent || bestScore < 2) {
-      return {
-        html: 'I can help with services, sectors, leadership, location, response times, pricing guidance, and how to get started. If you need a tailored answer, the <a href="' + contactLink + '">Get in Touch page</a> is the fastest way to reach the team.',
-        replies: ['What services do you offer?', 'Who do you work with?', 'How do we get started?']
-      };
+      setTimeout(function () {
+        input.focus();
+      }, 80);
     }
-
-    return bestIntent.answer(normalizedQuestion);
-  }
-
-  function openWidget() {
-    widget.classList.add('is-open');
-    panel.setAttribute('aria-hidden', 'false');
-    launcher.setAttribute('aria-expanded', 'true');
-    window.setTimeout(function () {
-      input.focus();
-      scrollLog();
-    }, 80);
-  }
-
-  function closeWidget() {
-    widget.classList.remove('is-open');
-    panel.setAttribute('aria-hidden', 'true');
-    launcher.setAttribute('aria-expanded', 'false');
-  }
-
-  function handleQuestion(question) {
-    var cleanQuestion = String(question || '').trim();
-
-    if (!cleanQuestion) {
-      return;
-    }
-
-    appendMessage('user', cleanQuestion, false);
-    input.value = '';
-
-    var response = findBestAnswer(cleanQuestion);
-
-    window.setTimeout(function () {
-      appendMessage('bot', response.html, true);
-      setQuickReplies(response.replies);
-    }, 220);
   }
 
   launcher.addEventListener('click', function () {
-    if (widget.classList.contains('is-open')) {
-      closeWidget();
-    } else {
-      openWidget();
-    }
+    setOpenState(!widget.classList.contains('is-open'));
   });
 
-  closeButton.addEventListener('click', closeWidget);
+  closeButton.addEventListener('click', function () {
+    setOpenState(false);
+  });
 
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    handleQuestion(input.value);
+    var question = input.value.trim();
+    if (!question) {
+      return;
+    }
+    input.value = '';
+    handleQuery(question);
   });
-
-  appendMessage('bot', 'Hello. I am R-Ignite&apos;s AI site guide. I can answer quick questions using the information on this website. ' + escapeHtml(getGreeting()), true);
-  setQuickReplies(getQuickReplies());
 })();

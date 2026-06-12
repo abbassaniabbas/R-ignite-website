@@ -1,162 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Team | R-Ignite Group</title>
-  <meta name="description" content="Meet the founders of R-Ignite Group — the driving force behind Nigeria's premier Data & AI consultancy.">
-  <meta name="theme-color" content="#2D3348">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leadership | R-Ignite Solutions Limited</title>
+  <meta name="description" content="Meet the founders of R-Ignite Solutions Limited and the leadership behind its AI, data, software, and emerging technology direction." />
+  <meta name="theme-color" content="#f2f4f7" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="theme.css">
   <style>
-    .founders { padding: 7rem 5%; max-width: 1400px; margin: 0 auto; }
-    .founders-header { margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 2px solid var(--ink); }
-    .founders-header .section-title { font-size: clamp(1.8rem,3.5vw,3rem); }
-    .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .team-intro {
+      padding: 5rem 5% 2.5rem;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(236, 241, 246, 0.8) 100%);
+    }
+
+    .team-intro-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 3rem;
+      align-items: end;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(24, 25, 27, 0.08);
+    }
+
+    .team-intro-inner p {
+      max-width: 60ch;
+      font-size: 0.98rem;
+      color: var(--ink-muted);
+    }
+
+    .founders {
+      padding: 2rem 5% 5rem;
+    }
+
+    .founders-grid {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
     .founder-card {
-      padding: 3.5rem; border: 1px solid var(--rule); border-radius: 12px;
-      transition: all .35s var(--ease);
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      overflow: hidden;
     }
-    .founder-card:hover { border-color: var(--crimson); box-shadow: 0 24px 64px rgba(155,35,53,.08); transform: translateY(-4px); }
-    .founder-avatar {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: var(--crimson-light); border: 2px solid var(--crimson);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--serif); font-size: 1.1rem; color: var(--crimson);
-      margin-bottom: 2rem;
+
+    .founder-image {
+      min-height: 100%;
+      background: #dbe1e7;
     }
-    .founder-role { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--crimson); margin-bottom: .6rem; }
-    .founder-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; margin-bottom: 1rem; }
-    .founder-bio { font-size: .92rem; color: var(--ink-muted); line-height: 1.75; }
-    .founder-contact { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
-    .founder-contact a { font-size: .82rem; font-weight: 600; color: var(--ink-muted); text-decoration: none; transition: color .2s; display: block; margin-bottom: .3rem; }
-    .founder-contact a:hover { color: var(--crimson); }
 
-    .culture { padding: 7rem 5%; background: var(--surface); }
-    .culture-inner { max-width: 1400px; margin: 0 auto; }
-    .culture-header { margin-bottom: 4rem; }
-    .culture-header .section-title { font-size: clamp(1.8rem,3.5vw,3rem); }
-    .principles-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; margin-top: 3rem; }
-    .principle { padding: 2rem; background: #fff; border-radius: 10px; border: 1px solid var(--rule); transition: all .3s var(--ease); }
-    .principle:hover { border-color: var(--crimson); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(155,35,53,.07); }
-    .principle-num { font-size: .65rem; font-weight: 700; letter-spacing: .12em; color: var(--crimson); margin-bottom: 1rem; }
-    .principle h4 { font-family: var(--serif); font-size: 1rem; font-weight: 400; margin-bottom: .6rem; }
-    .principle p { font-size: .86rem; color: var(--ink-muted); line-height: 1.65; }
-
-    .join-section { padding: 10rem 5%; text-align: center; background: var(--navy-deep); position: relative; overflow: hidden; }
-    .join-section::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(155,35,53,.2) 0%, transparent 70%); pointer-events:none; }
-    .join-label { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--crimson-mid); margin-bottom: 1.5rem; position: relative; }
-    .join-headline { font-family: var(--serif); font-size: clamp(2.5rem,7vw,6rem); font-weight: 400; line-height: 1; color: #fff; margin-bottom: 3rem; position: relative; }
-    .join-headline .accent { color: var(--crimson-mid); font-style: italic; }
-
-    @media(max-width:1024px){ .principles-grid{ grid-template-columns:1fr 1fr; } }
-    @media(max-width:768px){ .founders-grid{ grid-template-columns:1fr; } .principles-grid{ grid-template-columns:1fr; } }
-
-    @media(max-width:1024px){ .principles-grid { grid-template-columns:1fr 1fr; } }
-    @media(max-width:768px){
-      .founders { padding:5rem 5%; }
-      .culture { padding:5rem 5%; }
-      .founders-grid { grid-template-columns:1fr; gap:1.5rem; }
-      .principles-grid { grid-template-columns:1fr; }
-      .join-section { padding:6rem 5%; }
-      .founder-card { padding:2.5rem; }
+    .founder-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
-    @media(max-width:480px){ .principle { padding:1.6rem; } }
+
+    .founder-body {
+      padding: 1.5rem;
+    }
+
+    .founder-role {
+      display: block;
+      margin-bottom: 0.6rem;
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .founder-name {
+      margin-bottom: 0.7rem;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .founder-bio {
+      margin-bottom: 1rem;
+      color: var(--ink-muted);
+      font-size: 0.88rem;
+    }
+
+    .founder-focus {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .founder-focus span {
+      padding: 0.54rem 0.76rem;
+      border-radius: 999px;
+      border: 1px solid rgba(24, 25, 27, 0.08);
+      background: rgba(216, 224, 232, 0.9);
+      color: var(--ink-mid);
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    .founder-contact {
+      display: grid;
+      gap: 0.35rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(24, 25, 27, 0.08);
+    }
+
+    .founder-contact a {
+      min-width: unset;
+      min-height: unset;
+      display: inline;
+      color: var(--ink-mid);
+      font-size: 0.84rem;
+      text-decoration: none;
+    }
+
+    .leadership-panels {
+      padding: 0 5% 6rem;
+    }
+
+    .leadership-grid {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.3rem;
+    }
+
+    .leadership-card {
+      padding: 1.7rem;
+    }
+
+    .leadership-card strong {
+      display: block;
+      margin-bottom: 0.75rem;
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .leadership-card h3 {
+      margin-bottom: 0.6rem;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 1.22rem;
+      font-weight: 400;
+      line-height: 1.08;
+    }
+
+    .leadership-card p {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+
+    .team-cta {
+      padding: 0 5% 6rem;
+    }
+
+    .team-cta-card {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2rem;
+      align-items: end;
+      padding: 2.5rem;
+    }
+
+    .team-cta-card h2 {
+      max-width: 11ch;
+      margin-top: 1rem;
+      margin-bottom: 0.8rem;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .team-cta-card h2 em {
+      color: var(--red);
+      font-style: italic;
+    }
+
+    .team-cta-card p {
+      max-width: 56ch;
+      color: var(--ink-muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1080px) {
+      .team-intro-inner,
+      .team-cta-card {
+        grid-template-columns: 1fr;
+      }
+
+      .leadership-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .founders-grid,
+      .leadership-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .founder-card {
+        grid-template-columns: 1fr;
+      }
+
+      .founder-image {
+        aspect-ratio: 4 / 3.7;
+        min-height: unset;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .team-intro {
+        padding: 4rem 5% 2rem;
+      }
+
+      .founder-body,
+      .leadership-card,
+      .team-cta-card {
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="mobile-nav" id="mobileNav">
-    <button class="close-btn" id="closeNav">✕</button>
-    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
-    <a href="goals.html">Goals</a><a href="strategy.html">Strategy</a><a href="milestones.html">Milestones</a>
+    <button class="close-btn" id="closeNav" aria-label="Close menu">×</button>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
     <a href="team.html">Team</a>
     <div class="mobile-nav-bottom"><a href="my-backend/contact.html">Get in Touch</a></div>
   </div>
+
   <nav id="mainNav">
-    <a class="logo" href="index.html"><span class="logo-mark">R</span>-Ignite Group</a>
+    <a class="logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
+      <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
+    </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
-      <li><a href="services.html">Services</a></li><li><a href="goals.html">Goals</a></li>
-      <li><a href="strategy.html">Strategy</a></li><li><a href="milestones.html">Milestones</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
       <li><a href="team.html" class="active">Team</a></li>
     </ul>
     <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </nav>
 
   <section class="page-hero">
-    <div class="eyebrow">The People Behind It</div>
-    <h1 class="page-title">Meet Our<br/><em class="accent">Founders.</em></h1>
+    <span class="eyebrow">Leadership</span>
+    <h1 class="page-title">The founders shaping the company&apos;s <span class="accent">direction.</span></h1>
+  </section>
+
+  <section class="team-intro">
+    <div class="team-intro-inner reveal">
+      <div>
+        <span class="section-label">Founders</span>
+        <h2 class="section-title">Professional, focused leadership with clear technology and growth responsibilities.</h2>
+      </div>
+      <p>The team page should feel clean and credible. It presents the founders as the people responsible for execution, technical direction, and strategic growth rather than turning the company story into something overly personal.</p>
+    </div>
   </section>
 
   <section class="founders">
-    <div class="founders-header reveal">
-      <div class="section-label">Leadership</div>
-      <h2 class="section-title">The Driving Force</h2>
-    </div>
     <div class="founders-grid">
-      <div class="founder-card reveal">
-        <div class="founder-avatar">SE</div>
-        <div class="founder-role">Co-Founder / Chief Technology Officer</div>
-        <h3 class="founder-name">Samuel E. Urieto</h3>
-        <p class="founder-bio">Leading technological innovation and driving our technical vision forward. Samuel brings extensive experience in software development and emerging technologies to ensure R-Ignite stays at the forefront of enterprise tech excellence.</p>
-        <div class="founder-contact">
-          <a href="tel:+2349065063545">+234 906 506 3545</a>
-          <a href="mailto:samuelurieto@r-ignite.com">samuelurieto@r-ignite.com</a>
-          <a href="https://www.rignitegroup.com">www.rignitegroup.com</a>
+      <article class="founder-card surface-card reveal">
+        <div class="founder-image">
+          <img src="assets/abbas-portrait.png" alt="Abbas S. Abbas portrait">
         </div>
-      </div>
-      <div class="founder-card reveal reveal-d1">
-        <div class="founder-avatar">AS</div>
-        <div class="founder-role">Co-Founder / Chief Executive Officer</div>
-        <h3 class="founder-name">Abbas S. Abbas</h3>
-        <p class="founder-bio">Guiding strategic direction and fostering partnerships for growth. Abbas is passionate about empowering organisations through technology, bringing visionary leadership and sharp commercial acumen to R-Ignite's mission.</p>
-        <div class="founder-contact">
-          <a href="tel:+2347030579173">+234 703 057 9173</a>
-          <a href="mailto:abbassani@r-ignite.com">abbassani@r-ignite.com</a>
-          <a href="https://www.rignitegroup.com">www.rignitegroup.com</a>
+        <div class="founder-body">
+          <span class="founder-role">Co-Founder / Chief Executive Officer</span>
+          <h2 class="founder-name">Abbas S. Abbas</h2>
+          <p class="founder-bio">Abbas leads the company&apos;s strategic direction, client relationships, and growth priorities. His focus is on ensuring R-Ignite Solutions Limited remains disciplined in how it positions, structures, and delivers technology work for serious organisations.</p>
+          <div class="founder-focus">
+            <span>Strategy</span>
+            <span>Partnerships</span>
+            <span>Growth</span>
+            <span>Client Direction</span>
+          </div>
+          <div class="founder-contact">
+            <a href="tel:+2347030579173">+234 703 057 9173</a>
+            <a href="mailto:abbassani@r-ignite.com">abbassani@r-ignite.com</a>
+            <a href="https://www.rignitegroup.com" target="_blank" rel="noopener">www.rignitegroup.com</a>
+          </div>
         </div>
-      </div>
+      </article>
+
+      <article class="founder-card surface-card reveal reveal-d1">
+        <div class="founder-image">
+          <img src="assets/samuel-portrait.png" alt="Samuel E. Urieto portrait">
+        </div>
+        <div class="founder-body">
+          <span class="founder-role">Co-Founder / Chief Technology Officer</span>
+          <h2 class="founder-name">Samuel E. Urieto</h2>
+          <p class="founder-bio">Samuel leads technical direction across data systems, software engineering, AI implementation, and research-led exploration of emerging technologies. His role is to keep delivery strong, practical, and aligned with what clients can actually use.</p>
+          <div class="founder-focus">
+            <span>Software Engineering</span>
+            <span>AI &amp; Data</span>
+            <span>Architecture</span>
+            <span>Emerging Systems</span>
+          </div>
+          <div class="founder-contact">
+            <a href="tel:+2349065063545">+234 906 506 3545</a>
+            <a href="mailto:samuelurieto@r-ignite.com">samuelurieto@r-ignite.com</a>
+            <a href="https://www.rignitegroup.com" target="_blank" rel="noopener">www.rignitegroup.com</a>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
-  <section class="culture">
-    <div class="culture-inner">
-      <div class="culture-header reveal">
-        <div class="section-label">Our Culture</div>
-        <h2 class="section-title">Leadership Principles</h2>
-      </div>
-      <div class="principles-grid">
-        <div class="principle reveal"><div class="principle-num">01</div><h4>Visionary Thinking</h4><p>We think ahead, anticipating industry trends and positioning ourselves as leaders in enterprise tech innovation.</p></div>
-        <div class="principle reveal reveal-d1"><div class="principle-num">02</div><h4>Collaborative Spirit</h4><p>We believe in the power of partnerships — with clients, team, and the wider Nigerian tech ecosystem.</p></div>
-        <div class="principle reveal reveal-d2"><div class="principle-num">03</div><h4>Continuous Learning</h4><p>We're committed to staying ahead of emerging technologies and best practices — always sharpening the edge.</p></div>
-        <div class="principle reveal reveal-d3"><div class="principle-num">04</div><h4>Excellence Driven</h4><p>We maintain uncompromising standards in everything — from how we write code to how we write proposals.</p></div>
-      </div>
+  <section class="leadership-panels">
+    <div class="leadership-grid">
+      <article class="leadership-card surface-card reveal">
+        <strong>What Leadership Means Here</strong>
+        <h3>Clear ownership across commercial direction and technical delivery.</h3>
+        <p>The company is presented as focused and deliberate, with leadership responsible for both strategic thinking and the discipline of execution.</p>
+      </article>
+      <article class="leadership-card surface-card reveal reveal-d1">
+        <strong>What Clients Can Expect</strong>
+        <h3>Senior attention where the work has operational importance.</h3>
+        <p>That matters for clients seeking not just build capacity, but judgment, prioritisation, and steady decision-making around technology.</p>
+      </article>
+      <article class="leadership-card surface-card reveal reveal-d2">
+        <strong>Where The Team Is Headed</strong>
+        <h3>From strong AI and data delivery into broader engineering and innovation work.</h3>
+        <p>The leadership page reinforces the company&apos;s direction into software systems, advisory work, and research-led exploration of emerging technologies.</p>
+      </article>
     </div>
   </section>
 
-  <section class="join-section">
-    <div class="join-label reveal">Join the Team</div>
-    <h2 class="join-headline reveal">We're Building<br/>Something<br/><em class="accent">Significant.</em></h2>
-    <div class="reveal"><a href="my-backend/contact.html" class="btn-primary">Get in Touch →</a></div>
+  <section class="team-cta">
+    <div class="team-cta-card surface-card reveal">
+      <div>
+        <span class="section-label">Start A Conversation</span>
+        <h2>If the fit feels right, we can move into the <em>real brief</em>.</h2>
+        <p>The next step is a focused conversation around your organisation, the challenge in front of you, and whether the right route is intelligence, engineering, advisory, or emerging technology research.</p>
+      </div>
+      <div>
+        <a href="my-backend/contact.html" class="btn-primary">Get in Touch</a>
+      </div>
+    </div>
   </section>
 
   <footer>
     <div class="footer-inner">
-      <div class="footer-logo"><span class="footer-logo-mark">R</span>-Ignite Group</div>
-      <div class="footer-tagline">Empower · Innovate · Excel</div>
-      <div class="footer-copy">© 2025 R-Ignite Group. Abuja, Nigeria.</div>
+      <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
+        <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
+      </a>
+      <div class="footer-tagline">Data. Software. Emerging Systems.</div>
+      <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
     </div>
   </footer>
+
   <script src="chatbot-widget.js" defer></script>
   <script>
-    const nav=document.getElementById('mainNav');
-    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
-    document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
-    document.getElementById('closeNav').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
-    const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
-    document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+    const nav = document.getElementById('mainNav');
+    const mobileNav = document.getElementById('mobileNav');
+    const hamburger = document.getElementById('hamburger');
+    const closeNav = document.getElementById('closeNav');
+
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 24));
+    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+    closeNav.addEventListener('click', () => mobileNav.classList.remove('open'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((item) => observer.observe(item));
   </script>
 </body>
 </html>

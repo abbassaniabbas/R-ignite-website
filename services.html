@@ -1,198 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services | R-Ignite Group</title>
-  <meta name="description" content="Premium enterprise Data, AI and Digital Transformation services for Nigerian organisations.">
-  <meta name="theme-color" content="#2D3348">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | R-Ignite Solutions Limited</title>
+  <meta name="description" content="Explore the four core service pillars of R-Ignite Solutions Limited across AI, data, software, emerging technology research, and advisory." />
+  <meta name="theme-color" content="#f2f4f7" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="theme.css">
   <style>
-    .services-main { max-width: 1400px; margin: 0 auto; padding: 7rem 5%; }
-    .svc-item {
-      display: grid; grid-template-columns: 60px 1fr auto;
-      gap: 3rem; padding: 3.5rem 0; border-bottom: 1px solid var(--rule);
-      align-items: start; transition: all .25s;
+    .services-intro {
+      padding: 3.8rem 5% 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(235, 240, 245, 0.78) 100%);
     }
-    .svc-item:hover { padding-left: 1rem; background: var(--crimson-light); margin: 0 -1rem; padding-right: 1rem; border-radius: 10px; border-bottom-color: transparent; }
-    .svc-num { font-size: .72rem; font-weight: 700; letter-spacing: .08em; color: var(--ink-faint); padding-top: .3rem; }
-    .svc-item:hover .svc-num { color: var(--crimson); }
-    .svc-body h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; margin-bottom: .8rem; color: var(--ink); }
-    .svc-body p { font-size: .95rem; color: var(--ink-muted); line-height: 1.7; margin-bottom: 1.5rem; }
-    .svc-features { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .svc-feature {
-      font-size: .72rem; font-weight: 600; letter-spacing: .04em;
-      padding: .35rem .8rem; background: var(--surface); color: var(--ink-muted); border-radius: 4px;
-      border: 1px solid var(--rule);
+
+    .services-intro-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 3rem;
+      align-items: end;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid rgba(24, 25, 27, 0.08);
     }
-    .svc-item:hover .svc-feature { background: #fff; }
-    .svc-arr { font-size: 1.2rem; color: var(--ink-faint); transition: all .25s; align-self: start; }
-    .svc-item:hover .svc-arr { color: var(--crimson); transform: translate(3px,-3px); }
 
-    .bottom-cta { padding: 10rem 5%; text-align: center; background: var(--navy-deep); position: relative; overflow: hidden; }
-    .bottom-cta::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(155,35,53,.25) 0%, transparent 70%); pointer-events:none; }
-    .cta-eyebrow { font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--crimson-mid); margin-bottom:1.5rem; }
-    .cta-headline { font-family:var(--serif); font-size:clamp(3rem,7vw,6rem); font-weight:400; line-height:1; color:#fff; margin-bottom:3rem; position:relative; }
-    .cta-headline .accent { color:var(--crimson-mid); font-style:italic; }
-
-    @media(max-width:768px){ .svc-item{ grid-template-columns:40px 1fr; } .svc-arr{ display:none; } }
-
-    @media(max-width:768px){
-      .services-main { padding:5rem 5%; }
-      .svc-item { grid-template-columns:36px 1fr; gap:1.2rem; padding:2rem 0; }
-      .svc-arr { display:none; }
-      .svc-body h3 { font-size:1.2rem; }
-      .bottom-cta { padding:6rem 5%; }
+    .services-intro-inner p {
+      max-width: 60ch;
+      font-size: 0.98rem;
+      color: var(--ink-muted);
     }
-    @media(max-width:480px){ .svc-features { gap:.4rem; } .svc-feature { font-size:.68rem; } }
+
+    .services-flow {
+      padding: 0 5% 4.8rem;
+    }
+
+    .services-flow-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    .service-full {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 3rem;
+      align-items: start;
+      padding: 3.1rem 0;
+      border-bottom: 1px solid rgba(24, 25, 27, 0.08);
+    }
+
+    .service-left {
+      position: sticky;
+      top: 8rem;
+    }
+
+    .service-stage {
+      display: block;
+      margin-bottom: 0.75rem;
+      color: var(--red);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .service-number {
+      margin-bottom: 1rem;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 5.2rem;
+      line-height: 0.92;
+    }
+
+    .service-outcome {
+      display: inline-block;
+      padding: 0.85rem 0.95rem;
+      border-radius: 16px;
+      border: 1px solid rgba(24, 25, 27, 0.08);
+      background: rgba(214, 222, 231, 0.92);
+      color: var(--ink-mid);
+      font-size: 0.84rem;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .service-right h3 {
+      margin-bottom: 0.9rem;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 2.7vw, 2.25rem);
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+    }
+
+    .service-right > p {
+      max-width: 64ch;
+      margin-bottom: 1.8rem;
+      font-size: 0.97rem;
+      color: var(--ink-muted);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .service-card {
+      padding: 1.35rem 1.35rem 1.4rem;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(235, 240, 245, 0.98) 100%);
+      border: 1px solid rgba(24, 25, 27, 0.08);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .service-card strong {
+      display: block;
+      margin-bottom: 0.65rem;
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .service-card p {
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+      line-height: 1.7;
+    }
+
+    .service-capabilities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .service-capability {
+      padding: 0.72rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(24, 25, 27, 0.08);
+      background: rgba(216, 224, 232, 0.9);
+      color: var(--ink-mid);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .delivery-note {
+      margin-top: 1.5rem;
+      padding: 1rem 1.05rem;
+      border-left: 2px solid rgba(166, 35, 41, 0.28);
+      background: rgba(216, 224, 232, 0.82);
+    }
+
+    .delivery-note strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      color: var(--ink);
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .delivery-note span {
+      display: block;
+      color: var(--ink-muted);
+      font-size: 0.84rem;
+      line-height: 1.65;
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .example-card {
+      padding: 1.7rem;
+    }
+
+    .example-card strong {
+      display: block;
+      margin-bottom: 0.75rem;
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .example-card h3 {
+      margin-bottom: 0.65rem;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 1.28rem;
+      font-weight: 400;
+      line-height: 1.08;
+    }
+
+    .example-card p {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+
+    .services-cta {
+      padding: 0 5% 4.8rem;
+    }
+
+    .services-cta-card {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2rem;
+      align-items: end;
+      padding: 2rem;
+    }
+
+    .services-cta-card h2 {
+      max-width: 11ch;
+      margin-top: 1rem;
+      margin-bottom: 0.8rem;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .services-cta-card h2 em {
+      color: var(--red);
+      font-style: italic;
+    }
+
+    .services-cta-card p {
+      max-width: 56ch;
+      color: var(--ink-muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1120px) {
+      .services-intro-inner,
+      .service-full,
+      .services-cta-card {
+        grid-template-columns: 1fr;
+      }
+
+      .service-left {
+        position: static;
+      }
+
+      .examples-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .service-grid,
+      .examples-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .services-intro {
+        padding: 4rem 5% 0;
+      }
+
+      .services-flow,
+      .services-cta {
+        padding-bottom: 4.8rem;
+      }
+
+      .service-full {
+        gap: 2rem;
+        padding: 3rem 0;
+      }
+
+      .service-number {
+        font-size: 4rem;
+      }
+
+      .service-card,
+      .example-card,
+      .services-cta-card {
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="mobile-nav" id="mobileNav">
-    <button class="close-btn" id="closeNav">✕</button>
-    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
-    <a href="goals.html">Goals</a><a href="strategy.html">Strategy</a><a href="milestones.html">Milestones</a>
+    <button class="close-btn" id="closeNav" aria-label="Close menu">×</button>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
     <a href="team.html">Team</a>
     <div class="mobile-nav-bottom"><a href="my-backend/contact.html">Get in Touch</a></div>
   </div>
+
   <nav id="mainNav">
-    <a class="logo" href="index.html"><span class="logo-mark">R</span>-Ignite Group</a>
+    <a class="logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
+      <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
+    </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
-      <li><a href="services.html" class="active">Services</a></li><li><a href="goals.html">Goals</a></li>
-      <li><a href="strategy.html">Strategy</a></li><li><a href="milestones.html">Milestones</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
       <li><a href="team.html">Team</a></li>
     </ul>
     <a class="nav-cta" href="my-backend/contact.html">Get in Touch</a>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </nav>
 
   <section class="page-hero">
-    <div class="eyebrow">Enterprise Solutions</div>
-    <h1 class="page-title">What We<br/>Deliver for <em class="accent">You.</em></h1>
+    <span class="eyebrow">Core Services</span>
+    <h1 class="page-title">Four service pillars. One clear <span class="accent">technology direction.</span></h1>
   </section>
 
-  <div class="marquee-section">
-    <div class="marquee-track">
-      <div class="marquee-item"><div class="marquee-dot"></div>Banks</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Government</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Telecoms</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Oil &amp; Gas</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Large SMEs</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Enterprise</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Banks</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Government</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Telecoms</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Oil &amp; Gas</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Large SMEs</div>
-      <div class="marquee-item"><div class="marquee-dot"></div>Enterprise</div>
-    </div>
-  </div>
-
-  <section class="services-main">
-    <div class="svc-item reveal">
-      <div class="svc-num">01</div>
-      <div class="svc-body">
-        <h3>Business Intelligence &amp; Analytics</h3>
-        <p>Enterprise-grade BI dashboards and analytics infrastructure that turn your raw data into decision-making fuel. Built for scale, designed for clarity.</p>
-        <div class="svc-features">
-          <span class="svc-feature">Power BI</span><span class="svc-feature">Tableau</span>
-          <span class="svc-feature">Data Warehouses</span><span class="svc-feature">Executive KPIs</span>
-          <span class="svc-feature">Real-time Reporting</span><span class="svc-feature">Data Governance</span>
-        </div>
+  <section class="services-intro">
+    <div class="services-intro-inner reveal">
+      <div>
+        <span class="section-label">Service Overview</span>
+        <h2 class="section-title">The services page now reflects what the company is genuinely growing into.</h2>
       </div>
-      <div class="svc-arr">↗</div>
-    </div>
-    <div class="svc-item reveal">
-      <div class="svc-num">02</div>
-      <div class="svc-body">
-        <h3>AI-Powered Process Automation</h3>
-        <p>Intelligent automation that eliminates manual workflows and transforms your operations. From document processing to predictive forecasting.</p>
-        <div class="svc-features">
-          <span class="svc-feature">RPA</span><span class="svc-feature">Workflow AI</span>
-          <span class="svc-feature">OCR &amp; Doc Processing</span><span class="svc-feature">Predictive Analytics</span>
-          <span class="svc-feature">NLP Applications</span>
-        </div>
-      </div>
-      <div class="svc-arr">↗</div>
-    </div>
-    <div class="svc-item reveal">
-      <div class="svc-num">03</div>
-      <div class="svc-body">
-        <h3>ERP &amp; CRM Implementation</h3>
-        <p>Strategic implementation and customisation of enterprise resource planning and CRM systems — from selection through go-live and beyond.</p>
-        <div class="svc-features">
-          <span class="svc-feature">ERP Deployment</span><span class="svc-feature">Salesforce</span>
-          <span class="svc-feature">Dynamics 365</span><span class="svc-feature">Custom Modules</span>
-          <span class="svc-feature">Legacy Integration</span><span class="svc-feature">Change Management</span>
-        </div>
-      </div>
-      <div class="svc-arr">↗</div>
-    </div>
-    <div class="svc-item reveal">
-      <div class="svc-num">04</div>
-      <div class="svc-body">
-        <h3>Data Infrastructure &amp; Engineering</h3>
-        <p>Build the data foundation your enterprise needs — scalable cloud platforms, robust ETL pipelines, and data lakes designed for the long term.</p>
-        <div class="svc-features">
-          <span class="svc-feature">AWS</span><span class="svc-feature">Azure</span><span class="svc-feature">GCP</span>
-          <span class="svc-feature">ETL Pipelines</span><span class="svc-feature">Data Lakes</span>
-          <span class="svc-feature">API Development</span><span class="svc-feature">DB Optimisation</span>
-        </div>
-      </div>
-      <div class="svc-arr">↗</div>
-    </div>
-    <div class="svc-item reveal">
-      <div class="svc-num">05</div>
-      <div class="svc-body">
-        <h3>Custom Enterprise Software</h3>
-        <p>Bespoke enterprise applications engineered for your organisation's unique operational challenges — not off-the-shelf, built precisely for you.</p>
-        <div class="svc-features">
-          <span class="svc-feature">Industry-Specific Apps</span><span class="svc-feature">Admin Portals</span>
-          <span class="svc-feature">Compliance Systems</span><span class="svc-feature">Mobile Enterprise</span>
-          <span class="svc-feature">Workflow Management</span>
-        </div>
-      </div>
-      <div class="svc-arr">↗</div>
-    </div>
-    <div class="svc-item reveal">
-      <div class="svc-num">06</div>
-      <div class="svc-body">
-        <h3>Managed Services &amp; Retainers</h3>
-        <p>Ongoing partnership, monitoring, and optimisation. Your systems never stop delivering value because we never stop working on them.</p>
-        <div class="svc-features">
-          <span class="svc-feature">Annual Contracts</span><span class="svc-feature">Managed Analytics</span>
-          <span class="svc-feature">AI Monitoring</span><span class="svc-feature">Priority Support</span>
-          <span class="svc-feature">Continuous Improvement</span>
-        </div>
-      </div>
-      <div class="svc-arr">↗</div>
+      <p>AI and data remain the strongest pillar, while software delivery, emerging technology research, and advisory complete the wider company direction.</p>
     </div>
   </section>
 
-  <section class="bottom-cta">
-    <div class="cta-eyebrow reveal">Ready to Start?</div>
-    <h2 class="cta-headline reveal">Let's Solve<br/>Your Biggest<br/><em class="accent">Data Problem.</em></h2>
-    <div class="reveal"><a href="my-backend/contact.html" class="btn-primary">Get in Touch →</a></div>
+  <section class="services-flow">
+    <div class="services-flow-inner">
+      <article class="service-full reveal">
+        <div class="service-left">
+          <span class="service-stage">Pillar 01</span>
+          <div class="service-number">01</div>
+          <div class="service-outcome">For organisations that need stronger insight, cleaner reporting, and better decision support from their data.</div>
+        </div>
+        <div class="service-right">
+          <h3>AI &amp; Data Intelligence</h3>
+          <p>This remains the lead service pillar. We focus on practical AI systems that improve productivity, insight, and decision-making.</p>
+          <div class="service-grid">
+            <div class="service-card">
+              <strong>What It Includes</strong>
+              <p>Data analytics, dashboards, reporting systems, predictive analytics, data cleaning, modelling, reconciliation, and business workflow automation.</p>
+            </div>
+            <div class="service-card">
+              <strong>Where It Fits</strong>
+              <p>Leadership reporting, operational visibility, business intelligence, AI readiness, decision support, and responsible AI planning.</p>
+            </div>
+          </div>
+          <div class="service-capabilities">
+            <span class="service-capability">Dashboards &amp; Reporting</span>
+            <span class="service-capability">Predictive Analytics</span>
+            <span class="service-capability">Workflow Automation</span>
+            <span class="service-capability">Data Infrastructure</span>
+            <span class="service-capability">Responsible AI Advisory</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-full reveal">
+        <div class="service-left">
+          <span class="service-stage">Pillar 02</span>
+          <div class="service-number">02</div>
+          <div class="service-outcome">For organisations that need complete digital products and internal systems, not just analysis or consulting.</div>
+        </div>
+        <div class="service-right">
+          <h3>Software Engineering &amp; Digital Products</h3>
+          <p>This is the natural expansion from AI and data into full technology delivery. We build portals, platforms, internal tools, and connected applications designed around real workflows.</p>
+          <div class="service-grid">
+            <div class="service-card">
+              <strong>What It Includes</strong>
+              <p>Web applications, SaaS platforms, internal business systems, customer portals, mobile applications, API integrations, payment integrations, and database-backed software.</p>
+            </div>
+            <div class="service-card">
+              <strong>Where It Fits</strong>
+              <p>Teams replacing manual work, launching digital services, modernising internal operations, or maintaining products that need steady improvement.</p>
+            </div>
+          </div>
+          <div class="service-capabilities">
+            <span class="service-capability">Web Applications</span>
+            <span class="service-capability">Customer Portals</span>
+            <span class="service-capability">Mobile Applications</span>
+            <span class="service-capability">API Integrations</span>
+            <span class="service-capability">Maintenance &amp; Improvement</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-full reveal">
+        <div class="service-left">
+          <span class="service-stage">Pillar 03</span>
+          <div class="service-number">03</div>
+          <div class="service-outcome">For clients exploring future hardware systems, field technologies, and research-led innovation use cases.</div>
+        </div>
+        <div class="service-right">
+          <h3>Emerging Technology &amp; Hardware Research</h3>
+          <p>This pillar gives the company a forward-looking edge without overstating current capabilities. We describe it as research, prototyping, and use-case development across drones, IoT, sensing, robotics, and hardware-software integration.</p>
+          <div class="service-grid">
+            <div class="service-card">
+              <strong>What It Includes</strong>
+              <p>Emerging technology research, drone and UAV use-case research, IoT and sensor systems, field data collection systems, prototype development, and smart infrastructure exploration.</p>
+            </div>
+            <div class="service-card">
+              <strong>Where It Fits</strong>
+              <p>Agriculture, logistics, security, construction, and environmental monitoring scenarios where clients need structured research before larger commitments.</p>
+            </div>
+          </div>
+          <div class="service-capabilities">
+            <span class="service-capability">Drone Research</span>
+            <span class="service-capability">IoT Concepts</span>
+            <span class="service-capability">Sensor Systems</span>
+            <span class="service-capability">Prototype Development</span>
+            <span class="service-capability">Field Data Systems</span>
+          </div>
+          <div class="delivery-note">
+            <strong>Important framing</strong>
+            <span>Where this work touches drones or field hardware, delivery is framed as research and prototyping subject to applicable aviation, data protection, and safety requirements.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-full reveal">
+        <div class="service-left">
+          <span class="service-stage">Pillar 04</span>
+          <div class="service-number">04</div>
+          <div class="service-outcome">For organisations that need strategic direction, assessments, and transformation planning before or alongside implementation.</div>
+        </div>
+        <div class="service-right">
+          <h3>Technology Advisory &amp; Digital Transformation</h3>
+          <p>This pillar supports the premium consulting side of the brand through diagnosis, architecture, prioritisation, and roadmap thinking before larger delivery decisions.</p>
+          <div class="service-grid">
+            <div class="service-card">
+              <strong>What It Includes</strong>
+              <p>Digital transformation strategy, process automation advisory, technology audits, product strategy, innovation roadmaps, and architecture guidance.</p>
+            </div>
+            <div class="service-card">
+              <strong>Where It Fits</strong>
+              <p>Banks, agencies, schools, hospitals, logistics operators, real estate groups, and medium-to-large organisations seeking more structured technology direction.</p>
+            </div>
+          </div>
+          <div class="service-capabilities">
+            <span class="service-capability">Data Maturity Assessment</span>
+            <span class="service-capability">AI Readiness</span>
+            <span class="service-capability">Technology Audits</span>
+            <span class="service-capability">Product Strategy</span>
+            <span class="service-capability">Architecture Advisory</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="services-cta">
+    <div class="services-cta-card surface-card reveal">
+      <div>
+        <span class="section-label">Need Direction?</span>
+        <h2>We can help define the <em>right entry point</em>.</h2>
+        <p>If you know the problem but not whether it calls for analytics, product engineering, advisory, or research-led experimentation, we can help determine the right place to begin.</p>
+      </div>
+      <div>
+        <a href="my-backend/contact.html" class="btn-primary">Discuss Your Need</a>
+      </div>
+    </div>
   </section>
 
   <footer>
     <div class="footer-inner">
-      <div class="footer-logo"><span class="footer-logo-mark">R</span>-Ignite Group</div>
-      <div class="footer-tagline">Empower · Innovate · Excel</div>
-      <div class="footer-copy">© 2025 R-Ignite Group. Abuja, Nigeria.</div>
+      <a class="footer-logo" href="index.html" aria-label="R-Ignite Solutions Limited home">
+        <img src="assets/rignite-logo.png" alt="R-Ignite Solutions Limited logo">
+      </a>
+      <div class="footer-tagline">Data. Software. Emerging Systems.</div>
+      <div class="footer-copy">© 2026 R-Ignite Solutions Limited. Abuja, Nigeria.</div>
     </div>
   </footer>
+
   <script src="chatbot-widget.js" defer></script>
   <script>
-    const nav=document.getElementById('mainNav');
-    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
-    document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('open'));
-    document.getElementById('closeNav').addEventListener('click',()=>document.getElementById('mobileNav').classList.remove('open'));
-    const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
-    document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+    const nav = document.getElementById('mainNav');
+    const mobileNav = document.getElementById('mobileNav');
+    const hamburger = document.getElementById('hamburger');
+    const closeNav = document.getElementById('closeNav');
+
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 24));
+    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+    closeNav.addEventListener('click', () => mobileNav.classList.remove('open'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((item) => observer.observe(item));
   </script>
 </body>
 </html>
